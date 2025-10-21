@@ -79,11 +79,29 @@
         
         .page-title {
             text-align: center;
-            font-size: 2.5rem;
+            font-size: 2.8rem; /* Aumentamos el tamaño */
             color: var(--dark);
-            margin-bottom: 30px;
+            margin-bottom: 40px; /* Aumentamos el margen */
             font-weight: 700;
+            position: relative;
+            display: inline-block; /* Para que el after se ajuste al texto */
+            left: 50%;
+            transform: translateX(-50%);
         }
+
+        /* Nuevo estilo para el título */
+        .page-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--secondary);
+            border-radius: 2px;
+        }
+
 
         .content-grid {
             display: grid;
@@ -111,25 +129,43 @@
             transform: translateY(-10px);
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
         }
-
+        
+        /* Contenedor de la miniatura */
         .card-thumbnail {
             width: 100%;
             height: 200px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             position: relative;
             overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
+            background-color: #000; /* Color de fondo mientras carga la imagen */
+        }
+        
+        /* Estilo para la imagen de miniatura */
+        .card-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Asegura que la imagen cubra todo el espacio sin deformarse */
+            transition: transform 0.3s ease, filter 0.3s ease;
         }
 
+        .card:hover .card-thumbnail img {
+            transform: scale(1.05); /* Efecto de zoom al pasar el mouse */
+            filter: brightness(0.8); /* Oscurece un poco la imagen */
+        }
+
+        /* Icono de play sobre la miniatura */
         .card-thumbnail::before {
             content: '▶';
+            position: absolute;
+            z-index: 1;
             font-size: 4rem;
             color: white;
             opacity: 0.8;
             transition: all 0.3s ease;
             text-shadow: 0 0 15px rgba(0,0,0,0.5);
+            pointer-events: none; /* Evita que el icono interfiera con el clic */
         }
 
         .card:hover .card-thumbnail::before {
@@ -276,7 +312,9 @@
             
             <!-- TARJETA DE VIDEO 1 -->
             <div class="card" onclick="openModal('VO3E14BdyMw')">
-                <div class="card-thumbnail"></div>
+                <div class="card-thumbnail">
+                    <img src="https://img.youtube.com/vi/VO3E14BdyMw/hqdefault.jpg" alt="Miniatura 10 mandamientos del inyector de plástico" loading="lazy">
+                </div>
                 <div class="card-content">
                     <span class="card-badge">Capacitación Esencial</span>
                     <h3 class="card-title">Los 10 Mandamientos del Inyector de Plástico</h3>
@@ -286,7 +324,9 @@
 
             <!-- TARJETA DE VIDEO 2 -->
             <div class="card" onclick="openModal('yrbBTRAZKq0')">
-                <div class="card-thumbnail"></div>
+                <div class="card-thumbnail">
+                     <img src="https://img.youtube.com/vi/yrbBTRAZKq0/hqdefault.jpg" alt="Miniatura Metodología 5S" loading="lazy">
+                </div>
                 <div class="card-content">
                     <span class="card-badge">Productividad</span>
                     <h3 class="card-title">5S: La Metodología Esencial para la Organización y Eficiencia</h3>
@@ -302,7 +342,7 @@
         <div class="modal-content">
             <span class="modal-close" onclick="closeModal()">&times;</span>
             <div class="video-container">
-                <!-- VIDEO INSERTADO DE YOUTUBE -->
+                <!-- El iframe se rellena dinámicamente con JavaScript -->
                 <iframe id="videoPlayer" width="100%" height="100%" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border:none;"></iframe>
             </div>
         </div>
@@ -317,13 +357,15 @@
         const videoPlayer = document.getElementById('videoPlayer');
 
         function openModal(videoId) {
-            videoPlayer.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+            // Usamos una URL que permite autoplay y es más compatible
+            videoPlayer.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
             modal.classList.add('active');
         }
 
         function closeModal() {
             modal.classList.remove('active');
-            videoPlayer.src = ''; // Detiene el video al cerrar el modal
+            // Detiene el video al cerrar el modal de una forma más efectiva
+            videoPlayer.src = ''; 
         }
 
         // Cierra el modal si se hace clic fuera del contenido
@@ -335,3 +377,5 @@
     </script>
 </body>
 </html>
+
+
