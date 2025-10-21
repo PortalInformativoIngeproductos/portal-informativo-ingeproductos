@@ -43,7 +43,7 @@
 
         @keyframes slideDown {
             from { transform: translateY(-100%); }
-            to { transform: translateY(0); }
+            to { translateY(0); }
         }
 
         .header-content {
@@ -51,59 +51,24 @@
             margin: 0 auto;
             padding: 0 20px;
             display: flex;
-            justify-content: space-between;
+            justify-content: center; /* Centrado ahora que no hay botón */
             align-items: center;
         }
 
         .logo {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .logo-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 24px;
-            font-weight: bold;
+            text-align: center; /* Alineación de texto centrada */
         }
 
         .logo-text h1 {
-            font-size: 1.5rem;
+            font-size: 2rem; /* Texto más grande */
             color: var(--primary);
             margin-bottom: 2px;
+            font-weight: 700;
         }
 
         .logo-text p {
-            font-size: 0.85rem;
+            font-size: 1rem; /* Subtítulo más grande */
             color: #666;
-        }
-
-        .btn {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 8px;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 90, 158, 0.4);
         }
 
         .container {
@@ -220,7 +185,7 @@
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.85);
             z-index: 2000;
             justify-content: center;
             align-items: center;
@@ -296,13 +261,11 @@
     <header class="header">
         <div class="header-content">
             <div class="logo">
-                <div class="logo-icon">IP</div>
                 <div class="logo-text">
                     <h1>Ingeproductos</h1>
                     <p>Videoteca de Capacitación</p>
                 </div>
             </div>
-            <button class="btn btn-primary" onclick="alert('Contacta al equipo de TI para publicar nuevo contenido.')">Publicar Video</button>
         </div>
     </header>
 
@@ -331,14 +294,14 @@
         <div class="modal-content">
             <span class="modal-close" onclick="closeModal()">&times;</span>
             <div class="video-container">
-                <!-- VIDEO INSERTADO -->
-                <iframe src="https://ingeproductos-my.sharepoint.com/personal/xavier_rojas_ingeproductos_com_co/_layouts/15/embed.aspx?id=%2Fpersonal%2Fxavier%5Frojas%5Fingeproductos%5Fcom%5Fco%2FDocuments%2FDocumentos%2FClasificacion%20de%20archivos%2FTrabajo%2FQR%2FVideos%2FLos%2010%20mandamientos%20del%20inyector%20de%20plastico%2Emp4&ga=1" width="100%" height="100%" allowfullscreen style="border:none;"></iframe>
+                <!-- VIDEO INSERTADO Y CORREGIDO -->
+                <iframe src="https://ingeproductos-my.sharepoint.com/personal/xavier_rojas_ingeproductos_com_co/_layouts/15/embed.aspx?id=%2Fpersonal%2Fxavier%5Frojas%5Fingeproductos%5Fcom%5Fco%2FDocuments%2FDocumentos%2FClasificacion%20de%20archivos%2FTrabajo%2FQR%2FVideos%2FLos%2010%20mandamientos%20del%20inyector%20de%20plastico%2Emp4&e=adJhqS" width="100%" height="100%" allowfullscreen style="border:none;"></iframe>
             </div>
         </div>
     </div>
 
     <footer class="footer">
-        <p><strong>© 2025 Ingeproductos</strong> | Videoteca de Capacitación para Operarios</p>
+        <p><strong>© 2025 Ingeproductos</strong> | Videoteca Informativa</p>
     </footer>
 
     <script>
@@ -354,7 +317,9 @@
             modal.classList.remove('active');
             // Detener el video al cerrar para evitar que siga sonando
             if (iframe) {
-                iframe.src = videoSrc;
+                const currentSrc = iframe.src;
+                iframe.src = null; // Detiene la carga
+                iframe.src = currentSrc; // Lo reasigna para que pueda volver a cargarse
             }
         }
 
