@@ -1,1 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Informativo Ingeproductos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos Generales */
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            background-color: #f4f7f6; /* Fondo suave */
+            color: #333;
+            line-height: 1.6;
+        }
 
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Encabezado */
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            color: #005A9E; /* Azul corporativo fuerte */
+            font-size: 2.8em;
+            margin-bottom: 10px;
+            border-bottom: 3px solid #0078D4; /* Subrayado azul */
+            padding-bottom: 10px;
+            display: inline-block; /* Para que el subrayado se ajuste al texto */
+        }
+
+        header p {
+            color: #555;
+            font-size: 1.1em;
+        }
+
+        /* Sección de Videos */
+        .video-section {
+            margin-top: 40px;
+            padding: 25px;
+            background-color: #eaf3f9; /* Fondo ligero para la sección */
+            border-radius: 10px;
+            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .video-section h2 {
+            color: #005A9E;
+            text-align: center;
+            font-size: 2.2em;
+            margin-bottom: 25px;
+        }
+
+        .video-player {
+            position: relative;
+            padding-bottom: 56.25%; /* Relación de aspecto 16:9 */
+            height: 0;
+            overflow: hidden;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .video-player iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-info {
+            text-align: center;
+        }
+
+        .video-info h3 {
+            color: #0078D4; /* Azul de énfasis */
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+
+        .video-info p {
+            color: #666;
+            font-size: 1.05em;
+            margin-bottom: 20px;
+        }
+
+        /* Botón de Acción */
+        .action-button {
+            display: inline-block;
+            background-color: #28a745; /* Verde vibrante */
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 1.2em;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .action-button:hover {
+            background-color: #218838; /* Verde más oscuro al pasar el ratón */
+            transform: translateY(-2px); /* Pequeño efecto de elevación */
+        }
+
+        /* Pie de página */
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+            color: #888;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Portal Informativo Ingeproductos</h1>
+            <p>Bienvenido al centro de recursos para nuestros colaboradores de producción.</p>
+        </header>
+
+        <main>
+            <section class="video-section">
+                <h2>Videos de Capacitación</h2>
+                
+                <div class="video-player">
+                    <iframe 
+                        src="https://ingeproductos-my.sharepoint.com/personal/xavier_rojas_ingeproductos_com_co/_layouts/15/embed.aspx?id=EQ2v_sq19bZClaN1MVpLmd0BdgbGrQRsGUuZ7pyQ223MYw&amp;embed=1" 
+                        allowfullscreen="true"
+                        title="Video de Capacitación: Los 10 mandamientos del inyector de plástico"
+                    ></iframe>
+                </div>
+
+                <div class="video-info">
+                    <h3>Los 10 Mandamientos del Inyector de Plástico</h3>
+                    <p>Consejos esenciales para optimizar el proceso de inyección y mantener la calidad en cada pieza.</p>
+                    
+                    </div>
+            </section>
+            
+            </main>
+
+        <footer>
+            <p>&copy; 2023 Ingeproductos. Todos los derechos reservados.</p>
+            <p>Desarrollado por el equipo de TI.</p>
+        </footer>
+    </div>
+
+</body>
+</html>
