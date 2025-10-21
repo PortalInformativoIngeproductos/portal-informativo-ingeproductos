@@ -3,155 +3,660 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal Informativo Ingeproductos</title>
+    <title>Portal de Capacitación - Ingeproductos</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         :root {
-            --primary-blue: #005A9E;
-            --secondary-blue: #0078D4;
-            --light-gray: #f0f2f5;
-            --text-color: #333;
+            --primary: #005A9E;
+            --secondary: #0078D4;
+            --accent: #00A8E1;
+            --dark: #1a1a1a;
+            --light: #f5f7fa;
             --white: #ffffff;
-            --shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
         }
 
         body {
             font-family: 'Poppins', sans-serif;
-            margin: 0;
-            background-color: var(--light-gray);
-            color: var(--text-color);
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            padding: 20px;
-            box-sizing: border-box;
+            color: var(--dark);
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            animation: slideDown 0.5s ease;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo-text h1 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 2px;
+        }
+
+        .logo-text p {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 90, 158, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
         }
 
         .container {
-            width: 100%;
-            max-width: 960px;
-            background: var(--white);
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .filter-bar {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-btn {
+            padding: 8px 20px;
+            border: 2px solid #e0e0e0;
+            background: white;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .filter-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: white;
             border-radius: 20px;
-            box-shadow: var(--shadow);
             overflow: hidden;
-            animation: fadeIn 0.8s ease-out;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-thumbnail {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-thumbnail::before {
+            content: '▶';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3rem;
+            color: white;
+            opacity: 0.8;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover .card-thumbnail::before {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1.2);
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .card-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .badge-video {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .badge-aviso {
+            background: #fff3e0;
+            color: #f57c00;
+        }
+
+        .badge-urgente {
+            background: #ffebee;
+            color: #c62828;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .card-description {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 1px solid #e0e0e0;
+            font-size: 0.85rem;
+            color: #999;
+        }
+
+        .card-date {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .card-views {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .announcement-card {
+            background: linear-gradient(135deg, #fff5f5 0%, #ffe3e3 100%);
+            border-left: 5px solid var(--danger);
+        }
+
+        .announcement-card .card-thumbnail {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        .announcement-card .card-thumbnail::before {
+            content: '📢';
+        }
+
+        .footer {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 30px 0;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .footer-content p {
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .footer-links a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-bar {
+                justify-content: center;
+            }
+
+            .logo-text h1 {
+                font-size: 1.2rem;
+            }
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
-        header {
-            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
-            color: var(--white);
-            padding: 40px 30px;
-            text-align: center;
+        .modal.active {
+            display: flex;
         }
 
-        header h1 {
-            margin: 0;
-            font-size: 2.5rem;
-            font-weight: 700;
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 800px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: slideUp 0.3s ease;
         }
 
-        header p {
-            margin: 10px 0 0;
-            font-size: 1.1rem;
-            opacity: 0.9;
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
-        main {
-            padding: 40px;
-        }
-
-        .video-section {
-            text-align: center;
-        }
-
-        .video-section h2 {
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
             font-size: 2rem;
-            color: var(--primary-blue);
-            margin-bottom: 15px;
-            font-weight: 600;
+            color: #999;
+            cursor: pointer;
+            transition: color 0.3s ease;
         }
 
-        .video-section .subtitle {
-            font-size: 1.1rem;
-            color: #666;
-            margin-bottom: 30px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
+        .modal-close:hover {
+            color: var(--dark);
         }
 
-        .video-embed-container {
+        .video-container {
             position: relative;
             width: 100%;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            padding-bottom: 56.25%;
             height: 0;
-            background-color: #000;
+            background: #000;
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            margin-bottom: 20px;
-            transition: transform 0.3s ease;
-        }
-        
-        .video-embed-container:hover {
-            transform: scale(1.02);
+            margin: 20px 0;
         }
 
-        .video-embed-container iframe {
+        .video-container iframe {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            border: 0;
         }
-
-        footer {
-            background-color: #e9ecef;
-            color: #6c757d;
-            text-align: center;
-            padding: 20px;
-            font-size: 0.9rem;
-        }
-        
     </style>
 </head>
 <body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">IP</div>
+                <div class="logo-text">
+                    <h1>Ingeproductos</h1>
+                    <p>Portal de Capacitación</p>
+                </div>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-outline" onclick="scrollToSection()">Ver Contenido</button>
+                <button class="btn btn-primary" onclick="alert('Contacta al equipo de TI para publicar nuevo contenido')">Publicar</button>
+            </div>
+        </div>
+    </header>
 
     <div class="container">
-        <header>
-            <h1>Portal Informativo Ingeproductos</h1>
-            <p>Tu centro de capacitación y avisos de producción.</p>
-        </header>
+        <div class="filter-bar">
+            <button class="filter-btn active" onclick="filterContent('todos')">📋 Todos</button>
+            <button class="filter-btn" onclick="filterContent('videos')">🎥 Videos</button>
+            <button class="filter-btn" onclick="filterContent('avisos')">📢 Avisos</button>
+            <button class="filter-btn" onclick="filterContent('urgente')">⚠️ Urgente</button>
+        </div>
 
-        <main>
-            <section class="video-section">
-                <h2>Los 10 Mandamientos del Inyector de Plástico</h2>
-                <p class="subtitle">Consejos esenciales para optimizar el proceso de inyección y mantener la calidad en cada pieza.</p>
-                
-                <div class="video-embed-container">
-                    <!-- 
-                    PASO IMPORTANTE: 
-                    Pega aquí el código <iframe> que copiaste de OneDrive.
-                    Debe empezar con "<iframe src=..." y terminar con "</iframe>".
-                    -->
-
+        <div class="content-grid" id="contentGrid">
+            <!-- Video Card 1 -->
+            <div class="card" data-type="videos" onclick="openModal('video1')">
+                <div class="card-thumbnail"></div>
+                <div class="card-content">
+                    <span class="card-badge badge-video">Video Capacitación</span>
+                    <h3 class="card-title">Los 10 Mandamientos del Inyector de Plástico</h3>
+                    <p class="card-description">Consejos esenciales para optimizar el proceso de inyección y mantener la calidad en cada pieza producida.</p>
+                    <div class="card-meta">
+                        <span class="card-date">📅 15 Octubre 2023</span>
+                        <span class="card-views">👁️ 234 vistas</span>
+                    </div>
                 </div>
-            </section>
-        </main>
+            </div>
 
-        <footer>
-            <p>&copy; 2023 Ingeproductos | Desarrollado por el equipo de TI</p>
-        </footer>
+            <!-- Video Card 2 -->
+            <div class="card" data-type="videos" onclick="openModal('video2')">
+                <div class="card-thumbnail"></div>
+                <div class="card-content">
+                    <span class="card-badge badge-video">Video Capacitación</span>
+                    <h3 class="card-title">Seguridad en Planta: Procedimientos Básicos</h3>
+                    <p class="card-description">Conoce las normas fundamentales de seguridad que todo operario debe seguir en el área de producción.</p>
+                    <div class="card-meta">
+                        <span class="card-date">📅 12 Octubre 2023</span>
+                        <span class="card-views">👁️ 189 vistas</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Aviso Urgente -->
+            <div class="card announcement-card" data-type="urgente avisos" onclick="openModal('aviso1')">
+                <div class="card-thumbnail"></div>
+                <div class="card-content">
+                    <span class="card-badge badge-urgente">⚠️ Urgente</span>
+                    <h3 class="card-title">Mantenimiento Programado - Línea 3</h3>
+                    <p class="card-description">Se realizará mantenimiento preventivo en la línea 3 el día 22 de octubre. La producción se redirigirá a otras líneas.</p>
+                    <div class="card-meta">
+                        <span class="card-date">📅 18 Octubre 2023</span>
+                        <span class="card-views">⏰ Fecha límite: 22 Oct</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video Card 3 -->
+            <div class="card" data-type="videos" onclick="openModal('video3')">
+                <div class="card-thumbnail"></div>
+                <div class="card-content">
+                    <span class="card-badge badge-video">Video Capacitación</span>
+                    <h3 class="card-title">Control de Calidad: Inspección Visual</h3>
+                    <p class="card-description">Aprende a identificar defectos comunes en productos inyectados y los criterios de aceptación de calidad.</p>
+                    <div class="card-meta">
+                        <span class="card-date">📅 10 Octubre 2023</span>
+                        <span class="card-views">👁️ 312 vistas</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Aviso Normal -->
+            <div class="card" data-type="avisos" onclick="openModal('aviso2')">
+                <div class="card-thumbnail" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);"></div>
+                <div class="card-content">
+                    <span class="card-badge badge-aviso">Aviso Importante</span>
+                    <h3 class="card-title">Nuevo Horario de Turnos</h3>
+                    <p class="card-description">A partir del 1 de noviembre se implementará el nuevo esquema de turnos rotativos. Revisa los detalles.</p>
+                    <div class="card-meta">
+                        <span class="card-date">📅 16 Octubre 2023</span>
+                        <span class="card-views">📌 Permanente</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video Card 4 -->
+            <div class="card" data-type="videos" onclick="openModal('video4')">
+                <div class="card-thumbnail"></div>
+                <div class="card-content">
+                    <span class="card-badge badge-video">Video Capacitación</span>
+                    <h3 class="card-title">Mantenimiento Básico de Máquinas</h3>
+                    <p class="card-description">Rutinas diarias de mantenimiento que cada operario debe realizar en su estación de trabajo.</p>
+                    <div class="card-meta">
+                        <span class="card-date">📅 08 Octubre 2023</span>
+                        <span class="card-views">👁️ 276 vistas</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
+    <!-- Modal para videos -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p><strong>© 2023 Ingeproductos</strong> | Portal de Capacitación para Operarios</p>
+            <p>Desarrollado por el Equipo de TI</p>
+            <div class="footer-links">
+                <a href="#" onclick="alert('Contacto: ti@ingeproductos.com'); return false;">Contacto</a>
+                <a href="#" onclick="alert('Para soporte técnico contacta al ext. 101'); return false;">Soporte</a>
+                <a href="#" onclick="alert('¿Tienes sugerencias? Escríbenos'); return false;">Sugerencias</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let currentFilter = 'todos';
+
+        function filterContent(type) {
+            currentFilter = type;
+            const cards = document.querySelectorAll('.card');
+            const buttons = document.querySelectorAll('.filter-btn');
+            
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            cards.forEach(card => {
+                if (type === 'todos') {
+                    card.style.display = 'block';
+                } else {
+                    const cardTypes = card.getAttribute('data-type');
+                    if (cardTypes.includes(type)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                }
+            });
+        }
+
+        function openModal(contentId) {
+            const modal = document.getElementById('modal');
+            const modalBody = document.getElementById('modalBody');
+            
+            let content = '';
+            
+            if (contentId === 'video1') {
+                content = `
+                    <h2>Los 10 Mandamientos del Inyector de Plástico</h2>
+                    <div class="video-container">
+                        <!-- Aquí va el iframe del video de OneDrive -->
+                        <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: white;">
+                            <p>Inserta aquí el código iframe de tu video de OneDrive</p>
+                        </div>
+                    </div>
+                    <p><strong>Descripción:</strong> En este video aprenderás los 10 principios fundamentales que todo inyector de plástico debe seguir para garantizar la calidad del producto y optimizar el proceso de producción.</p>
+                    <p><strong>Duración:</strong> 15 minutos</p>
+                    <p><strong>Temas tratados:</strong></p>
+                    <ul>
+                        <li>Preparación del material</li>
+                        <li>Control de temperatura</li>
+                        <li>Presión de inyección</li>
+                        <li>Tiempo de enfriamiento</li>
+                        <li>Inspección de calidad</li>
+                    </ul>
+                `;
+            } else if (contentId === 'aviso1') {
+                content = `
+                    <h2>⚠️ Mantenimiento Programado - Línea 3</h2>
+                    <p><strong>Fecha:</strong> 22 de Octubre 2023</p>
+                    <p><strong>Horario:</strong> 6:00 AM - 2:00 PM</p>
+                    <p><strong>Línea afectada:</strong> Línea 3 - Inyección</p>
+                    <hr style="margin: 20px 0;">
+                    <p>Se realizará mantenimiento preventivo programado en la línea 3. Durante este período:</p>
+                    <ul>
+                        <li>La producción se redirigirá a las líneas 1 y 2</li>
+                        <li>El personal de la línea 3 apoyará en otras áreas</li>
+                        <li>Se solicita puntualidad para reorganizar las estaciones</li>
+                    </ul>
+                    <p><strong>Contacto:</strong> Supervisor de Producción - Ext. 205</p>
+                `;
+            } else {
+                content = `
+                    <h2>Contenido no disponible</h2>
+                    <p>Este contenido está en proceso de carga. Por favor intenta más tarde.</p>
+                `;
+            }
+            
+            modalBody.innerHTML = content;
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('modal');
+            modal.classList.remove('active');
+        }
+
+        function scrollToSection() {
+            document.getElementById('contentGrid').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('modal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
 </body>
 </html>
