@@ -4,125 +4,124 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portal Informativo Ingeproductos</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Estilos Generales */
+        :root {
+            --primary-blue: #005A9E;
+            --secondary-blue: #0078D4;
+            --light-gray: #f0f2f5;
+            --text-color: #333;
+            --white: #ffffff;
+            --shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
         body {
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Poppins', sans-serif;
             margin: 0;
-            background-color: #f4f7f6; /* Fondo suave */
-            color: #333;
-            line-height: 1.6;
+            background-color: var(--light-gray);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
         }
 
         .container {
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 30px;
-            background-color: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 960px;
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            animation: fadeIn 0.8s ease-out;
         }
 
-        /* Encabezado */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         header {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: var(--white);
+            padding: 40px 30px;
             text-align: center;
-            margin-bottom: 30px;
         }
 
         header h1 {
-            color: #005A9E; /* Azul corporativo fuerte */
-            font-size: 2.8em;
-            margin-bottom: 10px;
-            border-bottom: 3px solid #0078D4; /* Subrayado azul */
-            padding-bottom: 10px;
-            display: inline-block; /* Para que el subrayado se ajuste al texto */
+            margin: 0;
+            font-size: 2.5rem;
+            font-weight: 700;
         }
 
         header p {
-            color: #555;
-            font-size: 1.1em;
+            margin: 10px 0 0;
+            font-size: 1.1rem;
+            opacity: 0.9;
         }
 
-        /* Sección de Videos */
+        main {
+            padding: 40px;
+        }
+
         .video-section {
-            margin-top: 40px;
-            padding: 25px;
-            background-color: #eaf3f9; /* Fondo ligero para la sección */
-            border-radius: 10px;
-            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.05);
+            text-align: center;
         }
 
         .video-section h2 {
-            color: #005A9E;
-            text-align: center;
-            font-size: 2.2em;
-            margin-bottom: 25px;
+            font-size: 2rem;
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+            font-weight: 600;
         }
 
-        .video-player {
+        .video-section .subtitle {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .video-embed-container {
             position: relative;
-            padding-bottom: 56.25%; /* Relación de aspecto 16:9 */
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
             height: 0;
+            background-color: #000;
+            border-radius: 15px;
             overflow: hidden;
-            margin-bottom: 25px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+        
+        .video-embed-container:hover {
+            transform: scale(1.02);
         }
 
-        .video-player iframe {
+        .video-embed-container iframe {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            border: none;
+            border: 0;
         }
 
-        .video-info {
-            text-align: center;
-        }
-
-        .video-info h3 {
-            color: #0078D4; /* Azul de énfasis */
-            font-size: 1.8em;
-            margin-bottom: 10px;
-        }
-
-        .video-info p {
-            color: #666;
-            font-size: 1.05em;
-            margin-bottom: 20px;
-        }
-
-        /* Botón de Acción */
-        .action-button {
-            display: inline-block;
-            background-color: #28a745; /* Verde vibrante */
-            color: white;
-            padding: 15px 30px;
-            text-decoration: none;
-            border-radius: 8px;
-            font-size: 1.2em;
-            font-weight: bold;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .action-button:hover {
-            background-color: #218838; /* Verde más oscuro al pasar el ratón */
-            transform: translateY(-2px); /* Pequeño efecto de elevación */
-        }
-
-        /* Pie de página */
         footer {
+            background-color: #e9ecef;
+            color: #6c757d;
             text-align: center;
-            margin-top: 50px;
-            padding-top: 20px;
-            border-top: 1px solid #e0e0e0;
-            color: #888;
-            font-size: 0.9em;
+            padding: 20px;
+            font-size: 0.9rem;
         }
+        
     </style>
 </head>
 <body>
@@ -130,33 +129,27 @@
     <div class="container">
         <header>
             <h1>Portal Informativo Ingeproductos</h1>
-            <p>Bienvenido al centro de recursos para nuestros colaboradores de producción.</p>
+            <p>Tu centro de capacitación y avisos de producción.</p>
         </header>
 
         <main>
             <section class="video-section">
-                <h2>Videos de Capacitación</h2>
+                <h2>Los 10 Mandamientos del Inyector de Plástico</h2>
+                <p class="subtitle">Consejos esenciales para optimizar el proceso de inyección y mantener la calidad en cada pieza.</p>
                 
-                <div class="video-player">
-                    <iframe 
-                        src="https://ingeproductos-my.sharepoint.com/personal/xavier_rojas_ingeproductos_com_co/_layouts/15/embed.aspx?id=EQ2v_sq19bZClaN1MVpLmd0BdgbGrQRsGUuZ7pyQ223MYw&amp;embed=1" 
-                        allowfullscreen="true"
-                        title="Video de Capacitación: Los 10 mandamientos del inyector de plástico"
-                    ></iframe>
-                </div>
+                <div class="video-embed-container">
+                    <!-- 
+                    PASO IMPORTANTE: 
+                    Pega aquí el código <iframe> que copiaste de OneDrive.
+                    Debe empezar con "<iframe src=..." y terminar con "</iframe>".
+                    -->
 
-                <div class="video-info">
-                    <h3>Los 10 Mandamientos del Inyector de Plástico</h3>
-                    <p>Consejos esenciales para optimizar el proceso de inyección y mantener la calidad en cada pieza.</p>
-                    
-                    </div>
+                </div>
             </section>
-            
-            </main>
+        </main>
 
         <footer>
-            <p>&copy; 2023 Ingeproductos. Todos los derechos reservados.</p>
-            <p>Desarrollado por el equipo de TI.</p>
+            <p>&copy; 2023 Ingeproductos | Desarrollado por el equipo de TI</p>
         </footer>
     </div>
 
