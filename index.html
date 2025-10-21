@@ -51,23 +51,23 @@
             margin: 0 auto;
             padding: 0 20px;
             display: flex;
-            justify-content: center; /* Centrado ahora que no hay botón */
+            justify-content: center;
             align-items: center;
         }
 
         .logo {
-            text-align: center; /* Alineación de texto centrada */
+            text-align: center;
         }
 
         .logo-text h1 {
-            font-size: 2rem; /* Texto más grande */
+            font-size: 2rem;
             color: var(--primary);
             margin-bottom: 2px;
             font-weight: 700;
         }
 
         .logo-text p {
-            font-size: 1rem; /* Subtítulo más grande */
+            font-size: 1rem;
             color: #666;
         }
 
@@ -275,7 +275,7 @@
         <div class="content-grid" id="contentGrid">
             
             <!-- TARJETA DE VIDEO 1 -->
-            <div class="card" onclick="openModal()">
+            <div class="card" onclick="openModal('VO3E14BdyMw')">
                 <div class="card-thumbnail"></div>
                 <div class="card-content">
                     <span class="card-badge">Capacitación Esencial</span>
@@ -284,7 +284,15 @@
                 </div>
             </div>
 
-            <!-- Puedes copiar y pegar la tarjeta de arriba para añadir más videos en el futuro -->
+            <!-- TARJETA DE VIDEO 2 -->
+            <div class="card" onclick="openModal('yrbBTRAZKq0')">
+                <div class="card-thumbnail"></div>
+                <div class="card-content">
+                    <span class="card-badge">Productividad</span>
+                    <h3 class="card-title">5S: La Metodología Esencial para la Organización y Eficiencia</h3>
+                    <p class="card-description">Descubre cómo implementar las 5S para mejorar tu espacio de trabajo y aumentar la productividad.</p>
+                </div>
+            </div>
 
         </div>
     </div>
@@ -295,7 +303,7 @@
             <span class="modal-close" onclick="closeModal()">&times;</span>
             <div class="video-container">
                 <!-- VIDEO INSERTADO DE YOUTUBE -->
-                <iframe src="https://www.youtube.com/embed/VO3E14BdyMw" width="100%" height="100%" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border:none;"></iframe>
+                <iframe id="videoPlayer" width="100%" height="100%" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border:none;"></iframe>
             </div>
         </div>
     </div>
@@ -306,19 +314,16 @@
 
     <script>
         const modal = document.getElementById('modal');
-        const iframe = modal.querySelector('iframe');
-        const videoSrc = iframe ? iframe.src : ''; // Guarda el src original
+        const videoPlayer = document.getElementById('videoPlayer');
 
-        function openModal() {
+        function openModal(videoId) {
+            videoPlayer.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
             modal.classList.add('active');
         }
 
         function closeModal() {
             modal.classList.remove('active');
-            // Detener el video al cerrar y reiniciar su src para que se cargue de nuevo si se abre
-            if (iframe) {
-                iframe.src = videoSrc; // Restablece el src original para parar el video
-            }
+            videoPlayer.src = ''; // Detiene el video al cerrar el modal
         }
 
         // Cierra el modal si se hace clic fuera del contenido
@@ -330,4 +335,3 @@
     </script>
 </body>
 </html>
-
