@@ -24,7 +24,7 @@
                             cyanLight: '#e0f7fa',
                             green: '#74c336',
                             magenta: '#d90429',
-                            lightBg: '#f8fafc' /* Fondo premium claro */
+                            lightBg: '#f8fafc'
                         }
                     },
                     fontFamily: {
@@ -46,45 +46,22 @@
     <style>
         body { font-family: 'Montserrat', sans-serif; background-color: #f8fafc; }
         
-        /* Ocultar barra de scroll pero permitir scroll */
         .hide-scroll::-webkit-scrollbar { display: none; }
         .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
-
-        /* Utilidad para vistas */
         .hidden-view { display: none !important; }
 
-        /* Animaciones Suaves Premium */
         .fade-in { animation: fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         .slide-up { animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; }
         
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Animación de Flotación (Hero) */
-        .float-animation {
-            animation: float 6s ease-in-out infinite;
-        }
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
-        }
+        .float-animation { animation: float 6s ease-in-out infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
 
-        /* Animación para el botón de WhatsApp */
-        .bounce-soft {
-            animation: bounceSoft 3s infinite;
-        }
-        @keyframes bounceSoft {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-        }
+        .bounce-soft { animation: bounceSoft 3s infinite; }
+        @keyframes bounceSoft { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
 
-        /* Efecto Hover Premium para Cards de Video */
         .video-card { 
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
@@ -93,59 +70,16 @@
             transform: translateY(-8px); 
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
-        .video-card:hover .video-thumbnail {
-            transform: scale(1.05);
-            filter: brightness(0.7);
-        }
+        .video-card:hover .video-thumbnail { transform: scale(1.05); filter: brightness(0.7); }
 
-        /* --- EFECTO FLIP CARDS 3D --- */
-        .flip-card {
-            background-color: transparent;
-            perspective: 1000px;
-            height: 280px;
-            cursor: pointer;
-        }
-        .flip-card-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            text-align: center;
-            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-            transform-style: preserve-3d;
-        }
-        .flip-card:hover .flip-card-inner {
-            transform: rotateY(180deg);
-        }
-        .flip-card-front, .flip-card-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            border-radius: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 2rem;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
-            border: 1px solid rgba(0,0,0,0.05);
-        }
-        .flip-card-front {
-            background-color: #ffffff;
-            color: #1a1a1a;
-        }
-        .flip-card-back {
-            background: linear-gradient(135deg, #00b4d8, #0077b6);
-            color: white;
-            transform: rotateY(180deg);
-        }
+        .flip-card { background-color: transparent; perspective: 1000px; height: 280px; cursor: pointer; }
+        .flip-card-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); transform-style: preserve-3d; }
+        .flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
+        .flip-card-front, .flip-card-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 1.5rem; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 2rem; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); border: 1px solid rgba(0,0,0,0.05); }
+        .flip-card-front { background-color: #ffffff; color: #1a1a1a; }
+        .flip-card-back { background: linear-gradient(135deg, #00b4d8, #0077b6); color: white; transform: rotateY(180deg); }
 
-        /* Glassmorphism sutil para Navbar */
-        .nav-glass {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-        }
+        .nav-glass { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0, 0, 0, 0.05); }
     </style>
 </head>
 <body class="text-gray-800 flex flex-col min-h-screen relative">
@@ -169,6 +103,7 @@
                 <div class="hidden md:flex items-center space-x-8">
                     <button onclick="switchView('inicio')" id="nav-inicio" class="font-bold text-gray-800 hover:text-inge-cyan transition pb-1 border-b-2 border-inge-cyan">Inicio</button>
                     <button onclick="switchView('personal-hub')" id="nav-personal" class="font-bold text-gray-500 hover:text-inge-cyan transition pb-1 border-b-2 border-transparent">Personal General</button>
+                    <button onclick="switchView('visitante-hub')" id="nav-visitante" class="font-bold text-gray-500 hover:text-inge-cyan transition pb-1 border-b-2 border-transparent">Invitado</button>
                     
                     <!-- Botón "Área Directivos" (Login) -->
                     <button onclick="switchView('directivos-login')" id="nav-directivos-btn" class="bg-gray-900 text-white px-6 py-2 rounded-full font-bold hover:bg-inge-cyan hover:shadow-lg hover:shadow-cyan-500/30 transition-all flex items-center gap-2">
@@ -178,7 +113,7 @@
                     <!-- Enlace "Panel Directivo" (Aparece tras login) -->
                     <button onclick="switchView('directivos-dashboard')" id="nav-panel-directivos" class="hidden font-bold text-inge-cyan hover:text-cyan-600 transition pb-1 border-b-2 border-transparent">Panel Directivo</button>
 
-                    <!-- Botón Salir (Aparece tras login) -->
+                    <!-- Botón Salir -->
                     <div id="user-profile" class="hidden items-center border-l-2 border-gray-200 pl-6 ml-2">
                         <button onclick="logout()" class="text-sm text-red-500 hover:text-red-700 font-bold flex items-center gap-2 bg-red-50 px-4 py-2 rounded-full transition-colors">
                             <i class="ph-bold ph-sign-out text-lg"></i> Salir
@@ -199,6 +134,7 @@
         <div id="mobile-menu" class="hidden md:hidden bg-white p-4 border-t border-gray-100 shadow-xl absolute w-full">
             <button onclick="switchView('inicio')" class="block w-full text-left py-3 text-gray-800 font-bold border-b border-gray-100"><i class="ph-bold ph-house mr-2 text-inge-cyan"></i> Inicio</button>
             <button onclick="switchView('personal-hub')" class="block w-full text-left py-3 text-gray-800 font-bold border-b border-gray-100"><i class="ph-bold ph-users mr-2 text-inge-cyan"></i> Personal General</button>
+            <button onclick="switchView('visitante-hub')" class="block w-full text-left py-3 text-gray-800 font-bold border-b border-gray-100"><i class="ph-bold ph-handshake mr-2 text-inge-cyan"></i> Invitado / Visita</button>
             
             <button id="mobile-directivos-btn" onclick="switchView('directivos-login')" class="block w-full text-left py-3 text-gray-800 font-bold border-b border-gray-100"><i class="ph-bold ph-lock-key mr-2"></i> Área Directivos</button>
             <button id="mobile-panel-directivos" onclick="switchView('directivos-dashboard')" class="hidden block w-full text-left py-3 text-inge-cyan font-bold border-b border-gray-100"><i class="ph-bold ph-briefcase mr-2"></i> Panel Directivo</button>
@@ -210,16 +146,12 @@
     <!-- CONTENEDOR PRINCIPAL DE VISTAS -->
     <main class="flex-grow w-full flex flex-col relative z-10">
 
-        <!-- ================= VISTA: INICIO (PREMIUM LIGHT + BRAND COLORS) ================= -->
+        <!-- ================= VISTA: INICIO ================= -->
         <section id="view-inicio" class="fade-in flex flex-col justify-center min-h-[85vh]">
             <div class="relative bg-[#f8fafc] overflow-hidden pt-16 md:pt-24 pb-12 flex-grow flex items-center">
                 
-                <!-- Elementos de fondo decorativos INGEPRODUCTOS (Paleta: Cian, Magenta, Naranja) -->
                 <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-                    <!-- Grid sutil -->
                     <div class="absolute inset-0 opacity-[0.04]" style="background-image: radial-gradient(#000 1px, transparent 1px); background-size: 24px 24px;"></div>
-                    
-                    <!-- Glows suaves con colores de la marca -->
                     <div class="absolute -top-32 -right-32 w-[500px] h-[500px] bg-inge-cyan/20 rounded-full blur-[100px] mix-blend-multiply"></div>
                     <div class="absolute top-1/2 -left-32 w-[400px] h-[400px] bg-inge-magenta/10 rounded-full blur-[100px] mix-blend-multiply"></div>
                     <div class="absolute -bottom-32 right-1/4 w-[400px] h-[400px] bg-orange-400/10 rounded-full blur-[100px] mix-blend-multiply"></div>
@@ -232,33 +164,31 @@
                             <span class="w-2.5 h-2.5 rounded-full bg-inge-green animate-pulse"></span> Sistema Interno Activo
                         </div>
                         <h1 class="text-5xl md:text-7xl font-extrabold text-gray-900 leading-[1.1] slide-up tracking-tight" style="animation-delay: 0.2s;">
-                            Portal de <br>
-                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-inge-cyan via-blue-600 to-inge-magenta">Colaboradores</span>
+                            Portal <br>
+                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-inge-cyan via-blue-600 to-inge-magenta">Institucional</span>
                         </h1>
                         <p class="text-gray-600 text-lg md:text-xl max-w-lg slide-up leading-relaxed" style="animation-delay: 0.3s;">
-                            Descubre herramientas exclusivas, capacitaciones en línea y toda la información para potenciar tu desarrollo en Ingeproductos.
+                            Descubre herramientas exclusivas, capacitaciones en línea y toda la información corporativa del ecosistema Ingeproductos.
                         </p>
                         
                         <!-- Botones de Acción Principales -->
                         <div class="flex flex-wrap gap-4 pt-6 slide-up" style="animation-delay: 0.4s;">
-                            <button onclick="switchView('personal-hub')" class="bg-gray-900 text-white px-8 py-3.5 rounded-xl font-bold hover:bg-gray-800 hover:shadow-xl hover:-translate-y-1 transition-all flex items-center gap-2">
+                            <button onclick="switchView('personal-hub')" class="bg-gray-900 text-white px-6 py-3.5 rounded-xl font-bold hover:bg-gray-800 hover:shadow-xl hover:-translate-y-1 transition-all flex items-center gap-2">
                                 Soy Colaborador <i class="ph-bold ph-users"></i>
                             </button>
-                            <button onclick="switchView('directivos-login')" class="bg-white text-gray-900 border border-gray-200 shadow-sm px-8 py-3.5 rounded-xl font-bold hover:border-inge-cyan hover:text-inge-cyan hover:shadow-md hover:-translate-y-1 transition-all flex items-center gap-2">
+                            <button onclick="switchView('directivos-login')" class="bg-white text-gray-900 border border-gray-200 shadow-sm px-6 py-3.5 rounded-xl font-bold hover:border-inge-cyan hover:text-inge-cyan hover:shadow-md hover:-translate-y-1 transition-all flex items-center gap-2">
                                 Soy Directivo <i class="ph-bold ph-lock-key"></i>
                             </button>
-                            <!-- Nuevo botón rápido de Video Corporativo -->
-                            <button onclick="openVideoModal('xymTY2jyPlw')" class="bg-inge-magenta/10 text-inge-magenta border border-inge-magenta/20 shadow-sm px-6 py-3.5 rounded-xl font-bold hover:bg-inge-magenta hover:text-white hover:shadow-md hover:-translate-y-1 transition-all flex items-center gap-2">
-                                <i class="ph-fill ph-play-circle text-2xl"></i> Video Corporativo
+                            <!-- Nuevo Botón Invitado -->
+                            <button onclick="switchView('visitante-hub')" class="bg-blue-50 text-blue-700 border border-blue-200 shadow-sm px-6 py-3.5 rounded-xl font-bold hover:bg-blue-100 hover:shadow-md hover:-translate-y-1 transition-all flex items-center gap-2">
+                                Soy Visitante <i class="ph-bold ph-handshake"></i>
                             </button>
                         </div>
                     </div>
                     
                     <!-- Imagen Premium de Portín -->
                     <div class="w-full md:w-1/2 flex justify-center slide-up relative" style="animation-delay: 0.5s;">
-                        <!-- Fondo decorativo tipo cristal detrás de Portín -->
                         <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-72 h-72 md:w-[450px] md:h-[450px] bg-gradient-to-tr from-white/60 to-white/10 rounded-full border border-white/60 backdrop-blur-sm shadow-2xl"></div>
-                        
                         <img src="https://i.imgur.com/BXZiUkz.png" alt="DJ Portín" class="w-64 md:w-[380px] object-contain drop-shadow-2xl float-animation relative z-10">
                     </div>
                 </div>
@@ -268,7 +198,6 @@
             <div class="relative bg-[#f8fafc] pb-16 w-full z-20 mt-4 md:-mt-8">
                 <div class="max-w-5xl mx-auto px-4 slide-up" style="animation-delay: 0.6s;">
                     <div class="bg-white p-4 md:p-5 rounded-3xl shadow-[0_20px_50px_rgb(0,0,0,0.08)] border border-gray-100 flex flex-col md:flex-row items-center gap-6 cursor-pointer group hover:-translate-y-2 transition-all duration-300" onclick="openVideoModal('xymTY2jyPlw')">
-                        <!-- Miniatura del Video -->
                         <div class="w-full md:w-5/12 h-48 md:h-56 bg-black rounded-2xl overflow-hidden relative flex-shrink-0 shadow-inner">
                             <img src="https://img.youtube.com/vi/xymTY2jyPlw/hqdefault.jpg" alt="Video Corporativo Ingeproductos" class="w-full h-full object-cover group-hover:scale-105 group-hover:opacity-70 opacity-90 transition-all duration-500">
                             <div class="absolute inset-0 flex items-center justify-center">
@@ -277,7 +206,6 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- Texto Descriptivo -->
                         <div class="p-2 md:pr-8 w-full md:w-7/12 text-center md:text-left">
                             <span class="inline-block px-3 py-1 bg-pink-50 text-inge-magenta text-[10px] font-bold uppercase tracking-widest rounded-full mb-3">Conoce Nuestra Empresa</span>
                             <h3 class="text-2xl md:text-3xl font-extrabold text-gray-900 mb-3 leading-tight">Video Corporativo <br><span class="text-inge-cyan">Ingeproductos</span></h3>
@@ -293,7 +221,7 @@
             </div>
         </section>
 
-        <!-- ================= VISTA: HUB PERSONAL GENERAL (FLIP CARDS) ================= -->
+        <!-- ================= VISTA: HUB PERSONAL GENERAL ================= -->
         <section id="view-personal-hub" class="hidden-view fade-in py-16 bg-inge-lightBg flex-grow">
             <div class="max-w-7xl mx-auto px-4">
                 <div class="text-center mb-16 slide-up">
@@ -302,22 +230,21 @@
                     <div class="w-16 h-1.5 bg-inge-cyan mx-auto mt-6 rounded-full"></div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     <!-- FLIP CARD 1: Comunicados -->
                     <div class="flip-card slide-up" style="animation-delay: 0.1s;" onclick="alert('Área de comunicados en desarrollo.')">
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
-                                <div class="w-20 h-20 bg-blue-50 text-blue-500 rounded-full flex items-center justify-center text-4xl mb-4">
+                                <div class="w-16 h-16 bg-blue-50 text-blue-500 rounded-full flex items-center justify-center text-3xl mb-4">
                                     <i class="ph-fill ph-megaphone"></i>
                                 </div>
-                                <h3 class="text-2xl font-bold text-gray-900 mb-2">Comunicados</h3>
-                                <p class="text-gray-500 text-sm">Noticias y avisos</p>
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Comunicados</h3>
+                                <p class="text-gray-500 text-xs">Noticias y avisos</p>
                             </div>
                             <div class="flip-card-back">
-                                <i class="ph-fill ph-megaphone text-5xl mb-4 opacity-80"></i>
-                                <h3 class="text-xl font-bold mb-2">Información General</h3>
-                                <p class="text-sm text-blue-50">Mantente al día con cumpleaños, eventos y noticias corporativas de Ingeproductos.</p>
-                                <span class="mt-4 bg-white/20 px-4 py-1 rounded-full text-xs font-bold backdrop-blur-sm">Próximamente</span>
+                                <i class="ph-fill ph-megaphone text-4xl mb-3 opacity-80"></i>
+                                <h3 class="text-lg font-bold mb-2">Noticias</h3>
+                                <p class="text-xs text-blue-50">Mantente al día con novedades corporativas.</p>
                             </div>
                         </div>
                     </div>
@@ -326,37 +253,55 @@
                     <div class="flip-card slide-up" style="animation-delay: 0.2s;" onclick="switchView('capacitaciones')">
                         <div class="flip-card-inner">
                             <div class="flip-card-front" style="border: 2px solid #e0f7fa;">
-                                <div class="absolute -top-3 -right-3 bg-inge-green text-white text-xs font-bold px-3 py-1 rounded-full shadow-md z-10 animate-bounce">¡Nuevo!</div>
-                                <div class="w-20 h-20 bg-cyan-50 text-inge-cyan rounded-full flex items-center justify-center text-4xl mb-4">
+                                <div class="absolute -top-3 -right-3 bg-inge-green text-white text-[10px] font-bold px-3 py-1 rounded-full shadow-md z-10 animate-bounce">ACTIVO</div>
+                                <div class="w-16 h-16 bg-cyan-50 text-inge-cyan rounded-full flex items-center justify-center text-3xl mb-4">
                                     <i class="ph-fill ph-graduation-cap"></i>
                                 </div>
-                                <h3 class="text-2xl font-bold text-gray-900 mb-2">Capacitaciones</h3>
-                                <p class="text-gray-500 text-sm">Videoteca y formación</p>
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Capacitaciones</h3>
+                                <p class="text-gray-500 text-xs">Videoteca y formación</p>
                             </div>
                             <div class="flip-card-back" style="background: linear-gradient(135deg, #74c336, #559622);">
-                                <i class="ph-fill ph-video-camera text-5xl mb-4 opacity-80"></i>
-                                <h3 class="text-xl font-bold mb-2">Entrar a la Videoteca</h3>
-                                <p class="text-sm text-green-50">Accede a las metodologías 5S, inyección de plástico y más recursos formativos.</p>
-                                <span class="mt-4 bg-white text-green-700 px-4 py-1.5 rounded-full text-sm font-bold flex items-center gap-1">Ver Videos <i class="ph-bold ph-arrow-right"></i></span>
+                                <i class="ph-fill ph-video-camera text-4xl mb-3 opacity-80"></i>
+                                <h3 class="text-lg font-bold mb-2">Videoteca</h3>
+                                <p class="text-xs text-green-50 mb-3">Sistemas, Procesos y 5S.</p>
+                                <span class="bg-white text-green-700 px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">Entrar <i class="ph-bold ph-arrow-right"></i></span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- FLIP CARD 3: Formatos -->
-                    <div class="flip-card slide-up" style="animation-delay: 0.3s;" onclick="alert('Área de formatos en desarrollo.')">
+                    <!-- FLIP CARD 3: Estructura Organizacional -->
+                    <div class="flip-card slide-up" style="animation-delay: 0.3s;" onclick="openImageModal('https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1000&q=80', 'Estructura Organizacional')">
                         <div class="flip-card-inner">
                             <div class="flip-card-front">
-                                <div class="w-20 h-20 bg-purple-50 text-purple-500 rounded-full flex items-center justify-center text-4xl mb-4">
+                                <div class="w-16 h-16 bg-orange-50 text-orange-500 rounded-full flex items-center justify-center text-3xl mb-4">
+                                    <i class="ph-fill ph-tree-structure"></i>
+                                </div>
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Organigrama</h3>
+                                <p class="text-gray-500 text-xs">Conoce nuestro equipo</p>
+                            </div>
+                            <div class="flip-card-back" style="background: linear-gradient(135deg, #f97316, #ea580c);">
+                                <i class="ph-fill ph-users-three text-4xl mb-3 opacity-80"></i>
+                                <h3 class="text-lg font-bold mb-2">Nuestro Equipo</h3>
+                                <p class="text-xs text-orange-50 mb-3">Visualiza el mapa jerárquico de la compañía.</p>
+                                <span class="bg-white text-orange-700 px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">Ver Imagen <i class="ph-bold ph-eye"></i></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FLIP CARD 4: Formatos -->
+                    <div class="flip-card slide-up" style="animation-delay: 0.4s;" onclick="alert('Área de formatos en desarrollo.')">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <div class="w-16 h-16 bg-purple-50 text-purple-500 rounded-full flex items-center justify-center text-3xl mb-4">
                                     <i class="ph-fill ph-folder-open"></i>
                                 </div>
-                                <h3 class="text-2xl font-bold text-gray-900 mb-2">Formatos</h3>
-                                <p class="text-gray-500 text-sm">Descarga de recursos</p>
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Formatos</h3>
+                                <p class="text-gray-500 text-xs">Descarga de recursos</p>
                             </div>
                             <div class="flip-card-back" style="background: linear-gradient(135deg, #8b5cf6, #6d28d9);">
-                                <i class="ph-fill ph-file-text text-5xl mb-4 opacity-80"></i>
-                                <h3 class="text-xl font-bold mb-2">Documentos RRHH</h3>
-                                <p class="text-sm text-purple-50">Descarga manuales, políticas internas y formatos administrativos oficiales.</p>
-                                <span class="mt-4 bg-white/20 px-4 py-1 rounded-full text-xs font-bold backdrop-blur-sm">Próximamente</span>
+                                <i class="ph-fill ph-file-text text-4xl mb-3 opacity-80"></i>
+                                <h3 class="text-lg font-bold mb-2">Documentos RRHH</h3>
+                                <p class="text-xs text-purple-50">Descarga manuales y formatos.</p>
                             </div>
                         </div>
                     </div>
@@ -364,13 +309,14 @@
             </div>
         </section>
 
-        <!-- ================= VISTA: CAPACITACIONES (VIDEOS PERSONAL GENERAL) ================= -->
+        <!-- ================= VISTA: CAPACITACIONES (COLABORADORES) ================= -->
         <section id="view-capacitaciones" class="hidden-view fade-in py-12 bg-white flex-grow">
             <div class="max-w-7xl mx-auto px-4">
                 
-                <!-- Botón regresar -->
-                <button onclick="switchView('personal-hub')" class="text-gray-500 hover:text-inge-cyan font-bold mb-8 flex items-center gap-2 transition group">
-                    <i class="ph-bold ph-arrow-left group-hover:-translate-x-1 transition-transform"></i> Volver al Portal
+                <!-- BOTÓN VOLVER (MEJORADO Y GIGANTE) -->
+                <button onclick="switchView('personal-hub')" class="bg-gray-100 border border-gray-200 text-gray-800 px-6 md:px-8 py-3 md:py-4 rounded-2xl font-bold mb-10 flex items-center justify-center gap-3 hover:bg-inge-cyan hover:text-white hover:border-inge-cyan hover:-translate-y-1 transition-all shadow-sm w-full md:w-max group">
+                    <i class="ph-bold ph-arrow-left text-2xl group-hover:-translate-x-1 transition-transform"></i> 
+                    <span class="text-lg md:text-xl">Volver al Portal</span>
                 </button>
 
                 <div class="mb-10">
@@ -381,10 +327,95 @@
                     <p class="text-gray-500 mt-2 ml-14">Material formativo para mejorar nuestros procesos.</p>
                 </div>
 
-                <div class="space-y-12" id="capacitaciones-container">
+                <div class="space-y-16" id="capacitaciones-container">
                     <!-- Se llena con JavaScript separando por Categorías -->
                 </div>
 
+            </div>
+        </section>
+
+        <!-- ================= VISTA: HUB VISITANTES (NUEVO) ================= -->
+        <section id="view-visitante-hub" class="hidden-view fade-in py-16 bg-inge-lightBg flex-grow">
+            <div class="max-w-5xl mx-auto px-4">
+                <div class="text-center mb-16 slide-up">
+                    <h2 class="text-4xl font-extrabold text-gray-900 tracking-tight">Portal de Visitantes</h2>
+                    <p class="text-gray-500 mt-3 text-lg">Información esencial para tu ingreso y estadía en Ingeproductos.</p>
+                    <div class="w-16 h-1.5 bg-blue-600 mx-auto mt-6 rounded-full"></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Tarjeta: Políticas -->
+                    <div class="bg-white p-10 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-gray-100 hover:-translate-y-2 hover:shadow-[0_15px_40px_rgb(0,0,0,0.1)] transition-all cursor-pointer group text-center" onclick="switchView('visitante-politicas')">
+                        <div class="w-24 h-24 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center text-5xl mx-auto mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
+                            <i class="ph-fill ph-shield-check"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3 text-gray-900">Políticas de Ingreso</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed">Normas de seguridad, uso de EPP y reglamentos internos para toda persona externa a la compañía.</p>
+                        <div class="mt-6 flex items-center justify-center text-blue-600 font-bold opacity-0 group-hover:opacity-100 transition-opacity">
+                            Leer Políticas <i class="ph-bold ph-arrow-right ml-2"></i>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta: Videos Informativos -->
+                    <div class="bg-white p-10 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-gray-100 hover:-translate-y-2 hover:shadow-[0_15px_40px_rgb(0,0,0,0.1)] transition-all cursor-pointer group text-center" onclick="switchView('visitante-videos')">
+                        <div class="w-24 h-24 bg-inge-cyanLight text-inge-cyan rounded-full flex items-center justify-center text-5xl mx-auto mb-6 group-hover:bg-inge-cyan group-hover:text-white transition-colors duration-300">
+                            <i class="ph-fill ph-film-strip"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3 text-gray-900">Videos Informativos</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed">Conoce quiénes somos, qué hacemos y las recomendaciones generales antes de ingresar a planta.</p>
+                        <div class="mt-6 flex items-center justify-center text-inge-cyan font-bold opacity-0 group-hover:opacity-100 transition-opacity">
+                            Ver Videos <i class="ph-bold ph-arrow-right ml-2"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= VISTA: VISITANTES - POLITICAS ================= -->
+        <section id="view-visitante-politicas" class="hidden-view fade-in py-12 bg-white flex-grow">
+            <div class="max-w-7xl mx-auto px-4">
+                
+                <button onclick="switchView('visitante-hub')" class="bg-gray-100 border border-gray-200 text-gray-800 px-6 md:px-8 py-3 md:py-4 rounded-2xl font-bold mb-10 flex items-center justify-center gap-3 hover:bg-blue-600 hover:text-white hover:border-blue-600 hover:-translate-y-1 transition-all shadow-sm w-full md:w-max group">
+                    <i class="ph-bold ph-arrow-left text-2xl group-hover:-translate-x-1 transition-transform"></i> 
+                    <span class="text-lg md:text-xl">Volver a Visitantes</span>
+                </button>
+
+                <h2 class="text-3xl font-extrabold text-gray-900 tracking-tight mb-8">
+                    Políticas para Visitantes
+                </h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Ejemplo de Documento / Imagen -->
+                    <div class="border border-gray-200 rounded-2xl p-6 flex items-center gap-6 cursor-pointer hover:bg-blue-50 transition" onclick="openImageModal('https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&w=800&q=80', 'Reglamento de Seguridad (Planta)')">
+                        <div class="w-16 h-16 bg-red-100 text-red-500 rounded-xl flex items-center justify-center text-3xl shrink-0">
+                            <i class="ph-fill ph-file-pdf"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-900 text-lg">Reglamento de Seguridad (Planta)</h4>
+                            <p class="text-sm text-gray-500 mt-1">Uso de EPP obligatorio y rutas de evacuación.</p>
+                            <span class="text-blue-600 text-xs font-bold mt-2 inline-block">Visualizar Archivo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= VISTA: VISITANTES - VIDEOS ================= -->
+        <section id="view-visitante-videos" class="hidden-view fade-in py-12 bg-white flex-grow">
+            <div class="max-w-7xl mx-auto px-4">
+                
+                <button onclick="switchView('visitante-hub')" class="bg-gray-100 border border-gray-200 text-gray-800 px-6 md:px-8 py-3 md:py-4 rounded-2xl font-bold mb-10 flex items-center justify-center gap-3 hover:bg-blue-600 hover:text-white hover:border-blue-600 hover:-translate-y-1 transition-all shadow-sm w-full md:w-max group">
+                    <i class="ph-bold ph-arrow-left text-2xl group-hover:-translate-x-1 transition-transform"></i> 
+                    <span class="text-lg md:text-xl">Volver a Visitantes</span>
+                </button>
+
+                <h2 class="text-3xl font-extrabold text-gray-900 tracking-tight mb-8">
+                    Videos Informativos
+                </h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="visitantes-videos-container">
+                    <!-- Llenado por JS -->
+                </div>
             </div>
         </section>
 
@@ -443,30 +474,6 @@
                             Ingresar <i class="ph-bold ph-arrow-right ml-2"></i>
                         </div>
                     </div>
-
-                    <!-- Sección 2: Inteligencia Artificial -->
-                    <div class="bg-white p-10 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-gray-100 hover:-translate-y-2 hover:shadow-[0_15px_40px_rgb(0,0,0,0.1)] transition-all cursor-pointer group text-center" onclick="alert('La sección de Inteligencia Artificial estará disponible muy pronto.')">
-                        <div class="w-24 h-24 bg-gray-50 text-gray-800 rounded-full flex items-center justify-center text-4xl mx-auto mb-6 group-hover:bg-purple-600 group-hover:text-white transition-colors duration-300">
-                            <i class="ph-fill ph-robot"></i>
-                        </div>
-                        <h3 class="text-2xl font-bold mb-3 text-gray-900">Inteligencia Artificial</h3>
-                        <p class="text-gray-500 text-sm leading-relaxed">Herramientas, prompts y automatización para mejorar el ecosistema directivo.</p>
-                        <div class="mt-6 flex items-center justify-center text-purple-600 font-bold opacity-0 group-hover:opacity-100 transition-opacity">
-                            Próximamente <i class="ph-bold ph-clock ml-2"></i>
-                        </div>
-                    </div>
-
-                    <!-- Sección 3: Cultura Marisol -->
-                    <div class="bg-white p-10 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-gray-100 hover:-translate-y-2 hover:shadow-[0_15px_40px_rgb(0,0,0,0.1)] transition-all cursor-pointer group text-center" onclick="alert('La sección de Cultura Marisol estará disponible muy pronto.')">
-                        <div class="w-24 h-24 bg-gray-50 text-gray-800 rounded-full flex items-center justify-center text-4xl mx-auto mb-6 group-hover:bg-pink-500 group-hover:text-white transition-colors duration-300">
-                            <i class="ph-fill ph-heart"></i>
-                        </div>
-                        <h3 class="text-2xl font-bold mb-3 text-gray-900">Cultura Marisol</h3>
-                        <p class="text-gray-500 text-sm leading-relaxed">Bienestar, motivación y desarrollo integral de nuestros líderes.</p>
-                        <div class="mt-6 flex items-center justify-center text-pink-500 font-bold opacity-0 group-hover:opacity-100 transition-opacity">
-                            Próximamente <i class="ph-bold ph-clock ml-2"></i>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
@@ -475,12 +482,11 @@
         <section id="view-ruta-inge" class="hidden-view fade-in bg-inge-lightBg min-h-screen pb-20 pt-10 flex-grow">
             <div class="max-w-7xl mx-auto px-4">
                 
-                <!-- Botón de regreso -->
-                <button onclick="switchView('directivos-dashboard')" class="text-gray-500 hover:text-gray-900 font-bold mb-8 flex items-center gap-2 transition group">
-                    <i class="ph-bold ph-arrow-left group-hover:-translate-x-1 transition-transform"></i> Volver a Secciones
+                <button onclick="switchView('directivos-dashboard')" class="bg-gray-100 border border-gray-200 text-gray-800 px-6 md:px-8 py-3 md:py-4 rounded-2xl font-bold mb-10 flex items-center justify-center gap-3 hover:bg-gray-900 hover:text-white hover:border-gray-900 hover:-translate-y-1 transition-all shadow-sm w-full md:w-max group">
+                    <i class="ph-bold ph-arrow-left text-2xl group-hover:-translate-x-1 transition-transform"></i> 
+                    <span class="text-lg md:text-xl">Volver a Secciones</span>
                 </button>
                 
-                <!-- Banner de Objetivo Premium Claro -->
                 <div class="bg-white border border-gray-100 p-8 md:p-12 rounded-3xl mb-12 shadow-xl relative overflow-hidden flex flex-col md:flex-row items-center gap-8 slide-up">
                     <div class="absolute -right-10 -top-10 opacity-[0.03] pointer-events-none">
                         <i class="ph-fill ph-target text-[250px] text-gray-900"></i>
@@ -499,7 +505,6 @@
                     </div>
                 </div>
 
-                <!-- Lista de Videos -->
                 <div>
                     <h3 class="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
                         <i class="ph-fill ph-play-circle text-gray-400"></i> Clases Disponibles
@@ -535,7 +540,7 @@
                 <div class="inline-flex items-center bg-white rounded-full shadow-sm hover:scale-105 transition-transform cursor-default border border-gray-100 p-0.5" title="Número de visitas al portal">
                     <img src="https://api.visitorbadge.io/api/visitors?path=inge_interno.portal&label=Visitas&labelColor=%231a1a1a&countColor=%2300b4d8" alt="Contador de visitas" class="rounded-full" />
                 </div>
-                <p class="text-[11px] text-gray-400 font-medium">Última actualización: 02/03/2026 02:49 AM</p>
+                <p class="text-[11px] text-gray-400 font-medium">Última actualización: 02/03/2026 07:55 AM</p>
             </div>
 
         </div>
@@ -544,82 +549,116 @@
     <!-- BOTÓN WHATSAPP SUGERENCIAS -->
     <a href="https://wa.me/573202882534?text=Hola!%20Tengo%20una%20sugerencia%20para%20el%20Portal%20Interno:" target="_blank" class="fixed bottom-6 left-6 z-50 bg-[#25D366] text-white px-5 py-3 rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.2)] flex items-center gap-2 hover:bg-[#20bd5a] transition-colors group cursor-pointer bounce-soft border-2 border-white">
         <i class="ph-bold ph-whatsapp-logo text-2xl group-hover:scale-110 transition-transform"></i>
-        <span class="font-bold text-sm tracking-wide hidden md:inline">Buzón de Sugerencias</span>
+        <!-- Removí el hidden para que SIEMPRE diga Sugerencias, incluso en celulares -->
+        <span class="font-bold text-sm tracking-wide">Sugerencias</span>
     </a>
 
-    <!-- ================= MODAL DE VIDEO UNIVERSAL ================= -->
+    <!-- ================= MODAL DE VIDEO ================= -->
     <div id="video-modal" class="fixed inset-0 z-[100] bg-gray-900/95 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300 flex items-center justify-center p-4 md:p-10">
         <button onclick="closeVideoModal()" class="absolute top-6 right-6 md:top-10 md:right-10 text-white hover:text-red-400 transition p-2 bg-white/10 rounded-full hover:bg-white/20 z-50">
             <i class="ph-bold ph-x text-3xl"></i>
         </button>
         
         <div class="w-full max-w-5xl bg-black rounded-2xl overflow-hidden shadow-2xl relative slide-up flex items-center justify-center ring-1 ring-white/10" style="aspect-ratio: 16/9;">
-            <!-- Iframe con parámetros funcionales exactos del usuario -->
             <iframe id="main-video-player" width="100%" height="100%" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border:none; position: absolute; top: 0; left: 0;"></iframe>
         </div>
     </div>
 
+    <!-- ================= MODAL DE IMAGEN/PDF ================= -->
+    <div id="image-modal" class="fixed inset-0 z-[100] bg-gray-900/95 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300 flex items-center justify-center p-4 md:p-10">
+        <button onclick="closeImageModal()" class="absolute top-6 right-6 md:top-10 md:right-10 text-white hover:text-red-400 transition p-2 bg-white/10 rounded-full hover:bg-white/20 z-50 shadow-lg">
+            <i class="ph-bold ph-x text-3xl"></i>
+        </button>
+        
+        <!-- Contenedor con scroll para imágenes largas -->
+        <div class="w-full max-w-6xl max-h-[90vh] rounded-2xl overflow-y-auto shadow-2xl relative slide-up text-center no-scrollbar bg-white p-2">
+            <h3 id="image-modal-title" class="text-xl font-bold text-gray-900 py-4 border-b border-gray-100 mb-2">Visor de Documento</h3>
+            <img id="main-image-viewer" src="" alt="Documento Visualizado" class="w-full h-auto mx-auto rounded-xl object-contain">
+        </div>
+    </div>
+
     <!-- BOTÓN SCROLL TO TOP -->
-    <button id="scrollToTopBtn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="fixed bottom-6 right-6 z-50 hidden items-center justify-center w-12 h-12 bg-white rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-transform hover:scale-110 group cursor-pointer border border-gray-100">
+    <button id="scrollToTopBtn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="fixed bottom-24 right-6 z-50 hidden items-center justify-center w-14 h-14 bg-white rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.15)] transition-transform hover:scale-110 group cursor-pointer border border-gray-200">
         <svg class="absolute inset-0 w-full h-full transform -rotate-90" viewBox="0 0 36 36">
             <circle cx="18" cy="18" r="16" fill="none" class="stroke-gray-100" stroke-width="2"></circle>
             <circle id="scrollProgress" cx="18" cy="18" r="16" fill="none" class="stroke-inge-cyan transition-all duration-150 ease-out" stroke-width="2" stroke-dasharray="100.53" stroke-dashoffset="100.53" stroke-linecap="round"></circle>
         </svg>
-        <i class="ph-bold ph-caret-up text-xl text-gray-600 relative z-10 group-hover:-translate-y-0.5 transition-transform"></i>
+        <i class="ph-bold ph-caret-up text-2xl text-gray-800 relative z-10 group-hover:-translate-y-1 transition-transform"></i>
     </button>
 
 
     <!-- ================= JAVASCRIPT LÓGICA ================= -->
     <script>
-        // --- CONFIGURACIÓN ---
         const CLAVE_DIRECTIVOS = "IA2026"; 
         let isAuthenticated = false;
 
         // --- DATOS: VIDEOS CAPACITACIÓN (PERSONAL GENERAL) ---
         const videosCapacitacion = [
             {
-                id: 101,
-                title: "5S: La Metodología Esencial para la Organización y Eficiencia",
-                folder: "Sección de Seguridad y Organización",
-                badge: "Productividad",
+                id: 101, title: "5S: La Metodología Esencial para la Organización y Eficiencia",
+                folder: "Sección de Seguridad y Organización", badge: "Productividad",
                 desc: "Descubre cómo implementar las 5S para mejorar tu espacio de trabajo y aumentar la productividad.",
-                image: "https://img.youtube.com/vi/yrbBTRAZKq0/hqdefault.jpg",
-                videoId: "yrbBTRAZKq0"
+                image: "https://img.youtube.com/vi/yrbBTRAZKq0/hqdefault.jpg", videoId: "yrbBTRAZKq0"
             },
             {
-                id: 102,
-                title: "Los 10 Mandamientos del Inyector de Plástico",
-                folder: "Apartado: Información General sobre Inyección de Plástico",
-                badge: "Capacitación Esencial",
+                id: 102, title: "Los 10 Mandamientos del Inyector de Plástico",
+                folder: "Apartado: Información General sobre Inyección de Plástico", badge: "Capacitación Esencial",
                 desc: "Consejos clave para optimizar el proceso de inyección y mantener la calidad en cada pieza.",
-                image: "https://img.youtube.com/vi/VO3E14BdyMw/hqdefault.jpg",
-                videoId: "VO3E14BdyMw"
+                image: "https://img.youtube.com/vi/VO3E14BdyMw/hqdefault.jpg", videoId: "VO3E14BdyMw"
+            }
+        ];
+
+        // Generar 3 videos default de Elemental
+        for(let i=1; i<=3; i++) {
+            videosCapacitacion.push({
+                id: 200+i, title: `Inducción Elemental - Nivel ${i}`,
+                folder: "Sistema Elemental (Control de Piso)", badge: "Elemental",
+                desc: `Capacitación en uso y control de la plataforma de control de piso (Módulo ${i}).`,
+                image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=500&q=60", // Placeholder de máquina
+                videoId: "y-Se2mttMHY" // Placeholder youtube ID
+            });
+        }
+
+        // Generar 10 videos default de Ofima (ERP)
+        for(let i=1; i<=10; i++) {
+            videosCapacitacion.push({
+                id: 300+i, title: `Ofima ERP - Lección ${i}`,
+                folder: "Sección de Ofima (ERP)", badge: "Sistemas",
+                desc: `Aprende el paso a paso del uso del ERP Ofima (Video ${i} de 10).`,
+                image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=500&q=60", // Placeholder de software
+                videoId: "sUIV3hGXbfk" // Placeholder youtube ID
+            });
+        }
+
+        // --- DATOS: VIDEOS VISITANTES ---
+        const videosVisitantes = [
+            {
+                id: 401, title: "Video Corporativo Ingeproductos",
+                badge: "Institucional", desc: "Descubre nuestra esencia, valores y el compromiso que nos impulsa día a día.",
+                image: "https://img.youtube.com/vi/xymTY2jyPlw/hqdefault.jpg", videoId: "xymTY2jyPlw"
+            },
+            {
+                id: 402, title: "Charla de Seguridad para Visitantes",
+                badge: "Seguridad", desc: "Normas vitales de seguridad, rutas de evacuación y uso de elementos de protección personal al estar dentro de la planta.",
+                image: "https://images.unsplash.com/photo-1565347878440-b2cc82e212fa?auto=format&fit=crop&w=500&q=60", videoId: "VO3E14BdyMw" // ID Placeholder
+            },
+            {
+                id: 403, title: "Reglas Generales y Tránsito en Planta",
+                badge: "Normativas", desc: "Conoce las zonas delimitadas, áreas restringidas y comportamientos esperados durante tu visita.",
+                image: "https://images.unsplash.com/photo-1574044738517-81788b776fce?auto=format&fit=crop&w=500&q=60", videoId: "yrbBTRAZKq0" // ID Placeholder
             }
         ];
 
         // --- DATOS: VIDEOS RUTA INGE (DIRECTIVOS) ---
         const videosRutaInge = [
-            {
-                id: 1,
-                title: "Clase 5",
-                duration: "Ruta Inge",
-                image: "https://img.youtube.com/vi/y-Se2mttMHY/hqdefault.jpg", 
-                videoId: "y-Se2mttMHY" 
-            },
-            {
-                id: 2,
-                title: "Clase 6",
-                duration: "Ruta Inge",
-                image: "https://img.youtube.com/vi/sUIV3hGXbfk/hqdefault.jpg", 
-                videoId: "sUIV3hGXbfk"
-            }
+            { id: 1, title: "Clase 5", duration: "Ruta Inge", image: "https://img.youtube.com/vi/y-Se2mttMHY/hqdefault.jpg", videoId: "y-Se2mttMHY" },
+            { id: 2, title: "Clase 6", duration: "Ruta Inge", image: "https://img.youtube.com/vi/sUIV3hGXbfk/hqdefault.jpg", videoId: "sUIV3hGXbfk" }
         ];
 
         // --- NAVEGACIÓN Y VISTAS ---
         function switchView(viewName) {
-            const views = ['inicio', 'personal-hub', 'capacitaciones', 'directivos-login', 'directivos-dashboard', 'ruta-inge'];
+            const views = ['inicio', 'personal-hub', 'capacitaciones', 'directivos-login', 'directivos-dashboard', 'ruta-inge', 'visitante-hub', 'visitante-politicas', 'visitante-videos'];
             
-            // Protección
             if ((viewName === 'directivos-dashboard' || viewName === 'ruta-inge') && !isAuthenticated) {
                 viewName = 'directivos-login';
             }
@@ -627,13 +666,11 @@
                 viewName = 'directivos-dashboard';
             }
 
-            // Ocultar todas
             views.forEach(v => {
                 const el = document.getElementById('view-' + v);
                 if(el) { el.classList.add('hidden-view'); el.classList.remove('fade-in'); }
             });
 
-            // Mostrar destino
             const targetEl = document.getElementById('view-' + viewName);
             if(targetEl) {
                 targetEl.classList.remove('hidden-view');
@@ -643,22 +680,19 @@
 
             updateNavHighlight(viewName);
 
-            // Ocultar menú móvil si está abierto
             const mobileMenu = document.getElementById('mobile-menu');
-            if (!mobileMenu.classList.contains('hidden')) {
-                toggleMobileMenu();
-            }
+            if (!mobileMenu.classList.contains('hidden')) toggleMobileMenu();
 
             window.scrollTo(0, 0);
 
-            // Renders dinámicos según vista
+            // Renders dinámicos
             if(viewName === 'capacitaciones') renderCapacitaciones();
             if(viewName === 'ruta-inge') renderVideosRutaInge();
+            if(viewName === 'visitante-videos') renderVideosVisitantes();
         }
 
         function updateNavHighlight(viewName) {
-            // Limpiar estilos activos
-            ['inicio', 'personal', 'panel-directivos'].forEach(id => {
+            ['inicio', 'personal', 'panel-directivos', 'visitante'].forEach(id => {
                 const btn = document.getElementById('nav-' + id);
                 if(btn) {
                     btn.classList.remove('border-inge-cyan', 'text-gray-800', 'text-inge-cyan');
@@ -666,10 +700,10 @@
                 }
             });
 
-            // Determinar cuál resaltar
             let activeId = '';
             if (viewName === 'inicio') activeId = 'inicio';
             if (viewName === 'personal-hub' || viewName === 'capacitaciones') activeId = 'personal';
+            if (viewName === 'visitante-hub' || viewName === 'visitante-politicas' || viewName === 'visitante-videos') activeId = 'visitante';
             if (viewName === 'directivos-dashboard' || viewName === 'ruta-inge') activeId = 'panel-directivos';
 
             const activeBtn = document.getElementById('nav-' + activeId);
@@ -695,7 +729,6 @@
             }
         }
 
-        // --- LÓGICA DE LOGIN DIRECTIVOS ---
         function handleLogin(event) {
             event.preventDefault(); 
             const input = document.getElementById('input-password').value;
@@ -706,13 +739,11 @@
                 errorDiv.classList.add('hidden');
                 document.getElementById('input-password').value = ''; 
                 
-                // Actualizar Navbar (Desktop)
                 document.getElementById('nav-directivos-btn').classList.add('hidden');
                 document.getElementById('nav-panel-directivos').classList.remove('hidden');
                 document.getElementById('user-profile').classList.remove('hidden');
                 document.getElementById('user-profile').classList.add('flex');
 
-                // Actualizar Navbar (Móvil)
                 document.getElementById('mobile-directivos-btn').classList.add('hidden');
                 document.getElementById('mobile-panel-directivos').classList.remove('hidden');
                 document.getElementById('mobile-logout').classList.remove('hidden');
@@ -728,26 +759,19 @@
 
         function logout() {
             isAuthenticated = false;
-            
-            // Restaurar Navbar (Desktop)
             document.getElementById('nav-directivos-btn').classList.remove('hidden');
             document.getElementById('nav-panel-directivos').classList.add('hidden');
             document.getElementById('user-profile').classList.add('hidden');
             document.getElementById('user-profile').classList.remove('flex');
-
-            // Restaurar Navbar (Móvil)
             document.getElementById('mobile-directivos-btn').classList.remove('hidden');
             document.getElementById('mobile-panel-directivos').classList.add('hidden');
             document.getElementById('mobile-logout').classList.add('hidden');
-            
             switchView('inicio');
         }
 
-        // --- RENDERIZADO: CAPACITACIONES (AGRUPADO POR SECCIONES) ---
+        // --- RENDERIZADO CAPACITACIONES (COLABORADORES) ---
         function renderCapacitaciones() {
             const container = document.getElementById('capacitaciones-container');
-            
-            // Agrupar videos por carpeta (ahora se llaman Secciones)
             const folders = {};
             videosCapacitacion.forEach(vid => {
                 if(!folders[vid.folder]) folders[vid.folder] = [];
@@ -757,9 +781,9 @@
             let html = '';
             for (const [folderName, videos] of Object.entries(folders)) {
                 html += `
-                    <div class="bg-gray-50/50 rounded-3xl p-6 md:p-8 border border-gray-100 shadow-sm">
-                        <h3 class="text-xl font-bold text-gray-800 mb-6 flex items-center gap-3 border-b border-gray-200 pb-3">
-                            <i class="ph-fill ph-bookmark-simple text-inge-cyan text-2xl"></i> ${folderName}
+                    <div class="bg-gray-50/50 rounded-3xl p-6 md:p-8 border border-gray-200 shadow-sm relative">
+                        <h3 class="text-xl md:text-2xl font-extrabold text-gray-800 mb-6 flex items-center gap-3 border-b border-gray-300 pb-4">
+                            <i class="ph-fill ph-bookmark-simple text-inge-cyan text-3xl"></i> ${folderName}
                         </h3>
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                             ${videos.map(video => createVideoCardHTML(video)).join('')}
@@ -770,10 +794,15 @@
             container.innerHTML = html;
         }
 
+        function renderVideosVisitantes() {
+            const container = document.getElementById('visitantes-videos-container');
+            container.innerHTML = videosVisitantes.map(video => createVideoCardHTML(video)).join('');
+        }
+
         function createVideoCardHTML(video) {
             return `
-                <div class="video-card bg-white rounded-2xl overflow-hidden cursor-pointer group border border-gray-100 flex flex-col h-full" onclick="openVideoModal('${video.videoId}')">
-                    <div class="relative h-48 w-full bg-black overflow-hidden flex items-center justify-center flex-shrink-0">
+                <div class="video-card bg-white rounded-2xl overflow-hidden cursor-pointer group border border-gray-200 flex flex-col h-full" onclick="openVideoModal('${video.videoId}')">
+                    <div class="relative h-56 w-full bg-black overflow-hidden flex items-center justify-center flex-shrink-0">
                         <img src="${video.image}" alt="${video.title}" class="video-thumbnail w-full h-full object-cover transition-all duration-300">
                         <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
                         <i class="ph-fill ph-play-circle absolute text-white text-6xl opacity-90 group-hover:scale-110 transition-all duration-300 drop-shadow-md"></i>
@@ -790,10 +819,9 @@
         // --- RENDERIZADO: RUTA INGE (DIRECTIVOS) ---
         function renderVideosRutaInge() {
             const container = document.getElementById('video-grid-ruta-inge');
-
             container.innerHTML = videosRutaInge.map(video => `
-                <div class="video-card bg-white rounded-2xl overflow-hidden cursor-pointer group border border-gray-100" onclick="openVideoModal('${video.videoId}')">
-                    <div class="relative h-48 w-full bg-black overflow-hidden flex items-center justify-center">
+                <div class="video-card bg-white rounded-2xl overflow-hidden cursor-pointer group border border-gray-200" onclick="openVideoModal('${video.videoId}')">
+                    <div class="relative h-56 w-full bg-black overflow-hidden flex items-center justify-center">
                         <img src="${video.image}" alt="${video.title}" class="video-thumbnail w-full h-full object-cover transition-all duration-300">
                         <div class="absolute inset-0 bg-black/30 group-hover:bg-transparent transition-colors"></div>
                         <i class="ph-fill ph-play-circle absolute text-white text-6xl opacity-90 group-hover:scale-110 transition-all duration-300 drop-shadow-md"></i>
@@ -806,32 +834,43 @@
             `).join('');
         }
 
-        // --- REPRODUCTOR DE VIDEO UNIVERSAL (MODAL) ---
+        // --- MODAL YOUTUBE ---
         function openVideoModal(videoId) {
             const modal = document.getElementById('video-modal');
             const player = document.getElementById('main-video-player');
-            
-            // Usamos exactamente el formato que te funciona
             player.src = "https://www.youtube.com/embed/" + videoId + "?autoplay=1&rel=0";
-
             modal.classList.remove('hidden');
             setTimeout(() => { modal.classList.remove('opacity-0'); }, 10);
             document.body.style.overflow = 'hidden'; 
         }
-
         function closeVideoModal() {
             const modal = document.getElementById('video-modal');
             const player = document.getElementById('main-video-player');
-            
             modal.classList.add('opacity-0');
-            setTimeout(() => {
-                modal.classList.add('hidden');
-                player.src = ''; // Detiene el video al borrar el src
-                document.body.style.overflow = 'auto'; 
-            }, 300); 
+            setTimeout(() => { modal.classList.add('hidden'); player.src = ''; document.body.style.overflow = 'auto'; }, 300); 
         }
 
-        // --- SCROLL TO TOP & NAVBAR BLUR ---
+        // --- MODAL IMAGEN (ORGANIGRAMAS Y POLITICAS) ---
+        function openImageModal(imgUrl, title) {
+            const modal = document.getElementById('image-modal');
+            const viewer = document.getElementById('main-image-viewer');
+            const titleEl = document.getElementById('image-modal-title');
+            
+            viewer.src = imgUrl;
+            titleEl.innerText = title;
+            
+            modal.classList.remove('hidden');
+            setTimeout(() => { modal.classList.remove('opacity-0'); }, 10);
+            document.body.style.overflow = 'hidden'; 
+        }
+        function closeImageModal() {
+            const modal = document.getElementById('image-modal');
+            const viewer = document.getElementById('main-image-viewer');
+            modal.classList.add('opacity-0');
+            setTimeout(() => { modal.classList.add('hidden'); viewer.src = ''; document.body.style.overflow = 'auto'; }, 300); 
+        }
+
+        // --- SCROLL EFECTOS ---
         function initScrollEffects() {
             const scrollBtn = document.getElementById('scrollToTopBtn');
             const scrollProgress = document.getElementById('scrollProgress');
@@ -843,14 +882,12 @@
                 const docHeight = document.documentElement.scrollHeight - window.innerHeight;
                 const scrollPercent = docHeight > 0 ? scrollTop / docHeight : 0;
                 
-                // Mostrar botón subir
                 if (scrollTop > 300) {
                     scrollBtn.classList.remove('hidden'); scrollBtn.classList.add('flex');
                 } else {
                     scrollBtn.classList.add('hidden'); scrollBtn.classList.remove('flex');
                 }
                 
-                // Sombra Navbar
                 if (scrollTop > 10) {
                     navbar.classList.add('shadow-md'); navbar.classList.remove('shadow-sm');
                 } else {
@@ -861,14 +898,16 @@
             });
         }
 
-        // --- INICIALIZACIÓN ---
+        // --- INITS ---
         document.addEventListener('DOMContentLoaded', () => {
             switchView('inicio'); 
             initScrollEffects();
             
-            // Cerrar modal al dar click fuera del video
             document.getElementById('video-modal').addEventListener('click', function(e) {
                 if(e.target === this) closeVideoModal();
+            });
+            document.getElementById('image-modal').addEventListener('click', function(e) {
+                if(e.target === this) closeImageModal();
             });
         });
 
