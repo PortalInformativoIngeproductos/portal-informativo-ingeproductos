@@ -312,6 +312,27 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- FLIP CARD 5: Inteligencia Artificial (MOVIDO DESDE DIRECTIVOS) -->
+                    <div class="flip-card slide-up" style="animation-delay: 0.5s;" onclick="switchView('ia-hub')">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front" style="border: 2px solid #f3e8ff;">
+                                <div class="absolute -top-3 -right-3 bg-inge-green text-white text-[10px] font-bold px-3 py-1 rounded-full shadow-md z-10 animate-bounce">NUEVO</div>
+                                <div class="w-16 h-16 bg-purple-50 text-purple-600 rounded-full flex items-center justify-center text-3xl mb-4">
+                                    <i class="ph-fill ph-robot"></i>
+                                </div>
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Aprende IA</h3>
+                                <p class="text-gray-500 text-xs">Cursos y herramientas</p>
+                            </div>
+                            <div class="flip-card-back" style="background: linear-gradient(135deg, #9333ea, #6b21a8);">
+                                <i class="ph-fill ph-robot text-4xl mb-3 opacity-80"></i>
+                                <h3 class="text-lg font-bold mb-2">Inteligencia Artificial</h3>
+                                <p class="text-xs text-purple-50 mb-3">Integra la IA en tus tareas diarias.</p>
+                                <span class="bg-white text-purple-700 px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">Entrar <i class="ph-bold ph-arrow-right"></i></span>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </section>
@@ -485,7 +506,7 @@
                     <div class="w-16 h-1.5 bg-gray-900 mx-auto mt-6 rounded-full"></div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
                     <!-- Sección 1: Ruta Inge -->
                     <div class="bg-white p-10 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-gray-100 hover:-translate-y-2 hover:shadow-[0_15px_40px_rgb(0,0,0,0.1)] transition-all cursor-pointer group text-center" onclick="switchView('ruta-inge')">
                         <div class="w-24 h-24 bg-gray-50 text-gray-800 rounded-full flex items-center justify-center text-4xl mx-auto mb-6 group-hover:bg-gray-900 group-hover:text-white transition-colors duration-300">
@@ -497,6 +518,18 @@
                             Ingresar <i class="ph-bold ph-arrow-right ml-2"></i>
                         </div>
                     </div>
+
+                    <!-- Sección 3: Cultura Marisol -->
+                    <div class="bg-white p-10 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-gray-100 hover:-translate-y-2 hover:shadow-[0_15px_40px_rgb(0,0,0,0.1)] transition-all cursor-pointer group text-center" onclick="alert('La sección de Cultura Marisol estará disponible muy pronto.')">
+                        <div class="w-24 h-24 bg-gray-50 text-gray-800 rounded-full flex items-center justify-center text-4xl mx-auto mb-6 group-hover:bg-pink-500 group-hover:text-white transition-colors duration-300">
+                            <i class="ph-fill ph-heart"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3 text-gray-900">Cultura Marisol</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed">Bienestar, motivación y desarrollo integral de nuestros líderes.</p>
+                        <div class="mt-6 flex items-center justify-center text-pink-500 font-bold opacity-0 group-hover:opacity-100 transition-opacity">
+                            Próximamente <i class="ph-bold ph-clock ml-2"></i>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -505,12 +538,12 @@
         <section id="view-ruta-inge" class="hidden-view fade-in bg-inge-lightBg min-h-screen pb-20 pt-10 flex-grow">
             <div class="max-w-7xl mx-auto px-4">
                 
-                <!-- BOTÓN VOLVER (TAMAÑO REDUCIDO) -->
-                <button onclick="switchView('directivos-dashboard')" class="bg-white border border-gray-200 text-gray-800 px-4 py-2 rounded-xl font-bold mb-8 flex items-center gap-2 hover:bg-gray-900 hover:text-white hover:border-gray-900 hover:-translate-y-0.5 transition-all shadow-sm w-max group">
+                <button onclick="switchView('directivos-dashboard')" class="bg-gray-100 border border-gray-200 text-gray-800 px-6 md:px-8 py-3 md:py-4 rounded-2xl font-bold mb-10 flex items-center justify-center gap-3 hover:bg-gray-900 hover:text-white hover:border-gray-900 hover:-translate-y-0.5 transition-all shadow-sm w-full md:w-max group">
                     <i class="ph-bold ph-arrow-left text-lg group-hover:-translate-x-1 transition-transform"></i> 
                     <span class="text-sm">Volver a Secciones</span>
                 </button>
                 
+                <!-- Banner Objetivo Ruta Inge -->
                 <div class="bg-white border border-gray-100 p-8 md:p-12 rounded-3xl mb-12 shadow-xl relative overflow-hidden flex flex-col md:flex-row items-center gap-8 slide-up">
                     <div class="absolute -right-10 -top-10 opacity-[0.03] pointer-events-none">
                         <i class="ph-fill ph-target text-[250px] text-gray-900"></i>
@@ -536,6 +569,62 @@
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="video-grid-ruta-inge">
                         <!-- Generado por JS -->
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ================= VISTA: INTELIGENCIA ARTIFICIAL (NUEVA) ================= -->
+        <section id="view-ia-hub" class="hidden-view fade-in bg-inge-lightBg min-h-screen pb-20 pt-10 flex-grow">
+            <div class="max-w-7xl mx-auto px-4">
+                
+                <button onclick="switchView('personal-hub')" class="bg-gray-100 border border-gray-200 text-gray-800 px-6 md:px-8 py-3 md:py-4 rounded-2xl font-bold mb-10 flex items-center justify-center gap-3 hover:bg-purple-600 hover:text-white hover:border-purple-600 hover:-translate-y-0.5 transition-all shadow-sm w-full md:w-max group">
+                    <i class="ph-bold ph-arrow-left text-lg group-hover:-translate-x-1 transition-transform"></i> 
+                    <span class="text-sm">Volver al Portal</span>
+                </button>
+                
+                <div class="mb-10">
+                    <h2 class="text-3xl font-extrabold text-gray-900 tracking-tight flex items-center gap-3">
+                        <div class="p-2 bg-purple-100 rounded-lg text-purple-600"><i class="ph-fill ph-robot"></i></div> 
+                        Inteligencia Artificial
+                    </h2>
+                    <p class="text-gray-500 mt-2 ml-14">Recursos, guías y documentos para integrar la IA en nuestros procesos.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    
+                    <!-- Tarjeta PDF 1 -->
+                    <div class="bg-white rounded-2xl p-6 border border-gray-200 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_15px_40px_rgb(0,0,0,0.08)] transition-all flex flex-col h-full group">
+                        <div class="w-14 h-14 bg-red-50 text-red-500 rounded-xl flex items-center justify-center text-3xl mb-5 group-hover:scale-110 transition-transform">
+                            <i class="ph-fill ph-file-pdf"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">Guía de IA para Colaboradores</h3>
+                        <p class="text-gray-500 text-sm mb-6 flex-grow leading-relaxed">Documento oficial alojado en OneDrive con los primeros pasos para aplicar IA en tu área.</p>
+                        
+                        <div class="flex flex-col gap-3 mt-auto">
+                            <!-- Botón Ver en Línea (Abre Modal Iframe) -->
+                            <!-- Nota: Agregamos &action=embedview al enlace para forzar el visor de Sharepoint -->
+                            <button onclick="openDocumentModal('https://ingeproductos-my.sharepoint.com/:b:/g/personal/xavier_rojas_ingeproductos_com_co/IQBeWaGfv3GcSIK6s0rYOr7UATfpKvkxy6joZcf9rLLQtSo?e=xQX7At&action=embedview')" class="w-full bg-purple-50 text-purple-700 py-3 rounded-xl font-bold hover:bg-purple-600 hover:text-white transition-colors flex items-center justify-center gap-2 text-sm">
+                                <i class="ph-bold ph-eye text-lg"></i> Ver en línea
+                            </button>
+                            
+                            <!-- Botón Descargar (Abre en nueva pestaña) -->
+                            <a href="https://ingeproductos-my.sharepoint.com/:b:/g/personal/xavier_rojas_ingeproductos_com_co/IQBeWaGfv3GcSIK6s0rYOr7UATfpKvkxy6joZcf9rLLQtSo?e=xQX7At" target="_blank" class="w-full bg-gray-50 border border-gray-200 text-gray-700 py-3 rounded-xl font-bold hover:bg-gray-100 transition-colors flex items-center justify-center gap-2 text-sm">
+                                <i class="ph-bold ph-download-simple text-lg"></i> Abrir en OneDrive
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- NUEVA SECCIÓN DE VIDEOS IA -->
+                <div class="mt-16">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                        <i class="ph-fill ph-play-circle text-purple-500"></i> Cursos en Video
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="ia-videos-container">
+                        <!-- Llenado por JS -->
                     </div>
                 </div>
 
@@ -601,6 +690,27 @@
         </div>
     </div>
 
+    <!-- ================= MODAL DE PDF/DOCUMENTOS ================= -->
+    <div id="document-modal" class="fixed inset-0 z-[100] bg-gray-900/95 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300 flex items-center justify-center p-4 md:p-10">
+        <button onclick="closeDocumentModal()" class="absolute top-6 right-6 md:top-10 md:right-10 text-white hover:text-red-400 transition p-2 bg-white/10 rounded-full hover:bg-white/20 z-50 shadow-lg">
+            <i class="ph-bold ph-x text-3xl"></i>
+        </button>
+        
+        <div class="w-full max-w-6xl h-[85vh] bg-white rounded-2xl overflow-hidden shadow-2xl relative slide-up flex flex-col">
+            <div class="bg-gray-50 p-4 border-b border-gray-200 flex justify-between items-center">
+                <h3 class="font-bold text-gray-800 flex items-center gap-2"><i class="ph-fill ph-file-pdf text-red-500 text-xl"></i> Visor de Documentos (OneDrive)</h3>
+            </div>
+            <div class="flex-grow relative bg-gray-100 flex items-center justify-center">
+                <!-- Fallback por si OneDrive tarda en cargar -->
+                <div class="absolute flex flex-col items-center text-gray-400">
+                    <i class="ph-duotone ph-spinner-gap animate-spin text-4xl mb-2"></i>
+                    <p class="text-sm font-medium">Cargando documento...</p>
+                </div>
+                <iframe id="main-document-player" src="" width="100%" height="100%" allowfullscreen style="border:none; position: absolute; top: 0; left: 0; z-index: 10;"></iframe>
+            </div>
+        </div>
+    </div>
+
     <!-- BOTÓN SCROLL TO TOP -->
     <button id="scrollToTopBtn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="fixed bottom-24 right-6 z-50 hidden items-center justify-center w-14 h-14 bg-white rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.15)] transition-transform hover:scale-110 group cursor-pointer border border-gray-200">
         <svg class="absolute inset-0 w-full h-full transform -rotate-90" viewBox="0 0 36 36">
@@ -638,8 +748,8 @@
                 id: 200+i, title: `Inducción Elemental - Nivel ${i}`,
                 folder: "Sistema Elemental (Control de Piso)", badge: "Elemental",
                 desc: `Capacitación en uso y control de la plataforma de control de piso (Módulo ${i}).`,
-                image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=500&q=60", // Placeholder de máquina
-                videoId: "y-Se2mttMHY" // Placeholder youtube ID
+                image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=500&q=60", 
+                videoId: "PLACEHOLDER" 
             });
         }
 
@@ -649,8 +759,8 @@
                 id: 300+i, title: `Ofima ERP - Lección ${i}`,
                 folder: "Sección de Ofima (ERP)", badge: "Sistemas",
                 desc: `Aprende el paso a paso del uso del ERP Ofima (Video ${i} de 10).`,
-                image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=500&q=60", // Placeholder de software
-                videoId: "sUIV3hGXbfk" // Placeholder youtube ID
+                image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=500&q=60", 
+                videoId: "PLACEHOLDER" 
             });
         }
 
@@ -679,10 +789,18 @@
             { id: 2, title: "Clase 6", duration: "Ruta Inge", image: "https://img.youtube.com/vi/sUIV3hGXbfk/hqdefault.jpg", videoId: "sUIV3hGXbfk" }
         ];
 
+        // --- DATOS: VIDEOS CURSO IA (PERSONAL GENERAL) ---
+        const videosIA = [
+            { id: 501, title: "Curso IA - Clase 1", duration: "Aprende IA", image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=500&q=60", videoId: "PLACEHOLDER" },
+            { id: 502, title: "Curso IA - Clase 2", duration: "Aprende IA", image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=500&q=60", videoId: "PLACEHOLDER" },
+            { id: 503, title: "Curso IA - Clase 3", duration: "Aprende IA", image: "https://images.unsplash.com/photo-1684369175836-1cb7d084e3ed?auto=format&fit=crop&w=500&q=60", videoId: "PLACEHOLDER" }
+        ];
+
         // --- NAVEGACIÓN Y VISTAS ---
         function switchView(viewName) {
-            const views = ['inicio', 'personal-hub', 'capacitaciones', 'directivos-login', 'directivos-dashboard', 'ruta-inge', 'visitante-hub', 'visitante-politicas', 'visitante-videos'];
+            const views = ['inicio', 'personal-hub', 'capacitaciones', 'directivos-login', 'directivos-dashboard', 'ruta-inge', 'ia-hub', 'visitante-hub', 'visitante-politicas', 'visitante-videos'];
             
+            // Se quitó ia-hub de la protección porque ahora es para todo el personal
             if ((viewName === 'directivos-dashboard' || viewName === 'ruta-inge') && !isAuthenticated) {
                 viewName = 'directivos-login';
             }
@@ -713,6 +831,7 @@
             if(viewName === 'capacitaciones') renderCapacitaciones();
             if(viewName === 'ruta-inge') renderVideosRutaInge();
             if(viewName === 'visitante-videos') renderVideosVisitantes();
+            if(viewName === 'ia-hub') renderVideosIA();
         }
 
         function updateNavHighlight(viewName) {
@@ -726,7 +845,7 @@
 
             let activeId = '';
             if (viewName === 'inicio') activeId = 'inicio';
-            if (viewName === 'personal-hub' || viewName === 'capacitaciones') activeId = 'personal';
+            if (viewName === 'personal-hub' || viewName === 'capacitaciones' || viewName === 'ia-hub') activeId = 'personal';
             if (viewName === 'visitante-hub' || viewName === 'visitante-politicas' || viewName === 'visitante-videos') activeId = 'visitante';
             if (viewName === 'directivos-dashboard' || viewName === 'ruta-inge') activeId = 'panel-directivos';
 
@@ -858,8 +977,31 @@
             `).join('');
         }
 
+        // --- RENDERIZADO: IA (PERSONAL GENERAL) ---
+        function renderVideosIA() {
+            const container = document.getElementById('ia-videos-container');
+            container.innerHTML = videosIA.map(video => `
+                <div class="video-card bg-white rounded-2xl overflow-hidden cursor-pointer group border border-gray-200 flex flex-col" onclick="openVideoModal('${video.videoId}')">
+                    <div class="relative h-56 w-full bg-black overflow-hidden flex items-center justify-center">
+                        <img src="${video.image}" alt="${video.title}" class="video-thumbnail w-full h-full object-cover transition-all duration-300">
+                        <div class="absolute inset-0 bg-purple-900/20 group-hover:bg-transparent transition-colors"></div>
+                        <i class="ph-fill ph-play-circle absolute text-white text-6xl opacity-90 group-hover:scale-110 transition-all duration-300 drop-shadow-md"></i>
+                    </div>
+                    <div class="p-5 flex justify-between items-center">
+                        <h4 class="text-lg font-bold text-gray-900">${video.title}</h4>
+                        <span class="bg-purple-50 text-purple-700 text-xs px-3 py-1 rounded-full font-bold uppercase tracking-wider">${video.duration}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
         // --- MODAL YOUTUBE ---
         function openVideoModal(videoId) {
+            if(videoId === 'PLACEHOLDER') {
+                alert("Este video es un ejemplo y está actualmente en producción.");
+                return;
+            }
+            
             const modal = document.getElementById('video-modal');
             const player = document.getElementById('main-video-player');
             player.src = "https://www.youtube.com/embed/" + videoId + "?autoplay=1&rel=0";
@@ -892,6 +1034,22 @@
             const viewer = document.getElementById('main-image-viewer');
             modal.classList.add('opacity-0');
             setTimeout(() => { modal.classList.add('hidden'); viewer.src = ''; document.body.style.overflow = 'auto'; }, 300); 
+        }
+
+        // --- MODAL DOCUMENTOS (PDF/ONEDRIVE) ---
+        function openDocumentModal(docUrl) {
+            const modal = document.getElementById('document-modal');
+            const player = document.getElementById('main-document-player');
+            player.src = docUrl;
+            modal.classList.remove('hidden');
+            setTimeout(() => { modal.classList.remove('opacity-0'); }, 10);
+            document.body.style.overflow = 'hidden'; 
+        }
+        function closeDocumentModal() {
+            const modal = document.getElementById('document-modal');
+            const player = document.getElementById('main-document-player');
+            modal.classList.add('opacity-0');
+            setTimeout(() => { modal.classList.add('hidden'); player.src = ''; document.body.style.overflow = 'auto'; }, 300); 
         }
 
         // --- SCROLL EFECTOS ---
@@ -932,6 +1090,9 @@
             });
             document.getElementById('image-modal').addEventListener('click', function(e) {
                 if(e.target === this) closeImageModal();
+            });
+            document.getElementById('document-modal').addEventListener('click', function(e) {
+                if(e.target === this) closeDocumentModal();
             });
         });
 
