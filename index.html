@@ -805,8 +805,31 @@
 
         // --- DATOS: VIDEOS RUTA INGE (DIRECTIVOS) ---
         const videosRutaInge = [
-            { id: 1, title: "Clase 5", duration: "Ruta Inge", image: "https://img.youtube.com/vi/y-Se2mttMHY/hqdefault.jpg", videoId: "y-Se2mttMHY" },
-            { id: 2, title: "Clase 6", duration: "Ruta Inge", image: "https://img.youtube.com/vi/sUIV3hGXbfk/hqdefault.jpg", videoId: "sUIV3hGXbfk" }
+            { 
+                id: 1, title: "Introducción Clase 1", duration: "Video MP4", type: "onedrive",
+                image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=500&q=80", 
+                url: "https://ingeproductos-my.sharepoint.com/:v:/g/personal/xavier_rojas_ingeproductos_com_co/IQAl9smVtkooR7mTonK4oQ0dARnEPt4oEcoyLMra6xOPwp8?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=LCT50h" 
+            },
+            { 
+                id: 2, title: "Ruta Inge Clase 2", duration: "Presentación", type: "onedrive",
+                image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=500&q=80", 
+                url: "https://ingeproductos-my.sharepoint.com/:p:/g/personal/xavier_rojas_ingeproductos_com_co/IQAJoim71W4ITZZ-P6BCY5TTAVAaSJkipQPAu58ZMukrUGo?e=b3GeeA" 
+            },
+            { 
+                id: 3, title: "Ruta Inge Clase 3 y 4", duration: "Presentación", type: "onedrive",
+                image: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=500&q=80", 
+                url: "https://ingeproductos-my.sharepoint.com/:p:/g/personal/xavier_rojas_ingeproductos_com_co/IQCyCHDhIYJYR4SrN-_5g8rIAexBF3eXYNldFF-WcshouqU?e=YfDoPz" 
+            },
+            { 
+                id: 4, title: "Clase 5", duration: "Video YouTube", type: "youtube",
+                image: "https://img.youtube.com/vi/y-Se2mttMHY/hqdefault.jpg", 
+                videoId: "y-Se2mttMHY" 
+            },
+            { 
+                id: 5, title: "Clase 6", duration: "Video YouTube", type: "youtube",
+                image: "https://img.youtube.com/vi/sUIV3hGXbfk/hqdefault.jpg", 
+                videoId: "sUIV3hGXbfk" 
+            }
         ];
 
         // --- DATOS: VIDEOS CURSO IA (PERSONAL GENERAL) ---
@@ -981,19 +1004,24 @@
         // --- RENDERIZADO: RUTA INGE (DIRECTIVOS) ---
         function renderVideosRutaInge() {
             const container = document.getElementById('video-grid-ruta-inge');
-            container.innerHTML = videosRutaInge.map(video => `
-                <div class="video-card bg-white rounded-2xl overflow-hidden cursor-pointer group border border-gray-200" onclick="openVideoModal('${video.videoId}')">
-                    <div class="relative h-56 w-full bg-black overflow-hidden flex items-center justify-center">
+            container.innerHTML = videosRutaInge.map(video => {
+                let action = video.type === 'youtube' ? `openVideoModal('${video.videoId}')` : `window.open('${video.url}', '_blank')`;
+                let iconClass = video.type === 'youtube' ? 'ph-play-circle' : (video.duration === 'Presentación' ? 'ph-presentation-chart' : 'ph-file-video');
+                
+                return `
+                <div class="video-card bg-white rounded-2xl overflow-hidden cursor-pointer group border border-gray-200 flex flex-col h-full" onclick="${action}">
+                    <div class="relative h-56 w-full bg-black overflow-hidden flex items-center justify-center flex-shrink-0">
                         <img src="${video.image}" alt="${video.title}" class="video-thumbnail w-full h-full object-cover transition-all duration-300">
                         <div class="absolute inset-0 bg-black/30 group-hover:bg-transparent transition-colors"></div>
-                        <i class="ph-fill ph-play-circle absolute text-white text-6xl opacity-90 group-hover:scale-110 transition-all duration-300 drop-shadow-md"></i>
+                        <i class="ph-fill ${iconClass} absolute text-white text-6xl opacity-90 group-hover:scale-110 transition-all duration-300 drop-shadow-md"></i>
                     </div>
-                    <div class="p-5 flex justify-between items-center">
-                        <h4 class="text-lg font-bold text-gray-900">${video.title}</h4>
-                        <span class="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded font-bold">${video.duration}</span>
+                    <div class="p-5 flex justify-between items-center flex-grow">
+                        <h4 class="text-lg font-bold text-gray-900 leading-snug pr-2">${video.title}</h4>
+                        <span class="bg-gray-100 text-gray-600 text-[10px] px-2 py-1 rounded font-bold uppercase tracking-wider whitespace-nowrap">${video.duration}</span>
                     </div>
                 </div>
-            `).join('');
+                `;
+            }).join('');
         }
 
         // --- RENDERIZADO: IA (PERSONAL GENERAL) ---
