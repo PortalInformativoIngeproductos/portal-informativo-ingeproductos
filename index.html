@@ -219,6 +219,35 @@
                     </div>
                 </div>
             </div>
+
+            <!-- NUEVO: CARTELERA DE AVISOS (CUMPLEAÑOS) -->
+            <div class="relative bg-[#f8fafc] pb-16 w-full z-20 md:-mt-4">
+                <div class="max-w-5xl mx-auto px-4 slide-up" style="animation-delay: 0.7s;">
+                    <div class="flex items-center gap-3 mb-6">
+                        <i class="ph-fill ph-push-pin text-2xl text-inge-magenta"></i>
+                        <h3 class="text-2xl font-bold text-gray-900">Cartelera de Avisos</h3>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        
+                        <!-- Aviso Cumpleaños -->
+                        <!-- Nota: El segundo parámetro es el enlace original para poder descargarlo -->
+                        <div class="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_15px_40px_rgb(0,0,0,0.08)] transition-all group flex flex-col cursor-pointer" onclick="openDocumentModal('https://ingeproductos-my.sharepoint.com/:i:/g/personal/xavier_rojas_ingeproductos_com_co/IQC_BLyI71zGT7ijq7-zZvjsASgQ2k6-WHkjSZrQ_V_AVXI?e=IlOBiS&action=embedview', 'https://ingeproductos-my.sharepoint.com/:i:/g/personal/xavier_rojas_ingeproductos_com_co/IQC_BLyI71zGT7ijq7-zZvjsASgQ2k6-WHkjSZrQ_V_AVXI?e=IlOBiS')">
+                            <div class="h-32 bg-gradient-to-r from-pink-400 to-purple-500 relative overflow-hidden flex items-center justify-center">
+                                <i class="ph-fill ph-cake text-6xl text-white opacity-80 group-hover:scale-110 transition-transform duration-500"></i>
+                                <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors"></div>
+                            </div>
+                            <div class="p-5 flex-grow flex flex-col">
+                                <span class="text-[10px] font-bold uppercase tracking-widest text-pink-500 mb-2">Celebraciones</span>
+                                <h4 class="text-lg font-bold text-gray-900 mb-2">Cumpleaños de Marzo 🎂</h4>
+                                <p class="text-sm text-gray-500 mb-4">Conoce a los compañeros que celebran su día especial este mes.</p>
+                                <span class="mt-auto text-inge-cyan text-sm font-bold flex items-center gap-1 group-hover:translate-x-1 transition-transform">Ver cartelera <i class="ph-bold ph-arrow-right"></i></span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
         </section>
 
         <!-- ================= VISTA: HUB PERSONAL GENERAL ================= -->
@@ -594,25 +623,37 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     
-                    <!-- Tarjeta PDF 1 -->
-                    <div class="bg-white rounded-2xl p-6 border border-gray-200 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_15px_40px_rgb(0,0,0,0.08)] transition-all flex flex-col h-full group">
-                        <div class="w-14 h-14 bg-red-50 text-red-500 rounded-xl flex items-center justify-center text-3xl mb-5 group-hover:scale-110 transition-transform">
-                            <i class="ph-fill ph-file-pdf"></i>
-                        </div>
-                        <h3 class="text-lg font-bold text-gray-900 mb-2">Guía de IA para Colaboradores</h3>
-                        <p class="text-gray-500 text-sm mb-6 flex-grow leading-relaxed">Documento oficial alojado en OneDrive con los primeros pasos para aplicar IA en tu área.</p>
+                    <!-- Tarjeta PDF 1 ACTUALIZADA (Abre en nueva pestaña) -->
+                    <div class="bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_15px_40px_rgb(0,0,0,0.12)] transition-all flex flex-col h-full group cursor-pointer" onclick="window.open('https://ingeproductos-my.sharepoint.com/:b:/g/personal/xavier_rojas_ingeproductos_com_co/IQBeWaGfv3GcSIK6s0rYOr7UATfpKvkxy6joZcf9rLLQtSo?e=xQX7At', '_blank')">
                         
-                        <div class="flex flex-col gap-3 mt-auto">
-                            <!-- Botón Ver en Línea (Abre Modal Iframe) -->
-                            <!-- Nota: Agregamos &action=embedview al enlace para forzar el visor de Sharepoint -->
-                            <button onclick="openDocumentModal('https://ingeproductos-my.sharepoint.com/:b:/g/personal/xavier_rojas_ingeproductos_com_co/IQBeWaGfv3GcSIK6s0rYOr7UATfpKvkxy6joZcf9rLLQtSo?e=xQX7At&action=embedview')" class="w-full bg-purple-50 text-purple-700 py-3 rounded-xl font-bold hover:bg-purple-600 hover:text-white transition-colors flex items-center justify-center gap-2 text-sm">
-                                <i class="ph-bold ph-eye text-lg"></i> Ver en línea
-                            </button>
+                        <!-- Miniatura del PDF -->
+                        <div class="relative h-48 w-full bg-gray-100 flex items-center justify-center overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?auto=format&fit=crop&w=500&q=80" alt="Miniatura Guía IA" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90">
                             
-                            <!-- Botón Descargar (Abre en nueva pestaña) -->
-                            <a href="https://ingeproductos-my.sharepoint.com/:b:/g/personal/xavier_rojas_ingeproductos_com_co/IQBeWaGfv3GcSIK6s0rYOr7UATfpKvkxy6joZcf9rLLQtSo?e=xQX7At" target="_blank" class="w-full bg-gray-50 border border-gray-200 text-gray-700 py-3 rounded-xl font-bold hover:bg-gray-100 transition-colors flex items-center justify-center gap-2 text-sm">
-                                <i class="ph-bold ph-download-simple text-lg"></i> Abrir en OneDrive
-                            </a>
+                            <!-- Badge PDF Flotante -->
+                            <div class="absolute top-4 left-4 bg-red-500 text-white px-3 py-1 rounded-lg shadow-md flex items-center gap-1 text-xs font-bold">
+                                <i class="ph-fill ph-file-pdf text-lg"></i> Documento PDF
+                            </div>
+                            
+                            <!-- Overlay oscuro y flecha al pasar el mouse -->
+                            <div class="absolute inset-0 bg-black/10 group-hover:bg-black/30 transition-colors flex items-center justify-center">
+                                <div class="w-14 h-14 bg-white text-purple-600 rounded-full flex items-center justify-center shadow-xl opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+                                    <i class="ph-bold ph-arrow-up-right text-2xl"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Contenido y Botón -->
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Guía de IA para Colaboradores</h3>
+                            <p class="text-gray-500 text-sm mb-6 flex-grow leading-relaxed">Documento oficial con los primeros pasos para aplicar Inteligencia Artificial en tu área de trabajo.</p>
+                            
+                            <div class="mt-auto">
+                                <!-- Botón Ver en Línea y Descargar -->
+                                <span onclick="openDocumentModal('https://ingeproductos-my.sharepoint.com/:b:/g/personal/xavier_rojas_ingeproductos_com_co/IQBeWaGfv3GcSIK6s0rYOr7UATfpKvkxy6joZcf9rLLQtSo?e=xQX7At&action=embedview', 'https://ingeproductos-my.sharepoint.com/:b:/g/personal/xavier_rojas_ingeproductos_com_co/IQBeWaGfv3GcSIK6s0rYOr7UATfpKvkxy6joZcf9rLLQtSo?e=xQX7At')" class="w-full bg-purple-50 text-purple-700 py-3 rounded-xl font-bold group-hover:bg-purple-600 group-hover:text-white transition-colors flex items-center justify-center gap-2 text-sm border border-purple-100 group-hover:border-purple-600">
+                                    <i class="ph-bold ph-folder-open text-lg"></i> Ver en línea y Descargar
+                                </span>
+                            </div>
                         </div>
                     </div>
 
@@ -653,7 +694,7 @@
                 <div class="inline-flex items-center bg-white rounded-full shadow-sm hover:scale-105 transition-transform cursor-default border border-gray-100 p-0.5" title="Número de visitas al portal">
                     <img src="https://api.visitorbadge.io/api/visitors?path=inge_interno.portal&label=Visitas&labelColor=%231a1a1a&countColor=%2300b4d8" alt="Contador de visitas" class="rounded-full" />
                 </div>
-                <p class="text-[11px] text-gray-400 font-medium">Última actualización: 02/03/2026 07:55 AM</p>
+                <p class="text-[11px] text-gray-400 font-medium">Última actualización: 03/03/2026 10:04 PM</p>
             </div>
 
         </div>
@@ -662,12 +703,17 @@
     <!-- BOTÓN WHATSAPP SUGERENCIAS -->
     <a href="https://wa.me/573202882534?text=Hola!%20Tengo%20una%20sugerencia%20para%20el%20Portal%20Interno:" target="_blank" class="fixed bottom-6 left-4 md:left-6 z-50 bg-[#25D366] text-white px-3 py-2 md:px-4 md:py-2.5 rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.2)] flex items-center gap-1.5 md:gap-2 hover:bg-[#20bd5a] transition-colors group cursor-pointer bounce-soft border-2 border-white">
         <i class="ph-bold ph-whatsapp-logo text-xl md:text-2xl group-hover:scale-110 transition-transform"></i>
-        <!-- Removí el hidden para que SIEMPRE diga Sugerencias, pero reduje el tamaño del texto para móviles -->
         <span class="font-bold text-xs md:text-sm tracking-wide">Sugerencias</span>
     </a>
 
     <!-- ================= MODAL DE VIDEO ================= -->
     <div id="video-modal" class="fixed inset-0 z-[100] bg-gray-900/95 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300 flex items-center justify-center p-4 md:p-10">
+        
+        <!-- Botón Ver en YouTube -->
+        <a id="video-external-btn" href="#" target="_blank" class="absolute top-6 left-6 md:top-10 md:left-10 text-white bg-red-600/90 hover:bg-red-600 px-4 py-2 rounded-full text-sm font-bold transition-colors flex items-center gap-2 z-50 shadow-lg border border-red-500">
+            <i class="ph-bold ph-youtube-logo text-lg"></i> <span class="hidden md:inline">Ver en YouTube</span>
+        </a>
+
         <button onclick="closeVideoModal()" class="absolute top-6 right-6 md:top-10 md:right-10 text-white hover:text-red-400 transition p-2 bg-white/10 rounded-full hover:bg-white/20 z-50">
             <i class="ph-bold ph-x text-3xl"></i>
         </button>
@@ -684,9 +730,16 @@
         </button>
         
         <!-- Contenedor con scroll para imágenes largas -->
-        <div class="w-full max-w-6xl max-h-[90vh] rounded-2xl overflow-y-auto shadow-2xl relative slide-up text-center no-scrollbar bg-white p-2">
+        <div class="w-full max-w-6xl max-h-[90vh] rounded-2xl overflow-y-auto shadow-2xl relative slide-up text-center no-scrollbar bg-white p-2 flex flex-col">
             <h3 id="image-modal-title" class="text-xl font-bold text-gray-900 py-4 border-b border-gray-100 mb-2">Visor de Documento</h3>
-            <img id="main-image-viewer" src="" alt="Documento Visualizado" class="w-full h-auto mx-auto rounded-xl object-contain">
+            <img id="main-image-viewer" src="" alt="Documento Visualizado" class="w-full h-auto mx-auto rounded-xl object-contain flex-grow">
+            
+            <!-- Botón de Descarga Imagen -->
+            <div class="p-4 border-t border-gray-100 mt-2 bg-gray-50 rounded-b-xl flex justify-center">
+                <a id="image-download-btn" href="#" target="_blank" download class="bg-inge-cyan text-white px-6 py-2.5 rounded-xl text-sm font-bold hover:bg-cyan-600 transition-colors flex items-center gap-2 shadow-sm">
+                    <i class="ph-bold ph-download-simple text-lg"></i> Descargar Imagen
+                </a>
+            </div>
         </div>
     </div>
 
@@ -698,7 +751,12 @@
         
         <div class="w-full max-w-6xl h-[85vh] bg-white rounded-2xl overflow-hidden shadow-2xl relative slide-up flex flex-col">
             <div class="bg-gray-50 p-4 border-b border-gray-200 flex justify-between items-center">
-                <h3 class="font-bold text-gray-800 flex items-center gap-2"><i class="ph-fill ph-file-pdf text-red-500 text-xl"></i> Visor de Documentos (OneDrive)</h3>
+                <h3 class="font-bold text-gray-800 flex items-center gap-2"><i class="ph-fill ph-file text-inge-cyan text-xl"></i> Visor de Archivos (OneDrive)</h3>
+                
+                <!-- Botón Descargar Documento -->
+                <a id="document-download-btn" href="#" target="_blank" class="bg-white border border-gray-300 text-gray-700 px-4 py-1.5 rounded-lg text-sm font-bold hover:bg-gray-100 transition-colors flex items-center gap-2 shadow-sm">
+                    <i class="ph-bold ph-download-simple"></i> <span class="hidden md:inline">Descargar / Original</span>
+                </a>
             </div>
             <div class="flex-grow relative bg-gray-100 flex items-center justify-center">
                 <!-- Fallback por si OneDrive tarda en cargar -->
@@ -1004,7 +1062,11 @@
             
             const modal = document.getElementById('video-modal');
             const player = document.getElementById('main-video-player');
+            const externalBtn = document.getElementById('video-external-btn');
+
             player.src = "https://www.youtube.com/embed/" + videoId + "?autoplay=1&rel=0";
+            externalBtn.href = "https://www.youtube.com/watch?v=" + videoId;
+
             modal.classList.remove('hidden');
             setTimeout(() => { modal.classList.remove('opacity-0'); }, 10);
             document.body.style.overflow = 'hidden'; 
@@ -1017,13 +1079,15 @@
         }
 
         // --- MODAL IMAGEN (ORGANIGRAMAS Y POLITICAS) ---
-        function openImageModal(imgUrl, title) {
+        function openImageModal(imgUrl, title, downloadUrl = null) {
             const modal = document.getElementById('image-modal');
             const viewer = document.getElementById('main-image-viewer');
             const titleEl = document.getElementById('image-modal-title');
+            const downloadBtn = document.getElementById('image-download-btn');
             
             viewer.src = imgUrl;
             titleEl.innerText = title;
+            downloadBtn.href = downloadUrl || imgUrl;
             
             modal.classList.remove('hidden');
             setTimeout(() => { modal.classList.remove('opacity-0'); }, 10);
@@ -1037,10 +1101,14 @@
         }
 
         // --- MODAL DOCUMENTOS (PDF/ONEDRIVE) ---
-        function openDocumentModal(docUrl) {
+        function openDocumentModal(docUrl, originalUrl) {
             const modal = document.getElementById('document-modal');
             const player = document.getElementById('main-document-player');
+            const downloadBtn = document.getElementById('document-download-btn');
+
             player.src = docUrl;
+            downloadBtn.href = originalUrl || docUrl;
+
             modal.classList.remove('hidden');
             setTimeout(() => { modal.classList.remove('opacity-0'); }, 10);
             document.body.style.overflow = 'hidden'; 
