@@ -1101,7 +1101,44 @@
             
             viewer.src = imgUrl;
             titleEl.innerText = title;
-            downloadBtn.href = downloadUrl || imgUrl;
+            
+            // Lógica forzada de descarga creando un archivo local
+            downloadBtn.onclick = async function(e) {
+                e.preventDefault();
+                const urlToDownload = downloadUrl || imgUrl;
+                
+                // Feedback visual de descarga
+                const originalText = downloadBtn.innerHTML;
+                downloadBtn.innerHTML = '<i class="ph-duotone ph-spinner-gap animate-spin text-lg"></i> Descargando...';
+                downloadBtn.disabled = true;
+
+                try {
+                    const response = await fetch(urlToDownload);
+                    const blob = await response.blob();
+                    const url = window.URL.createObjectURL(blob);
+                    
+                    const a = document.createElement('a');
+                    a.style.display = 'none';
+                    a.href = url;
+                    
+                    // Limpiamos el título para usarlo como nombre de archivo
+                    let cleanTitle = title.replace(/[^a-zA-Z0-9 áéíóúÁÉÍÓÚ]/g, '').trim();
+                    a.download = cleanTitle + '.jpg';
+                    
+                    document.body.appendChild(a);
+                    a.click();
+                    
+                    window.URL.revokeObjectURL(url);
+                    a.remove();
+                } catch (err) {
+                    // Fallback si por políticas extremas de CORS falla el fetch
+                    window.open(urlToDownload, '_blank');
+                } finally {
+                    // Restaurar botón
+                    downloadBtn.innerHTML = originalText;
+                    downloadBtn.disabled = false;
+                }
+            };
             
             modal.classList.remove('hidden');
             setTimeout(() => { modal.classList.remove('opacity-0'); }, 10);
