@@ -229,18 +229,32 @@
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         
-                        <!-- Aviso Cumpleaños -->
-                        <!-- Nota: El segundo parámetro es el enlace original para poder descargarlo -->
-                        <div class="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_15px_40px_rgb(0,0,0,0.08)] transition-all group flex flex-col cursor-pointer" onclick="openDocumentModal('https://ingeproductos-my.sharepoint.com/:i:/g/personal/xavier_rojas_ingeproductos_com_co/IQC_BLyI71zGT7ijq7-zZvjsASgQ2k6-WHkjSZrQ_V_AVXI?e=IlOBiS&action=embedview', 'https://ingeproductos-my.sharepoint.com/:i:/g/personal/xavier_rojas_ingeproductos_com_co/IQC_BLyI71zGT7ijq7-zZvjsASgQ2k6-WHkjSZrQ_V_AVXI?e=IlOBiS')">
-                            <div class="h-32 bg-gradient-to-r from-pink-400 to-purple-500 relative overflow-hidden flex items-center justify-center">
-                                <i class="ph-fill ph-cake text-6xl text-white opacity-80 group-hover:scale-110 transition-transform duration-500"></i>
-                                <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors"></div>
+                        <!-- Aviso Cumpleaños (Actualizado con miniatura Imgur y Modal) -->
+                        <div class="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_15px_40px_rgb(0,0,0,0.08)] transition-all group flex flex-col cursor-pointer" onclick="openImageModal('https://i.imgur.com/Joo1f8x.jpeg', 'Cumpleaños de Marzo')">
+                            
+                            <!-- Miniatura visual -->
+                            <div class="h-48 bg-gray-100 relative overflow-hidden flex items-center justify-center">
+                                <img src="https://i.imgur.com/Joo1f8x.jpeg" alt="Miniatura Cumpleaños" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500 opacity-95">
+                                
+                                <!-- Capa oscura y botón de expandir al pasar el mouse -->
+                                <div class="absolute inset-0 bg-black/10 group-hover:bg-black/30 transition-colors flex items-center justify-center">
+                                    <div class="w-12 h-12 bg-white/20 backdrop-blur-sm border border-white/50 text-white rounded-full flex items-center justify-center shadow-lg opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+                                        <i class="ph-bold ph-arrows-out-simple text-xl"></i>
+                                    </div>
+                                </div>
+                                
+                                <!-- Etiqueta Festiva -->
+                                <div class="absolute top-3 left-3 bg-pink-500 text-white px-2 py-1 rounded-md shadow-md flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest">
+                                    <i class="ph-fill ph-cake"></i> Nuevo
+                                </div>
                             </div>
+                            
+                            <!-- Contenido de la tarjeta -->
                             <div class="p-5 flex-grow flex flex-col">
                                 <span class="text-[10px] font-bold uppercase tracking-widest text-pink-500 mb-2">Celebraciones</span>
                                 <h4 class="text-lg font-bold text-gray-900 mb-2">Cumpleaños de Marzo 🎂</h4>
                                 <p class="text-sm text-gray-500 mb-4">Conoce a los compañeros que celebran su día especial este mes.</p>
-                                <span class="mt-auto text-inge-cyan text-sm font-bold flex items-center gap-1 group-hover:translate-x-1 transition-transform">Ver cartelera <i class="ph-bold ph-arrow-right"></i></span>
+                                <span class="mt-auto text-inge-cyan text-sm font-bold flex items-center gap-1 group-hover:translate-x-1 transition-transform">Ver y Descargar <i class="ph-bold ph-arrow-right"></i></span>
                             </div>
                         </div>
 
@@ -623,7 +637,7 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     
-                    <!-- Tarjeta PDF 1 ACTUALIZADA (Abre en nueva pestaña) -->
+                    <!-- Tarjeta PDF 1 ACTUALIZADA (Solución OneDrive: Abre en nueva pestaña) -->
                     <div class="bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_15px_40px_rgb(0,0,0,0.12)] transition-all flex flex-col h-full group cursor-pointer" onclick="window.open('https://ingeproductos-my.sharepoint.com/:b:/g/personal/xavier_rojas_ingeproductos_com_co/IQBeWaGfv3GcSIK6s0rYOr7UATfpKvkxy6joZcf9rLLQtSo?e=xQX7At', '_blank')">
                         
                         <!-- Miniatura del PDF -->
@@ -650,9 +664,9 @@
                             
                             <div class="mt-auto">
                                 <!-- Botón Ver en Línea y Descargar -->
-                                <span onclick="openDocumentModal('https://ingeproductos-my.sharepoint.com/:b:/g/personal/xavier_rojas_ingeproductos_com_co/IQBeWaGfv3GcSIK6s0rYOr7UATfpKvkxy6joZcf9rLLQtSo?e=xQX7At&action=embedview', 'https://ingeproductos-my.sharepoint.com/:b:/g/personal/xavier_rojas_ingeproductos_com_co/IQBeWaGfv3GcSIK6s0rYOr7UATfpKvkxy6joZcf9rLLQtSo?e=xQX7At')" class="w-full bg-purple-50 text-purple-700 py-3 rounded-xl font-bold group-hover:bg-purple-600 group-hover:text-white transition-colors flex items-center justify-center gap-2 text-sm border border-purple-100 group-hover:border-purple-600">
+                                <button onclick="event.stopPropagation(); window.open('https://ingeproductos-my.sharepoint.com/:b:/g/personal/xavier_rojas_ingeproductos_com_co/IQBeWaGfv3GcSIK6s0rYOr7UATfpKvkxy6joZcf9rLLQtSo?e=xQX7At', '_blank')" class="w-full bg-purple-50 text-purple-700 py-3 rounded-xl font-bold group-hover:bg-purple-600 group-hover:text-white transition-colors flex items-center justify-center gap-2 text-sm border border-purple-100 group-hover:border-purple-600">
                                     <i class="ph-bold ph-folder-open text-lg"></i> Ver en línea y Descargar
-                                </span>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -694,7 +708,7 @@
                 <div class="inline-flex items-center bg-white rounded-full shadow-sm hover:scale-105 transition-transform cursor-default border border-gray-100 p-0.5" title="Número de visitas al portal">
                     <img src="https://api.visitorbadge.io/api/visitors?path=inge_interno.portal&label=Visitas&labelColor=%231a1a1a&countColor=%2300b4d8" alt="Contador de visitas" class="rounded-full" />
                 </div>
-                <p class="text-[11px] text-gray-400 font-medium">Última actualización: 03/03/2026 10:04 PM</p>
+                <p class="text-[11px] text-gray-400 font-medium">Última actualización: 03/03/2026 10:15 PM</p>
             </div>
 
         </div>
