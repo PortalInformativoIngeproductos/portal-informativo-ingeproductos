@@ -348,7 +348,7 @@
                         </div>
                     </div>
 
-                    <!-- FLIP CARD 5: Inteligencia Artificial (NUEVO) -->
+                    <!-- FLIP CARD 5: Inteligencia Artificial -->
                     <div class="flip-card slide-up" style="animation-delay: 0.5s;" onclick="switchView('ia-hub')">
                         <div class="flip-card-inner">
                             <div class="flip-card-front" style="border: 2px solid #f3e8ff;">
@@ -534,15 +534,23 @@
                         <span class="text-red-500 text-sm font-bold mt-4 inline-flex items-center gap-1 bg-white px-4 py-2 rounded-xl border border-red-100 w-full justify-center">Ver Inducción <i class="ph-bold ph-arrow-up-right"></i></span>
                     </div>
 
-                    <!-- PASO 3: Evaluación (QR) -->
-                    <div class="border border-gray-200 rounded-2xl p-6 flex flex-col items-center text-center gap-2 cursor-pointer hover:bg-green-50 transition-all shadow-sm hover:shadow-md hover:-translate-y-1 relative pt-10" onclick="openImageModal('https://i.imgur.com/Zbb9tNY.jpeg', 'Evaluación de Inducción')">
+                    <!-- PASO 3: Evaluación (QR y Enlace Directo) -->
+                    <div class="border border-gray-200 rounded-2xl p-6 flex flex-col items-center text-center gap-2 transition-all shadow-sm hover:shadow-md relative pt-10 bg-white">
                         <span class="absolute top-0 transform -translate-y-1/2 bg-inge-green text-white text-[10px] font-bold px-3 py-1.5 rounded-full uppercase tracking-wider shadow-sm">Paso 3</span>
-                        <div class="w-16 h-16 bg-green-100 text-green-600 rounded-2xl flex items-center justify-center text-3xl mb-2">
-                            <i class="ph-fill ph-qr-code"></i>
+                        
+                        <!-- Miniatura del QR (Al darle click abre el modal y muestra link) -->
+                        <div class="w-24 h-24 p-1.5 bg-white border border-green-200 rounded-xl mb-1 cursor-pointer hover:scale-105 transition-transform shadow-sm" onclick="openImageModal('https://i.imgur.com/Zbb9tNY.jpeg', 'Código QR de Evaluación', null, 'https://docs.google.com/forms/d/e/1FAIpQLSd6T3bS4CZEX-WGRXcuRFOFTT-VIP0EZ7NecXGI9LHyqvxaeA/viewform', 'Ir a la Encuesta')">
+                            <img src="https://i.imgur.com/Zbb9tNY.jpeg" alt="QR Evaluación" class="w-full h-full object-contain rounded-lg">
                         </div>
+                        <span class="text-[10px] text-gray-400 mb-2 cursor-pointer hover:text-gray-600" onclick="openImageModal('https://i.imgur.com/Zbb9tNY.jpeg', 'Código QR de Evaluación', null, 'https://docs.google.com/forms/d/e/1FAIpQLSd6T3bS4CZEX-WGRXcuRFOFTT-VIP0EZ7NecXGI9LHyqvxaeA/viewform', 'Ir a la Encuesta')">Ver QR grande <i class="ph-bold ph-magnifying-glass-plus"></i></span>
+
                         <h4 class="font-bold text-gray-900 text-xl">Evaluación</h4>
-                        <p class="text-sm text-gray-500 flex-grow">Escanea o haz clic aquí para realizar la evaluación requerida tras la inducción.</p>
-                        <span class="text-green-600 text-sm font-bold mt-4 inline-flex items-center gap-1 bg-white px-4 py-2 rounded-xl border border-green-100 w-full justify-center">Abrir Código QR <i class="ph-bold ph-arrows-out-simple"></i></span>
+                        <p class="text-sm text-gray-500 flex-grow mb-3">Realiza la evaluación requerida tras completar la inducción.</p>
+                        
+                        <!-- Botón Directo para Celulares -->
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSd6T3bS4CZEX-WGRXcuRFOFTT-VIP0EZ7NecXGI9LHyqvxaeA/viewform" target="_blank" class="bg-green-500 text-white hover:bg-green-600 text-sm font-bold mt-auto inline-flex items-center gap-2 px-4 py-2.5 rounded-xl w-full justify-center transition-colors shadow-sm">
+                            <i class="ph-bold ph-link text-lg"></i> Abrir evaluación en línea
+                        </a>
                     </div>
 
                 </div>
@@ -708,7 +716,7 @@
                 <div class="inline-flex items-center bg-white rounded-full shadow-sm hover:scale-105 transition-transform cursor-default border border-gray-100 p-0.5" title="Número de visitas al portal">
                     <img src="https://api.visitorbadge.io/api/visitors?path=inge_interno.portal&label=Visitas&labelColor=%231a1a1a&countColor=%2300b4d8" alt="Contador de visitas" class="rounded-full" />
                 </div>
-                <p class="text-[11px] text-gray-400 font-medium">Última actualización: 05/03/2026 05:05 PM</p>
+                <p class="text-[11px] text-gray-400 font-medium">Última actualización: 05/03/2026 05:09 PM</p>
             </div>
 
         </div>
@@ -743,16 +751,25 @@
             <i class="ph-bold ph-x text-3xl"></i>
         </button>
         
-        <!-- Contenedor con scroll para imágenes largas -->
-        <div class="w-full max-w-6xl max-h-[90vh] rounded-2xl overflow-y-auto shadow-2xl relative slide-up text-center no-scrollbar bg-white p-2 flex flex-col">
+        <!-- Contenedor con scroll para imágenes y TAMAÑO CONTROLADO -->
+        <div class="w-full max-w-4xl max-h-[90vh] rounded-2xl overflow-y-auto shadow-2xl relative slide-up text-center no-scrollbar bg-white p-2 flex flex-col">
             <h3 id="image-modal-title" class="text-xl font-bold text-gray-900 py-4 border-b border-gray-100 mb-2">Visor de Documento</h3>
-            <img id="main-image-viewer" src="" alt="Documento Visualizado" class="w-full h-auto mx-auto rounded-xl object-contain flex-grow">
             
-            <!-- Botón de Descarga Imagen -->
-            <div class="p-4 border-t border-gray-100 mt-2 bg-gray-50 rounded-b-xl flex justify-center">
+            <div class="flex-grow flex items-center justify-center bg-gray-50 rounded-xl p-4">
+                <!-- Se agregó max-h-[55vh] para que la imagen no quede inmensa -->
+                <img id="main-image-viewer" src="" alt="Documento Visualizado" class="max-w-full max-h-[55vh] mx-auto rounded-lg object-contain shadow-sm border border-gray-200">
+            </div>
+            
+            <!-- Botón de Descarga Imagen y Link Extra -->
+            <div class="p-4 border-t border-gray-100 mt-2 bg-gray-50 rounded-b-xl flex flex-wrap justify-center gap-4" id="image-modal-actions">
                 <button id="image-download-btn" class="bg-inge-cyan text-white px-6 py-2.5 rounded-xl text-sm font-bold hover:bg-cyan-600 transition-colors flex items-center gap-2 shadow-sm">
                     <i class="ph-bold ph-download-simple text-lg"></i> Descargar Imagen
                 </button>
+                
+                <!-- Este botón se mostrará si hay un link de encuesta -->
+                <a id="image-extra-link" href="#" target="_blank" class="hidden bg-green-500 text-white px-6 py-2.5 rounded-xl text-sm font-bold hover:bg-green-600 transition-colors items-center gap-2 shadow-sm">
+                    <i class="ph-bold ph-link text-lg"></i> <span id="image-extra-text">Abrir Enlace</span>
+                </a>
             </div>
         </div>
     </div>
@@ -1107,14 +1124,27 @@
         }
 
         // --- MODAL IMAGEN (ORGANIGRAMAS, POLITICAS Y CUMPLEAÑOS) ---
-        function openImageModal(imgUrl, title, downloadUrl = null) {
+        function openImageModal(imgUrl, title, downloadUrl = null, extraUrl = null, extraText = null) {
             const modal = document.getElementById('image-modal');
             const viewer = document.getElementById('main-image-viewer');
             const titleEl = document.getElementById('image-modal-title');
             const downloadBtn = document.getElementById('image-download-btn');
+            const extraLinkBtn = document.getElementById('image-extra-link');
+            const extraLinkText = document.getElementById('image-extra-text');
             
             viewer.src = imgUrl;
             titleEl.innerText = title;
+            
+            // Configurar botón extra si existe (ej. Link a la encuesta)
+            if (extraUrl) {
+                extraLinkBtn.href = extraUrl;
+                if(extraLinkText) extraLinkText.innerText = extraText || "Abrir Enlace";
+                extraLinkBtn.classList.remove('hidden');
+                extraLinkBtn.classList.add('flex');
+            } else {
+                extraLinkBtn.classList.add('hidden');
+                extraLinkBtn.classList.remove('flex');
+            }
             
             // Lógica forzada de descarga creando un archivo local
             downloadBtn.onclick = async function(e) {
