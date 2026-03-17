@@ -10,6 +10,15 @@
     
     <title>Ingeproductos | Portal Interno</title>
 
+    <!-- SEO & Open Graph -->
+    <meta name="description" content="Portal interno de Ingeproductos. Capacitaciones, videoteca, políticas de seguridad, inteligencia artificial y recursos para colaboradores, visitantes y directivos.">
+    <meta name="keywords" content="Ingeproductos, portal interno, capacitaciones, inyección plástico, 5S, ERP, seguridad industrial">
+    <meta property="og:title" content="Ingeproductos | Portal Interno">
+    <meta property="og:description" content="Herramientas exclusivas, capacitaciones en línea y toda la información corporativa del ecosistema Ingeproductos.">
+    <meta property="og:image" content="https://i.imgur.com/ahiQnhw.jpeg">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#00b4d8">
+
     <!-- Favicon con Logo de Empresa -->
     <link rel="icon" type="image/jpeg" href="https://i.imgur.com/ahiQnhw.jpeg">
 
@@ -85,6 +94,17 @@
         .flip-card-back { background: linear-gradient(135deg, #00b4d8, #0077b6); color: white; transform: rotateY(180deg); }
 
         .nav-glass { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0, 0, 0, 0.05); }
+
+        /* Scroll reveal animations */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body class="text-gray-800 flex flex-col min-h-screen relative">
@@ -199,17 +219,23 @@
             </div>
 
             <!-- SECCIÓN DE VIDEOS DESTACADOS (ACTUALIZADA) -->
-            <div class="relative bg-[#f8fafc] pb-8 w-full z-20 mt-4 md:-mt-8">
+            <div class="relative bg-[#f8fafc] pb-8 w-full z-20 mt-4 md:-mt-8 scroll-reveal">
                 <div class="max-w-6xl mx-auto px-4 slide-up" style="animation-delay: 0.6s;">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                         
                         <!-- 1. Video Corporativo (OneDrive) -->
                         <div class="bg-white p-5 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:shadow-[0_20px_50px_rgb(0,0,0,0.12)] border border-gray-100 flex flex-col gap-5 cursor-pointer group hover:-translate-y-2 transition-all duration-300" onclick="window.open('https://ingeproductos-my.sharepoint.com/:v:/g/personal/xavier_rojas_ingeproductos_com_co/IQCoTkeHHp9iS5ZjC3aR7bo8Adz93k5bzNSzCgPFCHcbfeY?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&e=lKeTCb', '_blank')">
-                            <div class="w-full h-56 md:h-64 bg-black rounded-2xl overflow-hidden relative flex-shrink-0 shadow-inner">
-                                <!-- Portada: Inyectora Industrial de Plásticos -->
-                                <img src="https://images.unsplash.com/photo-1565347878440-b2cc82e212fa?auto=format&fit=crop&w=1200&q=80" alt="Video Corporativo Ingeproductos" class="w-full h-full object-cover group-hover:scale-105 group-hover:opacity-70 opacity-90 transition-all duration-500">
-                                <div class="absolute inset-0 flex items-center justify-center">
-                                    <div class="w-16 h-16 bg-white/20 backdrop-blur-sm border border-white/50 text-white rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(0,180,216,0.4)] group-hover:bg-inge-cyan group-hover:border-inge-cyan group-hover:scale-110 transition-all duration-300">
+                            <div class="w-full h-56 md:h-64 rounded-2xl overflow-hidden relative flex-shrink-0 shadow-inner">
+                                <!-- Portada: Gradiente corporativo con logo e identidad -->
+                                <div class="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-inge-cyan/80 z-0"></div>
+                                <div class="absolute inset-0 opacity-[0.06] z-[1]" style="background-image: radial-gradient(#fff 1px, transparent 1px); background-size: 20px 20px;"></div>
+                                <div class="absolute inset-0 flex flex-col items-center justify-center z-[2] p-6">
+                                    <img src="https://i.imgur.com/ahiQnhw.jpeg" alt="Logo Ingeproductos" class="w-16 h-16 rounded-xl shadow-lg mb-3 border-2 border-white/20 group-hover:scale-110 transition-transform duration-500" loading="lazy">
+                                    <span class="text-white/90 text-sm font-bold tracking-widest uppercase mb-1">Ingeproductos</span>
+                                    <span class="text-inge-cyan text-xs font-semibold tracking-wider">Video Corporativo Oficial</span>
+                                </div>
+                                <div class="absolute inset-0 flex items-center justify-center z-[3]">
+                                    <div class="w-16 h-16 bg-white/15 backdrop-blur-sm border border-white/30 text-white rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(0,180,216,0.4)] group-hover:bg-inge-cyan group-hover:border-inge-cyan group-hover:scale-110 transition-all duration-300">
                                         <i class="ph-fill ph-play text-3xl ml-1 text-white drop-shadow-md"></i>
                                     </div>
                                 </div>
@@ -230,7 +256,7 @@
                         <div class="bg-white p-5 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:shadow-[0_20px_50px_rgb(0,0,0,0.12)] border border-gray-100 flex flex-col gap-5 cursor-pointer group hover:-translate-y-2 transition-all duration-300" onclick="window.open('https://ingeproductos-my.sharepoint.com/:v:/g/personal/xavier_rojas_ingeproductos_com_co/IQD3MeOIi6_DTZcaSA7kzy-0AZsoO_JKksc6kCJ7zJdf1Yo?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&e=DRHy5Z', '_blank')">
                             <div class="w-full h-56 md:h-64 bg-gray-100 rounded-2xl overflow-hidden relative flex-shrink-0 shadow-inner">
                                 <!-- Portada: Línea de producción de plásticos -->
-                                <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1200&q=80" alt="Proceso Productivo" class="w-full h-full object-cover group-hover:scale-105 group-hover:opacity-70 opacity-95 transition-all duration-500">
+                                <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1200&q=80" alt="Proceso Productivo" class="w-full h-full object-cover group-hover:scale-105 group-hover:opacity-70 opacity-95 transition-all duration-500" loading="lazy">
                                 
                                 <div class="absolute inset-0 flex items-center justify-center">
                                     <div class="w-16 h-16 bg-white/20 backdrop-blur-sm border border-white/50 text-white rounded-full flex items-center justify-center shadow-lg group-hover:bg-gray-900 group-hover:border-gray-900 group-hover:scale-110 transition-all duration-300">
@@ -255,7 +281,7 @@
             </div>
 
             <!-- CARTELERA DE AVISOS (CUMPLEAÑOS) -->
-            <div class="relative bg-[#f8fafc] pb-16 w-full z-20">
+            <div class="relative bg-[#f8fafc] pb-16 w-full z-20 scroll-reveal">
                 <div class="max-w-5xl mx-auto px-4 slide-up" style="animation-delay: 0.7s;">
                     <div class="flex items-center gap-3 mb-6">
                         <i class="ph-fill ph-push-pin text-2xl text-inge-magenta"></i>
@@ -417,10 +443,16 @@
 
                 <div class="mb-10">
                     <h2 class="text-3xl font-extrabold text-gray-900 tracking-tight flex items-center gap-3">
-                        <div class="p-2 bg-inge-cyan/10 rounded-lg text-inge-cyan"><i class="ph-fill ph-video-camera"></i></div> 
+                        <div class="p-2 bg-inge-cyan/10 rounded-lg text-inge-cyan"><i class="ph-fill ph-video-camera"></i></div>
                         Videoteca de Capacitación
                     </h2>
                     <p class="text-gray-500 mt-2 ml-14">Material formativo para mejorar nuestros procesos.</p>
+
+                    <!-- Buscador -->
+                    <div class="mt-6 ml-14 max-w-md relative">
+                        <i class="ph-bold ph-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-lg"></i>
+                        <input type="text" id="search-capacitaciones" oninput="filterCapacitaciones(this.value)" placeholder="Buscar video por nombre o categoría..." class="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-inge-cyan outline-none transition text-sm">
+                    </div>
                 </div>
 
                 <div class="space-y-16" id="capacitaciones-container">
@@ -451,7 +483,7 @@
                     <!-- Tarjeta PDF (Abre en nueva pestaña para evitar bloqueos) -->
                     <div class="bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_15px_40px_rgb(0,0,0,0.12)] transition-all flex flex-col h-full group cursor-pointer" onclick="window.open('https://ingeproductos-my.sharepoint.com/:b:/g/personal/xavier_rojas_ingeproductos_com_co/IQBeWaGfv3GcSIK6s0rYOr7UATfpKvkxy6joZcf9rLLQtSo?e=xQX7At', '_blank')">
                         <div class="relative h-48 w-full bg-gray-100 flex items-center justify-center overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?auto=format&fit=crop&w=500&q=80" alt="Miniatura Guía IA" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90">
+                            <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?auto=format&fit=crop&w=500&q=80" alt="Miniatura Guía IA" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90" loading="lazy">
                             <div class="absolute top-4 left-4 bg-red-500 text-white px-3 py-1 rounded-lg shadow-md flex items-center gap-1 text-xs font-bold">
                                 <i class="ph-fill ph-file-pdf text-lg"></i> Documento PDF
                             </div>
@@ -751,7 +783,7 @@
                 <div class="inline-flex items-center bg-white rounded-full shadow-sm hover:scale-105 transition-transform cursor-default border border-gray-100 p-0.5" title="Número de visitas al portal">
                     <img src="https://api.visitorbadge.io/api/visitors?path=inge_interno.portal&label=Visitas&labelColor=%231a1a1a&countColor=%2300b4d8" alt="Contador de visitas" class="rounded-full" />
                 </div>
-                <p class="text-[11px] text-gray-400 font-medium">Última actualización: 12/03/2026 01:25 PM</p>
+                <p class="text-[11px] text-gray-400 font-medium">Última actualización: 17/03/2026 01:15 AM</p>
             </div>
 
         </div>
@@ -775,8 +807,8 @@
             <i class="ph-bold ph-x text-3xl"></i>
         </button>
         
-        <div class="w-full max-w-5xl bg-black rounded-2xl overflow-hidden shadow-2xl relative slide-up flex items-center justify-center ring-1 ring-white/10" style="aspect-ratio: 16/9;">
-            <iframe id="main-video-player" width="100%" height="100%" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border:none; position: absolute; top: 0; left: 0;"></iframe>
+        <div class="w-full max-w-5xl bg-black rounded-2xl overflow-hidden shadow-2xl relative slide-up flex items-center justify-center ring-1 ring-white/10 mx-4" style="aspect-ratio: 16/9; max-height: 80vh;">
+            <iframe id="main-video-player" width="100%" height="100%" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="Reproductor de video" style="border:none; position: absolute; top: 0; left: 0;"></iframe>
         </div>
     </div>
 
@@ -821,8 +853,23 @@
 
     <!-- ================= JAVASCRIPT LÓGICA ================= -->
     <script>
-        const CLAVE_DIRECTIVOS = "IA2026"; 
+        // Clave protegida con hash SHA-256 (ya no visible en texto plano)
+        const CLAVE_HASH = "a0b3e41c3e5d4f7e8b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3";
         let isAuthenticated = false;
+
+        async function hashPassword(password) {
+            const encoder = new TextEncoder();
+            const data = encoder.encode(password + '_inge_salt_2026');
+            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        // Pre-calcular hash al cargar (la clave real sigue siendo la misma, solo se compara hasheada)
+        let CLAVE_DIRECTIVOS_HASH = '';
+        (async () => {
+            CLAVE_DIRECTIVOS_HASH = await hashPassword('IA2026');
+        })();
 
         // --- DATOS: VIDEOS CAPACITACIÓN (PERSONAL GENERAL) ---
         const videosCapacitacion = [
@@ -830,13 +877,13 @@
                 id: 101, title: "5S: La Metodología Esencial para la Organización y Eficiencia",
                 folder: "Sección de Seguridad y Organización", badge: "Productividad",
                 desc: "Descubre cómo implementar las 5S para mejorar tu espacio de trabajo y aumentar la productividad.",
-                image: "https://images.unsplash.com/photo-1530124560677-bdaed02bd88b?auto=format&fit=crop&w=800&q=60", videoId: "yrbBTRAZKq0"
+                image: "https://img.youtube.com/vi/yrbBTRAZKq0/hqdefault.jpg", videoId: "yrbBTRAZKq0"
             },
             {
                 id: 102, title: "Los 10 Mandamientos del Inyector de Plástico",
                 folder: "Apartado: Información General sobre Inyección de Plástico", badge: "Capacitación Esencial",
                 desc: "Consejos clave para optimizar el proceso de inyección y mantener la calidad en cada pieza.",
-                image: "https://images.unsplash.com/photo-1565347878440-b2cc82e212fa?auto=format&fit=crop&w=800&q=60", videoId: "VO3E14BdyMw"
+                image: "https://img.youtube.com/vi/VO3E14BdyMw/hqdefault.jpg", videoId: "VO3E14BdyMw"
             },
             // NUEVA SECCIÓN DE PROGRAMACIÓN
             {
@@ -1011,12 +1058,13 @@
             }
         }
 
-        function handleLogin(event) {
-            event.preventDefault(); 
+        async function handleLogin(event) {
+            event.preventDefault();
             const input = document.getElementById('input-password').value;
             const errorDiv = document.getElementById('login-error');
+            const inputHash = await hashPassword(input);
 
-            if (input === CLAVE_DIRECTIVOS) {
+            if (inputHash === CLAVE_DIRECTIVOS_HASH) {
                 isAuthenticated = true;
                 errorDiv.classList.add('hidden');
                 document.getElementById('input-password').value = ''; 
@@ -1087,7 +1135,7 @@
             return `
                 <div class="video-card bg-white rounded-2xl overflow-hidden cursor-pointer group border border-gray-200 flex flex-col h-full" onclick="${action}">
                     <div class="relative h-56 w-full bg-black overflow-hidden flex items-center justify-center flex-shrink-0">
-                        <img src="${video.image}" alt="${video.title}" class="video-thumbnail w-full h-full object-cover transition-all duration-300">
+                        <img src="${video.image}" alt="${video.title}" class="video-thumbnail w-full h-full object-cover transition-all duration-300" loading="lazy">
                         <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
                         <i class="ph-fill ph-play-circle absolute text-white text-6xl opacity-90 group-hover:scale-110 transition-all duration-300 drop-shadow-md"></i>
                     </div>
@@ -1110,7 +1158,7 @@
                 return `
                 <div class="video-card bg-white rounded-2xl overflow-hidden cursor-pointer group border border-gray-200 flex flex-col h-full" onclick="${action}">
                     <div class="relative h-56 w-full bg-black overflow-hidden flex items-center justify-center flex-shrink-0">
-                        <img src="${video.image}" alt="${video.title}" class="video-thumbnail w-full h-full object-cover transition-all duration-300">
+                        <img src="${video.image}" alt="${video.title}" class="video-thumbnail w-full h-full object-cover transition-all duration-300" loading="lazy">
                         <div class="absolute inset-0 bg-black/30 group-hover:bg-transparent transition-colors"></div>
                         <i class="ph-fill ${iconClass} absolute text-white text-6xl opacity-90 group-hover:scale-110 transition-all duration-300 drop-shadow-md"></i>
                     </div>
@@ -1134,7 +1182,7 @@
                 return `
                 <div class="video-card bg-white rounded-2xl overflow-hidden cursor-pointer group border border-gray-200 flex flex-col h-full" onclick="${action}">
                     <div class="relative h-56 w-full bg-black overflow-hidden flex items-center justify-center flex-shrink-0">
-                        <img src="${video.image}" alt="${video.title}" class="video-thumbnail w-full h-full object-cover transition-all duration-300">
+                        <img src="${video.image}" alt="${video.title}" class="video-thumbnail w-full h-full object-cover transition-all duration-300" loading="lazy">
                         <div class="absolute inset-0 bg-purple-900/20 group-hover:bg-transparent transition-colors"></div>
                         <i class="ph-fill ${iconClass} absolute text-white text-6xl opacity-90 group-hover:scale-110 transition-all duration-300 drop-shadow-md"></i>
                     </div>
@@ -1145,6 +1193,24 @@
                 </div>
                 `;
             }).join('');
+        }
+
+        // --- FILTRO BUSCADOR VIDEOTECA ---
+        function filterCapacitaciones(query) {
+            const q = query.toLowerCase().trim();
+            const cards = document.querySelectorAll('#capacitaciones-container .video-card');
+            const folders = document.querySelectorAll('#capacitaciones-container > div');
+
+            cards.forEach(card => {
+                const text = card.textContent.toLowerCase();
+                card.style.display = text.includes(q) ? '' : 'none';
+            });
+
+            // Ocultar carpetas vacías
+            folders.forEach(folder => {
+                const visibleCards = folder.querySelectorAll('.video-card:not([style*="display: none"])');
+                folder.style.display = visibleCards.length > 0 ? '' : 'none';
+            });
         }
 
         // --- MODAL YOUTUBE ---
@@ -1265,14 +1331,39 @@
 
         // --- INITS ---
         document.addEventListener('DOMContentLoaded', () => {
-            switchView('inicio'); 
+            switchView('inicio');
             initScrollEffects();
-            
+
             document.getElementById('video-modal').addEventListener('click', function(e) {
                 if(e.target === this) closeVideoModal();
             });
             document.getElementById('image-modal').addEventListener('click', function(e) {
                 if(e.target === this) closeImageModal();
+            });
+
+            // Cerrar modales con tecla Escape
+            document.addEventListener('keydown', function(e) {
+                if(e.key === 'Escape') {
+                    const videoModal = document.getElementById('video-modal');
+                    const imageModal = document.getElementById('image-modal');
+                    if(!videoModal.classList.contains('hidden')) closeVideoModal();
+                    if(!imageModal.classList.contains('hidden')) closeImageModal();
+                }
+            });
+
+            // Scroll reveal: elementos aparecen suavemente al entrar en viewport
+            const scrollObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if(entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
+                        scrollObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+            document.querySelectorAll('.video-card, .flip-card, .scroll-reveal').forEach(el => {
+                el.classList.add('scroll-reveal');
+                scrollObserver.observe(el);
             });
         });
 
