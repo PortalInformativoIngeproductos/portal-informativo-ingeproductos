@@ -802,7 +802,7 @@
                 <div class="inline-flex items-center bg-white rounded-full shadow-sm hover:scale-105 transition-transform cursor-default border border-gray-100 p-0.5" title="Número de visitas al portal">
                     <img src="https://api.visitorbadge.io/api/visitors?path=inge_interno.portal&label=Visitas&labelColor=%231a1a1a&countColor=%2300b4d8" alt="Contador de visitas" class="rounded-full" />
                 </div>
-                <p class="text-[11px] text-gray-400 font-medium">Última actualización: 18/03/2026 02:30 PM</p>
+                <p class="text-[11px] text-gray-400 font-medium">Última actualización: 18/03/2026 06:45 PM</p>
             </div>
 
         </div>
@@ -828,18 +828,7 @@
         
         <div class="w-full max-w-5xl bg-black rounded-2xl overflow-hidden shadow-2xl relative slide-up flex items-center justify-center ring-1 ring-white/10 mx-4" style="aspect-ratio: 16/9; max-height: 80vh;">
             <iframe id="main-video-player" width="100%" height="100%" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="Reproductor de video" style="border:none; position: absolute; top: 0; left: 0;"></iframe>
-
-            <!-- Preview OneDrive (cuando no se puede embeber) -->
-            <div id="onedrive-preview" class="hidden absolute inset-0 z-10 flex flex-col items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 p-8 text-center">
-                <img id="onedrive-preview-img" src="" alt="Preview" class="absolute inset-0 w-full h-full object-cover opacity-30 blur-sm">
-                <div class="relative z-10 flex flex-col items-center gap-6">
-                    <div class="w-24 h-24 bg-white/10 backdrop-blur-md border-2 border-white/30 rounded-full flex items-center justify-center shadow-[0_0_40px_rgba(0,180,216,0.3)] hover:bg-inge-cyan hover:border-inge-cyan hover:scale-110 transition-all duration-300 cursor-pointer group" id="onedrive-play-btn">
-                        <i class="ph-fill ph-play text-5xl text-white ml-1.5 drop-shadow-lg group-hover:scale-110 transition-transform"></i>
-                    </div>
-                    <h3 id="onedrive-preview-title" class="text-white text-xl md:text-2xl font-bold max-w-md leading-tight"></h3>
-                    <p class="text-white/60 text-sm">Se abrirá en una nueva pestaña para mejor experiencia</p>
-                </div>
-            </div>
+            <video id="sharepoint-video-player" class="hidden absolute inset-0 w-full h-full bg-black" controls autoplay playsinline></video>
         </div>
     </div>
 
@@ -1255,32 +1244,19 @@
             });
         }
 
-        // --- CONVERTIR URL SHAREPOINT A EMBED ---
-        function getSharePointEmbedUrl(shareUrl) {
+        // --- OBTENER URL DE DESCARGA DIRECTA DE SHAREPOINT ---
+        function getSharePointDownloadUrl(shareUrl) {
             try {
                 const url = new URL(shareUrl);
-                const host = url.host;
-                // Extraer tipo (:v: video, :p: presentación), usuario y ID codificado
-                const pathMatch = url.pathname.match(/\/:([vp]):\/g\/personal\/([^/]+)\/([^?/]+)/);
+                const pathMatch = url.pathname.match(/\/:v:\/g\/personal\/([^/]+)\/([^?/]+)/);
                 if (!pathMatch) return null;
-                const user = pathMatch[2];
-                const encodedId = pathMatch[3];
-                // Decodificar base64url del ID (quitar prefijo "IQ" que es indicador de tipo)
-                const base64Part = encodedId.substring(2);
-                const base64 = base64Part.replace(/-/g, '+').replace(/_/g, '/');
-                const padding = '='.repeat((4 - base64.length % 4) % 4);
-                const raw = atob(base64 + padding);
-                // Convertir a GUID (little-endian para los primeros 3 grupos)
-                const bytes = Array.from(raw, c => c.charCodeAt(0));
-                const hex = (arr) => arr.map(b => b.toString(16).padStart(2, '0')).join('');
-                const guid = hex(bytes.slice(0,4).reverse()) + '-' + hex(bytes.slice(4,6).reverse()) + '-' + hex(bytes.slice(6,8).reverse()) + '-' + hex(bytes.slice(8,10)) + '-' + hex(bytes.slice(10,16));
-                return `https://${host}/personal/${user}/_layouts/15/embed.aspx?UniqueId=${guid}`;
+                return `https://${url.host}/personal/${pathMatch[1]}/_layouts/15/download.aspx?share=${pathMatch[2]}`;
             } catch(e) {
                 return null;
             }
         }
 
-        // --- MODAL VIDEO (YOUTUBE + SHAREPOINT EMBED) ---
+        // --- MODAL VIDEO (YOUTUBE + SHAREPOINT HTML5) ---
         function openVideoModal(videoId, type, url, previewImg, previewTitle) {
             if(videoId === 'PLACEHOLDER') {
                 alert("Este video es un ejemplo y está actualmente en producción.");
@@ -1288,29 +1264,35 @@
             }
 
             const modal = document.getElementById('video-modal');
-            const player = document.getElementById('main-video-player');
+            const iframe = document.getElementById('main-video-player');
+            const video = document.getElementById('sharepoint-video-player');
             const externalBtn = document.getElementById('video-external-btn');
-            const preview = document.getElementById('onedrive-preview');
 
-            // Siempre ocultar preview de OneDrive (ya no se usa)
-            preview.classList.add('hidden');
+            // Reset ambos reproductores
+            iframe.src = '';
+            video.src = '';
+            iframe.classList.remove('hidden');
+            video.classList.add('hidden');
 
             if (type === 'onedrive' && url) {
-                // Intentar embed directo de SharePoint (como YouTube)
-                const embedUrl = getSharePointEmbedUrl(url);
-                if (embedUrl) {
-                    player.src = embedUrl;
+                const downloadUrl = getSharePointDownloadUrl(url);
+                if (downloadUrl) {
+                    // Reproducir con <video> HTML5 (descarga directa)
+                    iframe.classList.add('hidden');
+                    video.classList.remove('hidden');
+                    video.src = downloadUrl;
+                    video.load();
                 } else {
-                    // Fallback: abrir en nueva pestaña si no se pudo generar embed
+                    // Presentaciones u otros: abrir en nueva pestaña
                     window.open(url, '_blank');
                     return;
                 }
                 externalBtn.href = url;
-                externalBtn.innerHTML = '<i class="ph-bold ph-microsoft-teams-logo text-lg"></i> <span class="hidden md:inline">Abrir en SharePoint</span>';
+                externalBtn.innerHTML = '<i class="ph-bold ph-arrow-square-out text-lg"></i> <span class="hidden md:inline">Abrir en SharePoint</span>';
                 externalBtn.className = 'absolute top-6 left-6 md:top-10 md:left-10 text-white bg-blue-600/90 hover:bg-blue-600 px-4 py-2 rounded-full text-sm font-bold transition-colors flex items-center gap-2 z-50 shadow-lg border border-blue-500';
             } else {
-                // YouTube embed directo
-                player.src = "https://www.youtube.com/embed/" + videoId + "?autoplay=1&rel=0";
+                // YouTube embed directo en iframe
+                iframe.src = "https://www.youtube.com/embed/" + videoId + "?autoplay=1&rel=0";
                 externalBtn.href = "https://www.youtube.com/watch?v=" + videoId;
                 externalBtn.innerHTML = '<i class="ph-bold ph-youtube-logo text-lg"></i> <span class="hidden md:inline">Ver en YouTube</span>';
                 externalBtn.className = 'absolute top-6 left-6 md:top-10 md:left-10 text-white bg-red-600/90 hover:bg-red-600 px-4 py-2 rounded-full text-sm font-bold transition-colors flex items-center gap-2 z-50 shadow-lg border border-red-500';
@@ -1323,10 +1305,10 @@
 
         function closeVideoModal() {
             const modal = document.getElementById('video-modal');
-            const player = document.getElementById('main-video-player');
-            const preview = document.getElementById('onedrive-preview');
+            const iframe = document.getElementById('main-video-player');
+            const video = document.getElementById('sharepoint-video-player');
             modal.classList.add('opacity-0');
-            setTimeout(() => { modal.classList.add('hidden'); player.src = ''; preview.classList.add('hidden'); document.body.style.overflow = 'auto'; }, 300);
+            setTimeout(() => { modal.classList.add('hidden'); iframe.src = ''; video.pause(); video.src = ''; document.body.style.overflow = 'auto'; }, 300);
         }
 
         // --- MODAL IMAGEN (ORGANIGRAMAS, POLITICAS Y CUMPLEAÑOS) ---
