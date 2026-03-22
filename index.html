@@ -802,7 +802,7 @@
                 <div class="inline-flex items-center bg-white rounded-full shadow-sm hover:scale-105 transition-transform cursor-default border border-gray-100 p-0.5" title="Número de visitas al portal">
                     <img src="https://api.visitorbadge.io/api/visitors?path=inge_interno.portal&label=Visitas&labelColor=%231a1a1a&countColor=%2300b4d8" alt="Contador de visitas" class="rounded-full" />
                 </div>
-                <p class="text-[11px] text-gray-400 font-medium">Última actualización: 18/03/2026 06:45 PM</p>
+                <p class="text-[11px] text-gray-400 font-medium">Última actualización: 21/03/2026 11:00 AM</p>
             </div>
 
         </div>
@@ -893,6 +893,31 @@
 
         // --- DATOS: VIDEOS CAPACITACIÓN (PERSONAL GENERAL) ---
         const videosCapacitacion = [
+            // POWER BI (más reciente, va primero)
+            {
+                id: 104, title: "Aprende Power BI - Parte 1",
+                folder: "Aprende Power BI", badge: "Power BI",
+                desc: "Introducción a Power BI: conecta fuentes de datos y crea tus primeras visualizaciones.",
+                image: "https://img.youtube.com/vi/NKdhkRUPwKk/hqdefault.jpg", videoId: "NKdhkRUPwKk"
+            },
+            {
+                id: 105, title: "Aprende Power BI - Parte 2",
+                folder: "Aprende Power BI", badge: "Power BI",
+                desc: "Transformación de datos con Power Query y construcción de dashboards interactivos.",
+                image: "https://img.youtube.com/vi/dXB3B2gzN3k/hqdefault.jpg", videoId: "dXB3B2gzN3k"
+            },
+            {
+                id: 106, title: "Aprende Power BI - Parte 3",
+                folder: "Aprende Power BI", badge: "Power BI",
+                desc: "Funciones DAX, filtros avanzados y diseño de reportes profesionales.",
+                image: "https://img.youtube.com/vi/BLROIf-GjB8/hqdefault.jpg", videoId: "BLROIf-GjB8"
+            },
+            {
+                id: 107, title: "Aprende Power BI - Parte 4",
+                folder: "Aprende Power BI", badge: "Power BI",
+                desc: "Publica y comparte reportes en Power BI Service para toda la organización.",
+                image: "https://img.youtube.com/vi/zSbKj380UPw/hqdefault.jpg", videoId: "zSbKj380UPw"
+            },
             {
                 id: 101, title: "5S: La Metodología Esencial para la Organización y Eficiencia",
                 folder: "Sección de Seguridad y Organización", badge: "Productividad",
@@ -1140,8 +1165,8 @@
                         <h3 class="text-xl md:text-2xl font-extrabold text-gray-800 mb-6 flex items-center gap-3 border-b border-gray-300 pb-4">
                             <i class="ph-fill ph-bookmark-simple text-inge-cyan text-3xl"></i> ${folderName}
                         </h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            ${videos.map(video => createVideoCardHTML(video)).join('')}
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                            ${videos.map(video => createVideoCardHTML(video, true)).join('')}
                         </div>
                     </div>
                 `;
@@ -1154,22 +1179,29 @@
             container.innerHTML = videosVisitantes.map(video => createVideoCardHTML(video)).join('');
         }
 
-        function createVideoCardHTML(video) {
+        function createVideoCardHTML(video, compact = false) {
             let action = video.type === 'onedrive'
                 ? `openVideoModal(null, 'onedrive', '${video.url}', '${video.image}', '${video.title.replace(/'/g, "\\'")}')`
                 : `openVideoModal('${video.videoId}')`;
 
+            const imgH = compact ? 'h-40' : 'h-56';
+            const pad = compact ? 'p-4' : 'p-6';
+            const titleSize = compact ? 'text-base' : 'text-lg';
+            const descSize = compact ? 'text-xs' : 'text-sm';
+            const mbBadge = compact ? 'mb-2' : 'mb-3';
+            const mbTitle = compact ? 'mb-1' : 'mb-2';
+
             return `
                 <div class="video-card bg-white rounded-2xl overflow-hidden cursor-pointer group border border-gray-200 flex flex-col h-full" onclick="${action}">
-                    <div class="relative h-56 w-full bg-black overflow-hidden flex items-center justify-center flex-shrink-0">
+                    <div class="relative ${imgH} w-full bg-black overflow-hidden flex items-center justify-center flex-shrink-0">
                         <img src="${video.image}" alt="${video.title}" class="video-thumbnail w-full h-full object-cover transition-all duration-300" loading="lazy">
                         <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
                         <i class="ph-fill ph-play-circle absolute text-white text-6xl opacity-90 group-hover:scale-110 transition-all duration-300 drop-shadow-md"></i>
                     </div>
-                    <div class="p-6 flex flex-col flex-grow">
-                        <span class="inline-block px-3 py-1 bg-blue-50 text-blue-600 text-[10px] uppercase tracking-wider font-bold rounded-full mb-3 w-max">${video.badge}</span>
-                        <h4 class="text-lg font-bold text-gray-900 mb-2 leading-snug">${video.title}</h4>
-                        <p class="text-gray-500 text-sm leading-relaxed mt-auto">${video.desc}</p>
+                    <div class="${pad} flex flex-col flex-grow">
+                        <span class="inline-block px-3 py-1 bg-blue-50 text-blue-600 text-[10px] uppercase tracking-wider font-bold rounded-full ${mbBadge} w-max">${video.badge}</span>
+                        <h4 class="${titleSize} font-bold text-gray-900 ${mbTitle} leading-snug">${video.title}</h4>
+                        <p class="text-gray-500 ${descSize} leading-relaxed mt-auto">${video.desc}</p>
                     </div>
                 </div>
             `;
