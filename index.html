@@ -182,156 +182,172 @@
     <main class="flex-grow w-full flex flex-col relative z-10">
 
         <!-- ================= VISTA: INICIO ================= -->
-        <section id="view-inicio" class="fade-in flex flex-col justify-center min-h-[85vh]">
-            <div class="relative bg-[#f8fafc] overflow-hidden pt-16 md:pt-24 pb-12 flex-grow flex items-center">
-                
+        <section id="view-inicio" class="fade-in flex flex-col justify-center">
+            <div class="relative bg-[#f8fafc] overflow-hidden pt-8 md:pt-12 pb-6 flex-grow flex items-center">
+
                 <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
                     <div class="absolute inset-0 opacity-[0.04]" style="background-image: radial-gradient(#000 1px, transparent 1px); background-size: 24px 24px;"></div>
-                    <div class="absolute -top-32 -right-32 w-[500px] h-[500px] bg-inge-cyan/20 rounded-full blur-[100px] mix-blend-multiply"></div>
-                    <div class="absolute top-1/2 -left-32 w-[400px] h-[400px] bg-inge-magenta/10 rounded-full blur-[100px] mix-blend-multiply"></div>
-                    <div class="absolute -bottom-32 right-1/4 w-[400px] h-[400px] bg-orange-400/10 rounded-full blur-[100px] mix-blend-multiply"></div>
+                    <div class="absolute -top-16 -right-16 w-[300px] h-[300px] bg-inge-cyan/20 rounded-full blur-[80px] mix-blend-multiply"></div>
+                    <div class="absolute top-1/2 -left-16 w-[250px] h-[250px] bg-inge-magenta/10 rounded-full blur-[80px] mix-blend-multiply"></div>
                 </div>
-                
-                <div class="relative max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center gap-12 z-10 w-full">
+
+                <div class="relative max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center gap-6 md:gap-10 z-10 w-full">
                     <!-- Texto -->
-                    <div class="w-full md:w-1/2 space-y-6">
-                        <div class="inline-flex items-center gap-2 bg-white border border-gray-200 text-gray-700 font-bold px-4 py-2 rounded-full text-sm mb-2 shadow-sm slide-up" style="animation-delay: 0.1s;">
-                            <span class="w-2.5 h-2.5 rounded-full bg-inge-green animate-pulse"></span> Sistema Interno Activo
+                    <div class="w-full md:w-3/5 space-y-3">
+                        <div class="inline-flex items-center gap-2 bg-white border border-gray-200 text-gray-700 font-bold px-3 py-1.5 rounded-full text-xs shadow-sm slide-up" style="animation-delay: 0.1s;">
+                            <span class="w-2 h-2 rounded-full bg-inge-green animate-pulse"></span> Sistema Interno Activo
                         </div>
-                        <h1 class="text-5xl md:text-7xl font-extrabold text-gray-900 leading-[1.1] slide-up tracking-tight" style="animation-delay: 0.2s;">
-                            Portal <br>
-                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-inge-cyan via-blue-600 to-inge-magenta">Institucional</span>
+                        <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900 leading-tight slide-up tracking-tight" style="animation-delay: 0.2s;">
+                            Portal <span class="text-transparent bg-clip-text bg-gradient-to-r from-inge-cyan via-blue-600 to-inge-magenta">Institucional</span>
                         </h1>
-                        <p class="text-gray-600 text-lg md:text-xl max-w-lg slide-up leading-relaxed" style="animation-delay: 0.3s;">
-                            Descubre herramientas exclusivas, capacitaciones en línea y toda la información corporativa del ecosistema Ingeproductos.
+                        <p class="text-gray-500 text-sm md:text-base max-w-lg slide-up leading-relaxed" style="animation-delay: 0.3s;">
+                            Herramientas exclusivas, capacitaciones y toda la información corporativa de Ingeproductos.
                         </p>
-                        
-                        <!-- Botones de Acción Principales -->
-                        <div class="flex flex-wrap gap-4 pt-6 slide-up" style="animation-delay: 0.4s;">
-                            <div class="flex flex-col items-center gap-2">
-                                <button onclick="switchView('personal-hub')" class="bg-gray-900 text-white px-6 py-3.5 rounded-xl font-bold hover:bg-gray-800 hover:shadow-xl hover:-translate-y-1 transition-all flex items-center gap-2">
+
+                        <!-- Botones en UNA SOLA LÍNEA -->
+                        <div class="flex flex-row items-start gap-3 pt-2 slide-up" style="animation-delay: 0.4s;">
+                            <div class="flex flex-col items-center gap-1">
+                                <button onclick="switchView('personal-hub')" class="bg-gray-900 text-white px-4 py-2.5 rounded-xl font-bold text-sm hover:bg-gray-800 hover:shadow-lg hover:-translate-y-0.5 transition-all flex items-center gap-1.5 cursor-pointer whitespace-nowrap">
                                     Soy Colaborador <i class="ph-bold ph-users"></i>
                                 </button>
                                 <span class="counter-badge"><i class="ph-bold ph-eye"></i> <span class="count-num" id="count-colaborador">0</span> visitas</span>
                             </div>
-                            <div class="flex flex-col items-center gap-2">
-                                <button onclick="switchView('directivos-login')" class="bg-white text-gray-900 border border-gray-200 shadow-sm px-6 py-3.5 rounded-xl font-bold hover:border-inge-cyan hover:text-inge-cyan hover:shadow-md hover:-translate-y-1 transition-all flex items-center gap-2">
+                            <div class="flex flex-col items-center gap-1">
+                                <button onclick="switchView('directivos-login')" class="bg-white text-gray-900 border border-gray-200 shadow-sm px-4 py-2.5 rounded-xl font-bold text-sm hover:border-inge-cyan hover:text-inge-cyan hover:shadow-md hover:-translate-y-0.5 transition-all flex items-center gap-1.5 cursor-pointer whitespace-nowrap">
                                     Soy Directivo <i class="ph-bold ph-lock-key"></i>
                                 </button>
                                 <span class="counter-badge"><i class="ph-bold ph-eye"></i> <span class="count-num" id="count-directivos">0</span> visitas</span>
                             </div>
-                            <div class="flex flex-col items-center gap-2">
-                                <button onclick="switchView('visitante-hub')" class="bg-blue-50 text-blue-700 border border-blue-200 shadow-sm px-6 py-3.5 rounded-xl font-bold hover:bg-blue-100 hover:shadow-md hover:-translate-y-1 transition-all flex items-center gap-2">
+                            <div class="flex flex-col items-center gap-1">
+                                <button onclick="switchView('visitante-hub')" class="bg-blue-50 text-blue-700 border border-blue-200 shadow-sm px-4 py-2.5 rounded-xl font-bold text-sm hover:bg-blue-100 hover:shadow-md hover:-translate-y-0.5 transition-all flex items-center gap-1.5 cursor-pointer whitespace-nowrap">
                                     Soy Visitante <i class="ph-bold ph-handshake"></i>
                                 </button>
                                 <span class="counter-badge"><i class="ph-bold ph-eye"></i> <span class="count-num" id="count-visitantes">0</span> visitas</span>
                             </div>
                         </div>
                     </div>
-                    
-                    <!-- Imagen Premium de Portín -->
-                    <div class="w-full md:w-1/2 flex justify-center slide-up relative" style="animation-delay: 0.5s;">
-                        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-72 h-72 md:w-[450px] md:h-[450px] bg-gradient-to-tr from-white/60 to-white/10 rounded-full border border-white/60 backdrop-blur-sm shadow-2xl"></div>
-                        <img src="https://i.imgur.com/BXZiUkz.png" alt="DJ Portín" class="w-64 md:w-[380px] object-contain drop-shadow-2xl float-animation relative z-10">
+
+                    <!-- Portín compacto -->
+                    <div class="hidden md:flex w-2/5 justify-center slide-up relative" style="animation-delay: 0.5s;">
+                        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-44 h-44 bg-gradient-to-tr from-white/60 to-white/10 rounded-full border border-white/60 backdrop-blur-sm shadow-xl"></div>
+                        <img src="https://i.imgur.com/BXZiUkz.png" alt="DJ Portín" class="w-40 md:w-52 object-contain drop-shadow-xl float-animation relative z-10">
                     </div>
                 </div>
             </div>
 
-            <!-- SECCIÓN DE VIDEOS DESTACADOS (ACTUALIZADA) -->
-            <div class="relative bg-[#f8fafc] pb-8 w-full z-20 mt-4 md:-mt-8 scroll-reveal">
-                <div class="max-w-6xl mx-auto px-4 slide-up" style="animation-delay: 0.6s;">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        
-                        <!-- 1. Video Corporativo (OneDrive) -->
-                        <div class="bg-white p-5 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:shadow-[0_20px_50px_rgb(0,0,0,0.12)] border border-gray-100 flex flex-col gap-5 cursor-pointer group hover:-translate-y-2 transition-all duration-300" onclick="openVideoModal(null, 'onedrive', 'https://ingeproductos-my.sharepoint.com/:v:/g/personal/xavier_rojas_ingeproductos_com_co/IQCoTkeHHp9iS5ZjC3aR7bo8Adz93k5bzNSzCgPFCHcbfeY?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&e=lKeTCb', 'https://i.imgur.com/ahiQnhw.jpeg', 'Video Corporativo Ingeproductos')">
-                            <div class="w-full h-56 md:h-64 rounded-2xl overflow-hidden relative flex-shrink-0 shadow-inner">
-                                <!-- Portada: Gradiente corporativo con logo e identidad -->
-                                <div class="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-inge-cyan/80 z-0"></div>
-                                <div class="absolute inset-0 opacity-[0.06] z-[1]" style="background-image: radial-gradient(#fff 1px, transparent 1px); background-size: 20px 20px;"></div>
-                                <div class="absolute inset-0 flex flex-col items-center justify-center z-[2] p-6">
-                                    <img src="https://i.imgur.com/ahiQnhw.jpeg" alt="Logo Ingeproductos" class="w-16 h-16 rounded-xl shadow-lg mb-3 border-2 border-white/20 group-hover:scale-110 transition-transform duration-500" loading="lazy">
-                                    <span class="text-white/90 text-sm font-bold tracking-widest uppercase mb-1">Ingeproductos</span>
-                                    <span class="text-inge-cyan text-xs font-semibold tracking-wider">Video Corporativo Oficial</span>
-                                </div>
-                                <div class="absolute inset-0 flex items-center justify-center z-[3]">
-                                    <div class="w-16 h-16 bg-white/15 backdrop-blur-sm border border-white/30 text-white rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(0,180,216,0.4)] group-hover:bg-inge-cyan group-hover:border-inge-cyan group-hover:scale-110 transition-all duration-300">
-                                        <i class="ph-fill ph-play text-3xl ml-1 text-white drop-shadow-md"></i>
+            <!-- CARRUSEL DESTACADOS: VIDEOS + AVISOS -->
+            <div class="relative bg-[#f8fafc] pb-10 w-full z-20 mt-2 scroll-reveal">
+                <div class="max-w-4xl mx-auto px-4 slide-up" style="animation-delay: 0.6s;">
+
+                    <div class="relative"
+                         onmouseenter="stopFeaturedAutoPlay()"
+                         onmouseleave="startFeaturedAutoPlay()">
+
+                        <!-- Track deslizante -->
+                        <div class="overflow-hidden rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-gray-100">
+                            <div class="flex transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]" id="featured-track">
+
+                                <!-- SLIDE 1: Video Corporativo -->
+                                <div class="flex-shrink-0 w-full">
+                                    <div class="bg-white flex flex-col md:flex-row cursor-pointer group min-h-[220px]"
+                                         onclick="openVideoModal(null, 'onedrive', 'https://ingeproductos-my.sharepoint.com/:v:/g/personal/xavier_rojas_ingeproductos_com_co/IQCoTkeHHp9iS5ZjC3aR7bo8Adz93k5bzNSzCgPFCHcbfeY?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&e=lKeTCb', 'https://i.imgur.com/ahiQnhw.jpeg', 'Video Corporativo Ingeproductos')">
+                                        <div class="w-full md:w-2/5 h-52 md:h-auto relative overflow-hidden flex-shrink-0">
+                                            <div class="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-inge-cyan/80"></div>
+                                            <div class="absolute inset-0 opacity-[0.06]" style="background-image: radial-gradient(#fff 1px, transparent 1px); background-size: 20px 20px;"></div>
+                                            <div class="absolute inset-0 flex flex-col items-center justify-center z-[2] p-6">
+                                                <img src="https://i.imgur.com/ahiQnhw.jpeg" alt="Logo Ingeproductos" class="w-14 h-14 rounded-xl shadow-lg mb-2 border-2 border-white/20 group-hover:scale-110 transition-transform duration-500" loading="lazy">
+                                                <span class="text-white/90 text-xs font-bold tracking-widest uppercase mb-1">Ingeproductos</span>
+                                                <span class="text-inge-cyan text-[11px] font-semibold">Video Corporativo Oficial</span>
+                                            </div>
+                                            <div class="absolute inset-0 flex items-center justify-center z-[3]">
+                                                <div class="w-14 h-14 bg-white/15 backdrop-blur-sm border border-white/30 rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(0,180,216,0.4)] group-hover:bg-inge-cyan group-hover:border-inge-cyan group-hover:scale-110 transition-all duration-300">
+                                                    <i class="ph-fill ph-play text-2xl ml-0.5 text-white"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="flex-1 p-6 md:p-8 flex flex-col justify-center">
+                                            <span class="inline-block px-3 py-1 bg-pink-50 text-inge-magenta text-[10px] font-bold uppercase tracking-widest rounded-full mb-3 w-max">Conoce Nuestra Empresa</span>
+                                            <h3 class="text-xl md:text-2xl font-extrabold text-gray-900 mb-2 leading-tight">Video Corporativo</h3>
+                                            <p class="text-gray-500 text-sm leading-relaxed mb-5">Descubre nuestra esencia, valores y el compromiso que nos impulsa día a día en Ingeproductos.</p>
+                                            <span class="inline-flex items-center gap-2 text-inge-cyan font-bold text-sm group-hover:translate-x-2 transition-transform mt-auto">
+                                                Ver Video <i class="ph-bold ph-arrow-right"></i>
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="px-2 pb-2 text-center md:text-left flex flex-col flex-grow">
-                                <span class="inline-block px-3 py-1 bg-pink-50 text-inge-magenta text-[10px] font-bold uppercase tracking-widest rounded-full mb-3 w-max mx-auto md:mx-0">Conoce Nuestra Empresa</span>
-                                <h3 class="text-xl md:text-2xl font-extrabold text-gray-900 mb-2 leading-tight">Video Corporativo</h3>
-                                <p class="text-gray-500 text-sm leading-relaxed mb-4 flex-grow">
-                                    Descubre nuestra esencia, valores y el compromiso que nos impulsa día a día en Ingeproductos.
-                                </p>
-                                <span class="inline-flex items-center gap-2 text-inge-cyan font-bold text-sm group-hover:translate-x-2 transition-transform justify-center md:justify-start mt-auto">
-                                    Ver Video <i class="ph-bold ph-arrow-right"></i>
-                                </span>
+
+                                <!-- SLIDE 2: Cómo lo hacemos -->
+                                <div class="flex-shrink-0 w-full">
+                                    <div class="bg-white flex flex-col md:flex-row cursor-pointer group min-h-[220px]"
+                                         onclick="openVideoModal(null, 'onedrive', 'https://ingeproductos-my.sharepoint.com/:v:/g/personal/xavier_rojas_ingeproductos_com_co/IQD3MeOIi6_DTZcaSA7kzy-0AZsoO_JKksc6kCJ7zJdf1Yo?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&e=DRHy5Z', 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1200&q=80', '¿Cómo lo hacemos?')">
+                                        <div class="w-full md:w-2/5 h-52 md:h-auto relative overflow-hidden flex-shrink-0">
+                                            <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80" alt="Proceso Productivo" class="w-full h-full object-cover group-hover:scale-105 transition-all duration-500" loading="lazy">
+                                            <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                                                <div class="w-14 h-14 bg-white/20 backdrop-blur-sm border border-white/50 rounded-full flex items-center justify-center group-hover:bg-gray-900 group-hover:border-gray-900 group-hover:scale-110 transition-all duration-300">
+                                                    <i class="ph-bold ph-arrow-up-right text-2xl text-white"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="flex-1 p-6 md:p-8 flex flex-col justify-center">
+                                            <span class="inline-block px-3 py-1 bg-blue-50 text-blue-600 text-[10px] font-bold uppercase tracking-widest rounded-full mb-3 w-max">Nuestra Operación</span>
+                                            <h3 class="text-xl md:text-2xl font-extrabold text-gray-900 mb-2 leading-tight">¿Cómo lo hacemos?</h3>
+                                            <p class="text-gray-500 text-sm leading-relaxed mb-5">Acompaña nuestro proceso productivo paso a paso: desde la inyección de plástico hasta el despacho final.</p>
+                                            <span class="inline-flex items-center gap-2 text-gray-800 font-bold text-sm group-hover:translate-x-2 transition-transform mt-auto">
+                                                Abrir Video <i class="ph-bold ph-arrow-right"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- SLIDE 3: Cumpleaños -->
+                                <div class="flex-shrink-0 w-full">
+                                    <div class="bg-white flex flex-col md:flex-row cursor-pointer group min-h-[220px]"
+                                         onclick="openImageModal('https://i.imgur.com/Joo1f8x.jpeg', 'Cumpleaños de Marzo')">
+                                        <div class="w-full md:w-2/5 h-52 md:h-auto relative overflow-hidden flex-shrink-0">
+                                            <img src="https://i.imgur.com/Joo1f8x.jpeg" alt="Cumpleaños de Marzo" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500" loading="lazy">
+                                            <div class="absolute inset-0 bg-black/10 group-hover:bg-black/30 transition-colors flex items-center justify-center">
+                                                <div class="w-14 h-14 bg-white/20 backdrop-blur-sm border border-white/50 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300">
+                                                    <i class="ph-bold ph-arrows-out-simple text-xl text-white"></i>
+                                                </div>
+                                            </div>
+                                            <div class="absolute top-3 left-3 bg-pink-500 text-white px-2 py-1 rounded-md shadow-md flex items-center gap-1 text-[10px] font-bold uppercase">
+                                                <i class="ph-fill ph-cake"></i> Nuevo
+                                            </div>
+                                        </div>
+                                        <div class="flex-1 p-6 md:p-8 flex flex-col justify-center">
+                                            <span class="inline-block px-3 py-1 bg-pink-50 text-pink-500 text-[10px] font-bold uppercase tracking-widest rounded-full mb-3 w-max">Celebraciones</span>
+                                            <h3 class="text-xl md:text-2xl font-extrabold text-gray-900 mb-2 leading-tight">Cumpleaños de Marzo</h3>
+                                            <p class="text-gray-500 text-sm leading-relaxed mb-5">Conoce a los compañeros que celebran su día especial este mes. ¡Felicítalos!</p>
+                                            <span class="inline-flex items-center gap-2 text-inge-cyan font-bold text-sm group-hover:translate-x-2 transition-transform mt-auto">
+                                                Ver y Descargar <i class="ph-bold ph-arrow-right"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
 
-                        <!-- 2. Cómo lo hacemos (OneDrive) -->
-                        <div class="bg-white p-5 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:shadow-[0_20px_50px_rgb(0,0,0,0.12)] border border-gray-100 flex flex-col gap-5 cursor-pointer group hover:-translate-y-2 transition-all duration-300" onclick="openVideoModal(null, 'onedrive', 'https://ingeproductos-my.sharepoint.com/:v:/g/personal/xavier_rojas_ingeproductos_com_co/IQD3MeOIi6_DTZcaSA7kzy-0AZsoO_JKksc6kCJ7zJdf1Yo?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&e=DRHy5Z', 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1200&q=80', '¿Cómo lo hacemos?')">
-                            <div class="w-full h-56 md:h-64 bg-gray-100 rounded-2xl overflow-hidden relative flex-shrink-0 shadow-inner">
-                                <!-- Portada: Línea de producción de plásticos -->
-                                <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1200&q=80" alt="Proceso Productivo" class="w-full h-full object-cover group-hover:scale-105 group-hover:opacity-70 opacity-95 transition-all duration-500" loading="lazy">
-                                
-                                <div class="absolute inset-0 flex items-center justify-center">
-                                    <div class="w-16 h-16 bg-white/20 backdrop-blur-sm border border-white/50 text-white rounded-full flex items-center justify-center shadow-lg group-hover:bg-gray-900 group-hover:border-gray-900 group-hover:scale-110 transition-all duration-300">
-                                        <i class="ph-bold ph-arrow-up-right text-3xl text-white drop-shadow-md"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="px-2 pb-2 text-center md:text-left flex flex-col flex-grow">
-                                <span class="inline-block px-3 py-1 bg-blue-50 text-blue-600 text-[10px] font-bold uppercase tracking-widest rounded-full mb-3 w-max mx-auto md:mx-0">Nuestra Operación</span>
-                                <h3 class="text-xl md:text-2xl font-extrabold text-gray-900 mb-2 leading-tight">¿Cómo lo hacemos?</h3>
-                                <p class="text-gray-500 text-sm leading-relaxed mb-4 flex-grow">
-                                    Acompaña nuestro proceso productivo paso a paso: desde la inyección de plástico, pasando por el ensamble, hasta el despacho final.
-                                </p>
-                                <span class="inline-flex items-center gap-2 text-gray-800 font-bold text-sm group-hover:translate-x-2 transition-transform justify-center md:justify-start mt-auto">
-                                    Abrir Video <i class="ph-bold ph-arrow-right"></i>
-                                </span>
-                            </div>
+                        <!-- Flecha izquierda -->
+                        <button onclick="prevFeaturedSlide()" aria-label="Anterior"
+                            class="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 bg-white/95 backdrop-blur-sm border border-gray-200 rounded-full shadow-md flex items-center justify-center hover:bg-inge-cyan hover:text-white hover:border-inge-cyan transition-all duration-200 cursor-pointer">
+                            <i class="ph-bold ph-caret-left text-base"></i>
+                        </button>
+
+                        <!-- Flecha derecha -->
+                        <button onclick="nextFeaturedSlide()" aria-label="Siguiente"
+                            class="absolute right-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 bg-white/95 backdrop-blur-sm border border-gray-200 rounded-full shadow-md flex items-center justify-center hover:bg-inge-cyan hover:text-white hover:border-inge-cyan transition-all duration-200 cursor-pointer">
+                            <i class="ph-bold ph-caret-right text-base"></i>
+                        </button>
+
+                        <!-- Indicadores (dots) -->
+                        <div class="flex justify-center items-center gap-2 mt-4" id="featured-dots">
+                            <button onclick="goToFeaturedSlide(0)" class="featured-dot h-2 rounded-full bg-inge-cyan w-6 transition-all duration-300 cursor-pointer"></button>
+                            <button onclick="goToFeaturedSlide(1)" class="featured-dot h-2 rounded-full bg-gray-300 w-2 transition-all duration-300 cursor-pointer"></button>
+                            <button onclick="goToFeaturedSlide(2)" class="featured-dot h-2 rounded-full bg-gray-300 w-2 transition-all duration-300 cursor-pointer"></button>
                         </div>
-
                     </div>
-                </div>
-            </div>
 
-            <!-- CARTELERA DE AVISOS (CUMPLEAÑOS) -->
-            <div class="relative bg-[#f8fafc] pb-16 w-full z-20 scroll-reveal">
-                <div class="max-w-5xl mx-auto px-4 slide-up" style="animation-delay: 0.7s;">
-                    <div class="flex items-center gap-3 mb-6">
-                        <i class="ph-fill ph-push-pin text-2xl text-inge-magenta"></i>
-                        <h3 class="text-2xl font-bold text-gray-900">Cartelera de Avisos</h3>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        
-                        <!-- Aviso Cumpleaños -->
-                        <div class="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_15px_40px_rgb(0,0,0,0.08)] transition-all group flex flex-col cursor-pointer" onclick="openImageModal('https://i.imgur.com/Joo1f8x.jpeg', 'Cumpleaños de Marzo')">
-                            <div class="h-48 bg-gray-100 relative overflow-hidden flex items-center justify-center">
-                                <img src="https://i.imgur.com/Joo1f8x.jpeg" alt="Miniatura Cumpleaños" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500 opacity-95">
-                                
-                                <div class="absolute inset-0 bg-black/10 group-hover:bg-black/30 transition-colors flex items-center justify-center">
-                                    <div class="w-12 h-12 bg-white/20 backdrop-blur-sm border border-white/50 text-white rounded-full flex items-center justify-center shadow-lg opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
-                                        <i class="ph-bold ph-arrows-out-simple text-xl"></i>
-                                    </div>
-                                </div>
-                                
-                                <div class="absolute top-3 left-3 bg-pink-500 text-white px-2 py-1 rounded-md shadow-md flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest">
-                                    <i class="ph-fill ph-cake"></i> Nuevo
-                                </div>
-                            </div>
-                            <div class="p-5 flex-grow flex flex-col">
-                                <span class="text-[10px] font-bold uppercase tracking-widest text-pink-500 mb-2">Celebraciones</span>
-                                <h4 class="text-lg font-bold text-gray-900 mb-2">Cumpleaños de Marzo 🎂</h4>
-                                <p class="text-sm text-gray-500 mb-4">Conoce a los compañeros que celebran su día especial este mes.</p>
-                                <span class="mt-auto text-inge-cyan text-sm font-bold flex items-center gap-1 group-hover:translate-x-1 transition-transform">Ver y Descargar <i class="ph-bold ph-arrow-right"></i></span>
-                            </div>
-                        </div>
-
-                    </div>
                 </div>
             </div>
 
@@ -1406,6 +1422,34 @@
             setTimeout(() => { modal.classList.add('hidden'); viewer.src = ''; document.body.style.overflow = 'auto'; }, 300); 
         }
 
+        // --- CARRUSEL DESTACADOS ---
+        let featuredCurrent = 0;
+        const featuredTotal = 3;
+        let featuredTimer;
+
+        function goToFeaturedSlide(n) {
+            featuredCurrent = (n + featuredTotal) % featuredTotal;
+            document.getElementById('featured-track').style.transform = `translateX(-${featuredCurrent * 100}%)`;
+            document.querySelectorAll('.featured-dot').forEach((dot, i) => {
+                if (i === featuredCurrent) {
+                    dot.classList.add('bg-inge-cyan', 'w-6');
+                    dot.classList.remove('bg-gray-300', 'w-2');
+                } else {
+                    dot.classList.remove('bg-inge-cyan', 'w-6');
+                    dot.classList.add('bg-gray-300', 'w-2');
+                }
+            });
+        }
+
+        function nextFeaturedSlide() { goToFeaturedSlide(featuredCurrent + 1); }
+        function prevFeaturedSlide() { goToFeaturedSlide(featuredCurrent - 1); }
+
+        function startFeaturedAutoPlay() {
+            stopFeaturedAutoPlay();
+            featuredTimer = setInterval(nextFeaturedSlide, 4000);
+        }
+        function stopFeaturedAutoPlay() { clearInterval(featuredTimer); }
+
         // --- CONTADORES DE ACCESO POR SECCIÓN ---
         function trackSectionVisit(section) {
             const key = 'inge_visits_' + section;
@@ -1459,6 +1503,7 @@
             switchView('inicio');
             initScrollEffects();
             updateCounterDisplay();
+            startFeaturedAutoPlay();
 
             document.getElementById('video-modal').addEventListener('click', function(e) {
                 if(e.target === this) closeVideoModal();
