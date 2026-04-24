@@ -370,9 +370,10 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     <!-- FLIP CARD 0: Reglamento Interno -->
-                    <div class="flip-card slide-up" style="animation-delay: 0.05s;" onclick="alert('Reglamento Interno en desarrollo.')">
+                    <div class="flip-card slide-up" style="animation-delay: 0.05s;" onclick="window.open('assets/docs/reglamento-interno-v2026.pdf', '_blank')">
                         <div class="flip-card-inner">
-                            <div class="flip-card-front">
+                            <div class="flip-card-front" style="border: 2px solid #e0e7ff;">
+                                <div class="absolute -top-3 -right-3 bg-inge-green text-white text-[10px] font-bold px-3 py-1 rounded-full shadow-md z-10 animate-bounce">ACTIVO</div>
                                 <div class="w-16 h-16 bg-indigo-50 text-indigo-500 rounded-full flex items-center justify-center text-3xl mb-4">
                                     <i class="ph-fill ph-scales"></i>
                                 </div>
@@ -380,9 +381,10 @@
                                 <p class="text-gray-500 text-xs">Normas y convivencia</p>
                             </div>
                             <div class="flip-card-back" style="background: linear-gradient(135deg, #6366f1, #4338ca);">
-                                <i class="ph-fill ph-book-open-text text-4xl mb-3 opacity-80"></i>
+                                <i class="ph-fill ph-file-pdf text-4xl mb-3 opacity-80"></i>
                                 <h3 class="text-base font-bold mb-2">Reglamento</h3>
-                                <p class="text-xs text-indigo-50">Consulta las normas internas de la compañía.</p>
+                                <p class="text-xs text-indigo-50 mb-3">Versión 2026. Click para abrir el PDF.</p>
+                                <span class="bg-white text-indigo-700 px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">Abrir PDF <i class="ph-bold ph-arrow-square-out"></i></span>
                             </div>
                         </div>
                     </div>
@@ -426,9 +428,10 @@
                     </div>
 
                     <!-- FLIP CARD 3: Estructura Organizacional -->
-                    <div class="flip-card slide-up" style="animation-delay: 0.3s;" onclick="openImageModal('https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1000&q=80', 'Estructura Organizacional')">
+                    <div class="flip-card slide-up" style="animation-delay: 0.3s;" onclick="openOrganigrama()">
                         <div class="flip-card-inner">
-                            <div class="flip-card-front">
+                            <div class="flip-card-front" style="border: 2px solid #ffedd5;">
+                                <div class="absolute -top-3 -right-3 bg-inge-green text-white text-[10px] font-bold px-3 py-1 rounded-full shadow-md z-10 animate-bounce">ACTIVO</div>
                                 <div class="w-16 h-16 bg-orange-50 text-orange-500 rounded-full flex items-center justify-center text-3xl mb-4">
                                     <i class="ph-fill ph-tree-structure"></i>
                                 </div>
@@ -438,8 +441,8 @@
                             <div class="flip-card-back" style="background: linear-gradient(135deg, #f97316, #ea580c);">
                                 <i class="ph-fill ph-users-three text-4xl mb-3 opacity-80"></i>
                                 <h3 class="text-base font-bold mb-2">Nuestro Equipo</h3>
-                                <p class="text-xs text-orange-50 mb-3">Visualiza el mapa jerárquico de la compañía.</p>
-                                <span class="bg-white text-orange-700 px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">Ver Imagen <i class="ph-bold ph-eye"></i></span>
+                                <p class="text-xs text-orange-50 mb-3">Mapa jerárquico interactivo en vivo.</p>
+                                <span class="bg-white text-orange-700 px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">Explorar <i class="ph-bold ph-arrow-right"></i></span>
                             </div>
                         </div>
                     </div>
@@ -854,7 +857,7 @@
                 <div class="inline-flex items-center bg-white rounded-full shadow-sm hover:scale-105 transition-transform cursor-default border border-gray-100 p-0.5" title="Número de visitas al portal">
                     <img src="https://api.visitorbadge.io/api/visitors?path=inge_interno.portal&label=Visitas&labelColor=%231a1a1a&countColor=%2300b4d8" alt="Contador de visitas" class="rounded-full" />
                 </div>
-                <p class="text-[11px] text-gray-400 font-medium">Última actualización: 8/04/2026 9:50 AM</p>
+                <p class="text-[11px] text-gray-400 font-medium">Última actualización: 24/04/2026 2:56 PM</p>
             </div>
 
         </div>
@@ -909,6 +912,32 @@
                 <a id="image-extra-link" href="#" target="_blank" class="hidden bg-green-500 text-white px-6 py-2.5 rounded-xl text-sm font-bold hover:bg-green-600 transition-colors flex items-center gap-2 shadow-sm">
                     <i class="ph-bold ph-link text-lg"></i> <span id="image-extra-text">Abrir Enlace</span>
                 </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= MODAL ORGANIGRAMA (árbol plegable en vivo desde el ERP) ================= -->
+    <div id="organigrama-modal" class="fixed inset-0 z-[100] bg-gray-900/95 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300 flex items-center justify-center p-2 md:p-6">
+        <button onclick="closeOrganigrama()" class="absolute top-4 right-4 md:top-6 md:right-6 text-white hover:text-red-400 transition p-2 bg-white/10 rounded-full hover:bg-white/20 z-50 shadow-lg">
+            <i class="ph-bold ph-x text-3xl"></i>
+        </button>
+        <div class="w-full max-w-5xl max-h-[92vh] rounded-2xl overflow-hidden shadow-2xl slide-up bg-white flex flex-col">
+            <div class="px-5 py-4 border-b border-gray-100 flex items-center gap-3 flex-shrink-0" style="background: linear-gradient(135deg,#f97316 0%,#ea580c 100%); color:#fff;">
+                <i class="ph-fill ph-tree-structure text-2xl"></i>
+                <div class="flex-1">
+                    <h3 class="text-lg font-bold">Organigrama Ingeproductos</h3>
+                    <p class="text-xs opacity-90">Estructura jerárquica en vivo. Click en cada nodo para expandir/colapsar.</p>
+                </div>
+                <div class="hidden md:flex items-center gap-2">
+                    <button onclick="expandirTodoOrg(true)" class="bg-white/20 hover:bg-white/30 text-white text-xs font-bold px-3 py-1.5 rounded-lg transition"><i class="ph-bold ph-arrows-out mr-1"></i>Expandir</button>
+                    <button onclick="expandirTodoOrg(false)" class="bg-white/20 hover:bg-white/30 text-white text-xs font-bold px-3 py-1.5 rounded-lg transition"><i class="ph-bold ph-arrows-in mr-1"></i>Colapsar</button>
+                </div>
+            </div>
+            <div id="organigrama-body" class="flex-1 overflow-y-auto p-4 md:p-6 bg-gray-50">
+                <div class="text-center text-gray-500 py-12">
+                    <i class="ph-duotone ph-spinner-gap text-5xl animate-spin block mb-3"></i>
+                    Cargando organigrama…
+                </div>
             </div>
         </div>
     </div>
@@ -1455,7 +1484,139 @@
             const modal = document.getElementById('image-modal');
             const viewer = document.getElementById('main-image-viewer');
             modal.classList.add('opacity-0');
-            setTimeout(() => { modal.classList.add('hidden'); viewer.src = ''; document.body.style.overflow = 'auto'; }, 300); 
+            setTimeout(() => { modal.classList.add('hidden'); viewer.src = ''; document.body.style.overflow = 'auto'; }, 300);
+        }
+
+        // ===================================================================
+        // ORGANIGRAMA EN VIVO — consume /api/v1/organigrama/publico del ERP
+        // Se actualiza automaticamente cuando cambia en la web-app (Ingeportal).
+        // ===================================================================
+        const ORG_API_URL = 'https://ingeproductos.app/api/v1/organigrama/publico';
+        const ORG_STATIC_BASE = 'https://ingeproductos.app';
+        let orgTreeCache = null;
+        const orgExpandedSet = new Set(); // ids expandidos
+
+        async function openOrganigrama() {
+            const modal = document.getElementById('organigrama-modal');
+            const body = document.getElementById('organigrama-body');
+            modal.classList.remove('hidden');
+            setTimeout(() => modal.classList.remove('opacity-0'), 10);
+            document.body.style.overflow = 'hidden';
+            if (!orgTreeCache) {
+                try {
+                    const r = await fetch(ORG_API_URL, { cache: 'no-store' });
+                    if (!r.ok) throw new Error('HTTP ' + r.status);
+                    orgTreeCache = await r.json();
+                    // Expandir el primer nivel por defecto
+                    orgExpandedSet.clear();
+                    (orgTreeCache || []).forEach(n => orgExpandedSet.add(n.id));
+                } catch (err) {
+                    body.innerHTML = `<div class="text-center py-12"><i class="ph-bold ph-warning-circle text-5xl text-red-400 block mb-3"></i><p class="text-red-600 font-bold">No se pudo cargar el organigrama</p><p class="text-gray-500 text-sm mt-2">${err.message}</p><button onclick="orgTreeCache=null; openOrganigrama()" class="mt-4 bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-lg"><i class="ph-bold ph-arrow-clockwise mr-1"></i> Reintentar</button></div>`;
+                    return;
+                }
+            }
+            renderOrganigrama();
+        }
+
+        function closeOrganigrama() {
+            const modal = document.getElementById('organigrama-modal');
+            modal.classList.add('opacity-0');
+            setTimeout(() => { modal.classList.add('hidden'); document.body.style.overflow = 'auto'; }, 300);
+        }
+
+        function expandirTodoOrg(expandir) {
+            const recorrer = (lista) => {
+                (lista || []).forEach(n => {
+                    if (expandir) orgExpandedSet.add(n.id);
+                    else orgExpandedSet.delete(n.id);
+                    recorrer(n.children);
+                });
+            };
+            recorrer(orgTreeCache || []);
+            renderOrganigrama();
+        }
+
+        function toggleOrgNode(id) {
+            if (orgExpandedSet.has(id)) orgExpandedSet.delete(id);
+            else orgExpandedSet.add(id);
+            renderOrganigrama();
+        }
+
+        // Paleta de colores por area (consistente con los cards del portal)
+        const ORG_AREA_COLORS = {
+            'Gerencia':    { bg: '#fef3c7', border: '#fcd34d', text: '#92400e' },
+            'Produccion':  { bg: '#dbeafe', border: '#93c5fd', text: '#1e40af' },
+            'Producción':  { bg: '#dbeafe', border: '#93c5fd', text: '#1e40af' },
+            'Calidad':     { bg: '#dcfce7', border: '#86efac', text: '#166534' },
+            'Comercial':   { bg: '#fce7f3', border: '#f9a8d4', text: '#9d174d' },
+            'Ventas':      { bg: '#fce7f3', border: '#f9a8d4', text: '#9d174d' },
+            'Administrativa': { bg: '#e0e7ff', border: '#a5b4fc', text: '#3730a3' },
+            'Administracion': { bg: '#e0e7ff', border: '#a5b4fc', text: '#3730a3' },
+            'Contabilidad':   { bg: '#e0e7ff', border: '#a5b4fc', text: '#3730a3' },
+            'Mantenimiento':  { bg: '#fef3c7', border: '#fcd34d', text: '#92400e' },
+            'Logistica':   { bg: '#cffafe', border: '#67e8f9', text: '#155e75' },
+            'Logística':   { bg: '#cffafe', border: '#67e8f9', text: '#155e75' },
+            'General':     { bg: '#f3f4f6', border: '#d1d5db', text: '#374151' },
+        };
+        const ORG_DEFAULT_COLOR = { bg: '#f3f4f6', border: '#d1d5db', text: '#374151' };
+
+        function renderOrgNodo(nodo, nivel) {
+            const hasChildren = (nodo.children || []).length > 0;
+            const expanded = orgExpandedSet.has(nodo.id);
+            const col = ORG_AREA_COLORS[nodo.area] || ORG_DEFAULT_COLOR;
+            const fotos = nodo.fotos || [];
+            const fotoUrl = fotos.length > 0
+                ? (fotos[0].startsWith('http') ? fotos[0] : ORG_STATIC_BASE + fotos[0])
+                : null;
+            const iniciales = (nodo.persona_nombre || nodo.nombre || '?').trim().split(/\s+/).slice(0, 2).map(p => p[0]).join('').toUpperCase();
+
+            const padLeft = nivel === 0 ? 0 : Math.min(nivel, 5) * 18;
+            const line = nivel > 0
+                ? `<span class="absolute -left-3 top-1/2 w-3 h-px bg-gray-300"></span><span class="absolute -left-3 top-0 w-px bg-gray-300" style="height:50%"></span>`
+                : '';
+
+            return `
+                <div class="relative mb-2" style="margin-left:${padLeft}px">
+                    <div class="relative flex items-center gap-3 p-3 rounded-xl shadow-sm hover:shadow-md transition cursor-pointer bg-white border-l-4"
+                         style="border-left-color:${col.border}"
+                         onclick="${hasChildren ? `toggleOrgNode(${nodo.id})` : ''}">
+                        ${line}
+                        <div class="flex-shrink-0 w-11 h-11 rounded-full flex items-center justify-center overflow-hidden ring-2 ring-white shadow"
+                             style="background:${col.bg}; color:${col.text}">
+                            ${fotoUrl
+                                ? `<img src="${fotoUrl}" alt="${nodo.persona_nombre || nodo.nombre}" class="w-full h-full object-cover" onerror="this.style.display='none'; this.parentNode.textContent='${iniciales}'">`
+                                : `<span class="text-sm font-bold">${iniciales}</span>`}
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="font-bold text-sm text-gray-900 truncate">${escapeHtml(nodo.nombre)}</div>
+                            ${nodo.persona_nombre ? `<div class="text-xs text-gray-600 truncate">${escapeHtml(nodo.persona_nombre)}</div>` : ''}
+                            <div class="flex items-center gap-2 mt-0.5">
+                                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full" style="background:${col.bg}; color:${col.text}">${escapeHtml(nodo.area || 'General')}</span>
+                                ${nodo.cantidad ? `<span class="text-[10px] text-gray-500"><i class="ph-bold ph-users"></i> ${escapeHtml(nodo.cantidad)}</span>` : ''}
+                            </div>
+                        </div>
+                        ${hasChildren
+                            ? `<div class="flex-shrink-0 w-7 h-7 flex items-center justify-center text-gray-500 bg-gray-100 rounded-full transition-transform ${expanded ? 'rotate-90' : ''}"><i class="ph-bold ph-caret-right text-sm"></i></div>`
+                            : ''}
+                    </div>
+                    ${hasChildren && expanded
+                        ? `<div class="mt-2 ml-5 pl-3 border-l-2 border-dashed border-gray-200">${nodo.children.map(c => renderOrgNodo(c, nivel + 1)).join('')}</div>`
+                        : ''}
+                </div>
+            `;
+        }
+
+        function escapeHtml(s) {
+            return String(s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+        }
+
+        function renderOrganigrama() {
+            const body = document.getElementById('organigrama-body');
+            if (!orgTreeCache || orgTreeCache.length === 0) {
+                body.innerHTML = '<div class="text-center py-12 text-gray-500">No hay nodos en el organigrama.</div>';
+                return;
+            }
+            body.innerHTML = orgTreeCache.map(n => renderOrgNodo(n, 0)).join('');
         }
 
         // --- CARRUSEL DESTACADOS ---
@@ -1550,14 +1711,19 @@
             document.getElementById('image-modal').addEventListener('click', function(e) {
                 if(e.target === this) closeImageModal();
             });
+            document.getElementById('organigrama-modal').addEventListener('click', function(e) {
+                if(e.target === this) closeOrganigrama();
+            });
 
             // Cerrar modales con tecla Escape
             document.addEventListener('keydown', function(e) {
                 if(e.key === 'Escape') {
                     const videoModal = document.getElementById('video-modal');
                     const imageModal = document.getElementById('image-modal');
+                    const orgModal   = document.getElementById('organigrama-modal');
                     if(!videoModal.classList.contains('hidden')) closeVideoModal();
                     if(!imageModal.classList.contains('hidden')) closeImageModal();
+                    if(!orgModal.classList.contains('hidden')) closeOrganigrama();
                 }
             });
 
