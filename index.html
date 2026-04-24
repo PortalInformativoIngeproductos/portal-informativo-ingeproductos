@@ -859,7 +859,7 @@
                 <div class="inline-flex items-center bg-white rounded-full shadow-sm hover:scale-105 transition-transform cursor-default border border-gray-100 p-0.5" title="Número de visitas al portal">
                     <img src="https://api.visitorbadge.io/api/visitors?path=inge_interno.portal&label=Visitas&labelColor=%231a1a1a&countColor=%2300b4d8" alt="Contador de visitas" class="rounded-full" />
                 </div>
-                <p class="text-[11px] text-gray-400 font-medium">Última actualización: 24/04/2026 3:45 PM</p>
+                <p class="text-[11px] text-gray-400 font-medium">Última actualización: 24/04/2026 3:54 PM</p>
             </div>
 
         </div>
@@ -1655,7 +1655,25 @@
 
         function orgFotoUrl(f) {
             if (!f) return null;
-            return f.startsWith('http') ? f : ORG_STATIC_BASE + f;
+            // Las fotos vienen como data:image/...;base64 (embebidas) o URL absoluta
+            if (f.startsWith('data:') || f.startsWith('http')) return f;
+            return ORG_STATIC_BASE + f;
+        }
+
+        // Abrir una foto del organigrama (evita meter el data URI enorme en el onclick).
+        function openOrgFoto(nodeId, idx) {
+            const find = (list) => {
+                for (const n of (list || [])) {
+                    if (n.id === nodeId) return n;
+                    const f = find(n.children);
+                    if (f) return f;
+                }
+                return null;
+            };
+            const n = find(orgTreeCache);
+            if (!n) return;
+            const fotos = (n.fotos || []).map(orgFotoUrl).filter(Boolean);
+            if (fotos[idx]) openImageModal(fotos[idx], n.persona_nombre || n.nombre);
         }
 
         // Card (igual a NodeCard de Organigrama.jsx): 240px ancho, foto circular con
@@ -1663,13 +1681,12 @@
         function renderOrgCard(nodo, expanded, hasChildren) {
             const c = ORG_AREAS[nodo.area] || ORG_DEFAULT_AREA;
             const fotos = (nodo.fotos || []).map(orgFotoUrl).filter(Boolean);
-            const nombreSafe = escapeHtml(nodo.persona_nombre || nodo.nombre || '');
 
             let avatarHtml = '';
             if (fotos.length === 1) {
-                avatarHtml = `<img src="${fotos[0]}" alt="${escapeHtml(nodo.nombre)}" referrerpolicy="no-referrer" loading="lazy" onclick="event.stopPropagation(); openImageModal('${fotos[0]}', '${nombreSafe}')" style="width:42px; height:42px; border-radius:50%; object-fit:cover; flex-shrink:0; border:2px solid ${c.chipText}; box-shadow:0 2px 6px rgba(15,23,42,0.18); cursor:zoom-in; transition:transform .25s ease" onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'" onerror="this.style.display='none'">`;
+                avatarHtml = `<img src="${fotos[0]}" alt="${escapeHtml(nodo.nombre)}" loading="lazy" onclick="event.stopPropagation(); openOrgFoto(${nodo.id}, 0)" style="width:42px; height:42px; border-radius:50%; object-fit:cover; flex-shrink:0; border:2px solid ${c.chipText}; box-shadow:0 2px 6px rgba(15,23,42,0.18); cursor:zoom-in; transition:transform .25s ease" onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'" onerror="this.style.display='none'">`;
             } else if (fotos.length > 1) {
-                const visibles = fotos.slice(0, 3).map(f => `<img src="${f}" referrerpolicy="no-referrer" loading="lazy" onclick="event.stopPropagation(); openImageModal('${f}', '${nombreSafe}')" style="width:30px; height:30px; border-radius:50%; object-fit:cover; border:2px solid ${c.chipText}; box-shadow:0 1px 3px rgba(15,23,42,0.2); cursor:zoom-in" onerror="this.style.display='none'">`).join('');
+                const visibles = fotos.slice(0, 3).map((f, i) => `<img src="${f}" loading="lazy" onclick="event.stopPropagation(); openOrgFoto(${nodo.id}, ${i})" style="width:30px; height:30px; border-radius:50%; object-fit:cover; border:2px solid ${c.chipText}; box-shadow:0 1px 3px rgba(15,23,42,0.2); cursor:zoom-in" onerror="this.style.display='none'">`).join('');
                 const extra = fotos.length > 3 ? `<div style="width:30px; height:30px; border-radius:50%; background:${c.grad}; color:#fff; font-size:10px; font-weight:800; display:flex; align-items:center; justify-content:center; border:2px solid ${c.chipText}; box-shadow:0 1px 3px rgba(15,23,42,0.2)">+${fotos.length - 3}</div>` : '';
                 avatarHtml = `<div style="display:flex; align-items:center; gap:3px; flex-shrink:0">${visibles}${extra}</div>`;
             }
