@@ -859,7 +859,7 @@
                 <div class="inline-flex items-center bg-white rounded-full shadow-sm hover:scale-105 transition-transform cursor-default border border-gray-100 p-0.5" title="Número de visitas al portal">
                     <img src="https://api.visitorbadge.io/api/visitors?path=inge_interno.portal&label=Visitas&labelColor=%231a1a1a&countColor=%2300b4d8" alt="Contador de visitas" class="rounded-full" />
                 </div>
-                <p class="text-[11px] text-gray-400 font-medium">Última actualización: 24/04/2026 3:35 PM</p>
+                <p class="text-[11px] text-gray-400 font-medium">Última actualización: 24/04/2026 3:45 PM</p>
             </div>
 
         </div>
@@ -923,19 +923,19 @@
         <button onclick="closeOrganigrama()" class="absolute top-4 right-4 md:top-6 md:right-6 text-white hover:text-red-400 transition p-2 bg-white/10 rounded-full hover:bg-white/20 z-50 shadow-lg">
             <i class="ph-bold ph-x text-3xl"></i>
         </button>
-        <div class="w-full max-w-5xl max-h-[92vh] rounded-2xl overflow-hidden shadow-2xl slide-up bg-white flex flex-col">
+        <div class="w-full max-w-7xl max-h-[95vh] rounded-2xl overflow-hidden shadow-2xl slide-up bg-white flex flex-col">
             <div class="px-5 py-4 border-b border-gray-100 flex items-center gap-3 flex-shrink-0" style="background: linear-gradient(135deg,#f97316 0%,#ea580c 100%); color:#fff;">
                 <i class="ph-fill ph-tree-structure text-2xl"></i>
                 <div class="flex-1">
                     <h3 class="text-lg font-bold">Organigrama Ingeproductos</h3>
-                    <p class="text-xs opacity-90">Estructura jerárquica en vivo. Click en cada nodo para expandir/colapsar.</p>
+                    <p class="text-xs opacity-90">Estructura jerárquica en vivo. Click en cada nodo para expandir/colapsar. Arrastra para navegar.</p>
                 </div>
                 <div class="hidden md:flex items-center gap-2">
                     <button onclick="expandirTodoOrg(true)" class="bg-white/20 hover:bg-white/30 text-white text-xs font-bold px-3 py-1.5 rounded-lg transition"><i class="ph-bold ph-arrows-out mr-1"></i>Expandir</button>
                     <button onclick="expandirTodoOrg(false)" class="bg-white/20 hover:bg-white/30 text-white text-xs font-bold px-3 py-1.5 rounded-lg transition"><i class="ph-bold ph-arrows-in mr-1"></i>Colapsar</button>
                 </div>
             </div>
-            <div id="organigrama-body" class="flex-1 overflow-y-auto p-4 md:p-6 bg-gray-50">
+            <div id="organigrama-body" class="flex-1 overflow-auto p-4 md:p-6 bg-gray-50" style="cursor:grab">
                 <div class="text-center text-gray-500 py-12">
                     <i class="ph-duotone ph-spinner-gap text-5xl animate-spin block mb-3"></i>
                     Cargando organigrama…
@@ -1658,50 +1658,84 @@
             return f.startsWith('http') ? f : ORG_STATIC_BASE + f;
         }
 
-        function renderOrgNodo(nodo, nivel) {
-            const hasChildren = (nodo.children || []).length > 0;
-            const expanded = orgExpandedSet.has(nodo.id);
+        // Card (igual a NodeCard de Organigrama.jsx): 240px ancho, foto circular con
+        // borde del color del area, nombre cargo + persona + chips. Sin foto = sin circulo.
+        function renderOrgCard(nodo, expanded, hasChildren) {
             const c = ORG_AREAS[nodo.area] || ORG_DEFAULT_AREA;
             const fotos = (nodo.fotos || []).map(orgFotoUrl).filter(Boolean);
-            const iniciales = (nodo.persona_nombre || nodo.nombre || '?').trim().split(/\s+/).slice(0, 2).map(p => p[0]).join('').toUpperCase();
+            const nombreSafe = escapeHtml(nodo.persona_nombre || nodo.nombre || '');
 
-            // Avatar: 1 foto -> 42px circular con borde color area; varias -> 3 mini circulares + contador
-            // Sin foto -> NO mostrar avatar (solo texto del cargo, sin circulo de iniciales/color)
             let avatarHtml = '';
             if (fotos.length === 1) {
-                avatarHtml = `<img src="${fotos[0]}" alt="${escapeHtml(nodo.nombre)}" referrerpolicy="no-referrer" loading="lazy" onclick="event.stopPropagation(); openImageModal('${fotos[0]}', '${escapeHtml(nodo.persona_nombre || nodo.nombre)}')" style="width:42px; height:42px; border-radius:50%; object-fit:cover; flex-shrink:0; border:2px solid ${c.chipText}; box-shadow:0 2px 6px rgba(15,23,42,0.18); cursor:zoom-in" onerror="this.style.display='none'">`;
+                avatarHtml = `<img src="${fotos[0]}" alt="${escapeHtml(nodo.nombre)}" referrerpolicy="no-referrer" loading="lazy" onclick="event.stopPropagation(); openImageModal('${fotos[0]}', '${nombreSafe}')" style="width:42px; height:42px; border-radius:50%; object-fit:cover; flex-shrink:0; border:2px solid ${c.chipText}; box-shadow:0 2px 6px rgba(15,23,42,0.18); cursor:zoom-in; transition:transform .25s ease" onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'" onerror="this.style.display='none'">`;
             } else if (fotos.length > 1) {
-                const visibles = fotos.slice(0, 3).map(f => `<img src="${f}" referrerpolicy="no-referrer" loading="lazy" onclick="event.stopPropagation(); openImageModal('${f}', '${escapeHtml(nodo.persona_nombre || nodo.nombre)}')" style="width:30px; height:30px; border-radius:50%; object-fit:cover; border:2px solid ${c.chipText}; box-shadow:0 1px 3px rgba(15,23,42,0.2); cursor:zoom-in" onerror="this.style.display='none'">`).join('');
+                const visibles = fotos.slice(0, 3).map(f => `<img src="${f}" referrerpolicy="no-referrer" loading="lazy" onclick="event.stopPropagation(); openImageModal('${f}', '${nombreSafe}')" style="width:30px; height:30px; border-radius:50%; object-fit:cover; border:2px solid ${c.chipText}; box-shadow:0 1px 3px rgba(15,23,42,0.2); cursor:zoom-in" onerror="this.style.display='none'">`).join('');
                 const extra = fotos.length > 3 ? `<div style="width:30px; height:30px; border-radius:50%; background:${c.grad}; color:#fff; font-size:10px; font-weight:800; display:flex; align-items:center; justify-content:center; border:2px solid ${c.chipText}; box-shadow:0 1px 3px rgba(15,23,42,0.2)">+${fotos.length - 3}</div>` : '';
                 avatarHtml = `<div style="display:flex; align-items:center; gap:3px; flex-shrink:0">${visibles}${extra}</div>`;
             }
 
-            const padLeft = nivel === 0 ? 0 : Math.min(nivel, 6) * 16;
             const cantidadChip = nodo.cantidad
-                ? `<span style="font-size:9px; font-weight:600; padding:2px 7px; border-radius:4px; background:#f1f5f9; color:#64748b; white-space:nowrap">${escapeHtml(nodo.cantidad)}</span>`
+                ? `<span style="font-size:9px; font-weight:600; padding:2px 6px; border-radius:4px; background:#f1f5f9; color:#64748b; white-space:nowrap">${escapeHtml(nodo.cantidad)}</span>`
+                : '';
+
+            const expandBtn = hasChildren
+                ? `<button onclick="event.stopPropagation(); toggleOrgNode(${nodo.id})" title="${expanded ? 'Contraer' : 'Desplegar'}" style="position:absolute; right:-12px; top:50%; transform:translateY(-50%); width:24px; height:24px; border-radius:50%; background:#fff; border:1px solid #cbd5e1; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 6px rgba(15,23,42,0.18); color:#64748b; font-size:14px; font-weight:700; line-height:1; z-index:20; cursor:pointer; padding:0">${expanded ? '−' : '+'}</button>`
                 : '';
 
             return `
-                <div class="mb-2" style="margin-left:${padLeft}px">
-                    <div class="flex items-center gap-3 rounded-xl bg-white shadow-sm hover:shadow-md transition-all"
-                         style="border:1px solid rgba(226,232,240,0.8); padding:10px; ${hasChildren ? 'cursor:pointer' : ''}; position:relative"
-                         ${hasChildren ? `onclick="toggleOrgNode(${nodo.id})"` : ''}>
-                        ${avatarHtml}
-                        <div style="display:flex; flex-direction:column; overflow:hidden; flex:1; min-width:0">
-                            <h3 style="font-size:13px; font-weight:700; color:#1e293b; line-height:1.25; margin:0; word-break:break-word" title="${escapeHtml(nodo.nombre)}">${escapeHtml(nodo.nombre)}</h3>
-                            ${nodo.persona_nombre ? `<span style="font-size:11px; color:#64748b; font-weight:500; margin-top:2px">${escapeHtml(nodo.persona_nombre)}</span>` : ''}
-                            <div style="display:flex; align-items:center; gap:4px; margin-top:5px; flex-wrap:wrap">
-                                <span style="font-size:9px; font-weight:700; padding:2px 7px; border-radius:4px; background:${c.chipBg}; color:${c.chipText}; text-transform:uppercase; letter-spacing:0.06em">${escapeHtml(nodo.area || 'General')}</span>
-                                ${cantidadChip}
-                            </div>
+                <div onclick="${hasChildren ? `toggleOrgNode(${nodo.id})` : ''}" style="width:240px; background:#fff; border:1px solid rgba(226,232,240,0.8); border-radius:12px; box-shadow:0 1px 2px rgba(15,23,42,0.06); padding:10px; display:flex; align-items:center; gap:12px; transition:all 0.3s ease; position:relative; ${hasChildren ? 'cursor:pointer' : ''}">
+                    ${avatarHtml}
+                    <div style="display:flex; flex-direction:column; overflow:hidden; width:100%">
+                        <h3 style="font-size:12px; font-weight:700; color:#1e293b; line-height:1.25; margin:0; word-break:break-word" title="${escapeHtml(nodo.nombre)}">${escapeHtml(nodo.nombre)}</h3>
+                        ${nodo.persona_nombre ? `<span style="font-size:10px; color:#64748b; font-weight:500; margin-top:2px">${escapeHtml(nodo.persona_nombre)}</span>` : ''}
+                        <div style="display:flex; align-items:center; gap:4px; margin-top:4px; flex-wrap:wrap">
+                            <span style="font-size:8.5px; font-weight:700; padding:2px 6px; border-radius:4px; background:${c.chipBg}; color:${c.chipText}; text-transform:uppercase; letter-spacing:0.06em">${escapeHtml(nodo.area || 'General')}</span>
+                            ${cantidadChip}
                         </div>
-                        ${hasChildren
-                            ? `<button onclick="event.stopPropagation(); toggleOrgNode(${nodo.id})" style="width:26px; height:26px; border-radius:50%; background:#fff; border:1px solid #cbd5e1; box-shadow:0 2px 6px rgba(15,23,42,0.15); color:#64748b; font-size:14px; font-weight:700; cursor:pointer; flex-shrink:0; display:flex; align-items:center; justify-content:center; padding:0">${expanded ? '−' : '+'}</button>`
-                            : ''}
                     </div>
-                    ${hasChildren && expanded
-                        ? `<div style="margin-top:8px; margin-left:12px; padding-left:10px; border-left:2px dashed #e2e8f0">${nodo.children.map(ch => renderOrgNodo(ch, nivel + 1)).join('')}</div>`
-                        : ''}
+                    ${expandBtn}
+                </div>
+            `;
+        }
+
+        // TreeNode recursivo horizontal (igual a Organigrama.jsx TreeNode):
+        // izquierda = card + linea saliente; derecha = lista vertical de hijos con lineas conectoras
+        function renderOrgNodo(nodo) {
+            const hasChildren = (nodo.children || []).length > 0;
+            const expanded = orgExpandedSet.has(nodo.id);
+            const isOnly = hasChildren && nodo.children.length === 1;
+            const card = renderOrgCard(nodo, expanded, hasChildren);
+
+            let children = '';
+            if (hasChildren && expanded) {
+                const items = nodo.children.map((child, i) => {
+                    const isFirst = i === 0;
+                    const isLast  = i === nodo.children.length - 1;
+                    const busLine = !isOnly
+                        ? `<div style="position:absolute; left:0; width:2px; background:#cbd5e1; top:${isFirst ? '50%' : '0'}; bottom:${isLast ? '50%' : '0'}"></div>`
+                        : '';
+                    return `
+                        <div style="display:flex; align-items:stretch; position:relative; padding-left:32px; padding-top:6px; padding-bottom:6px">
+                            <div style="position:absolute; left:0; top:50%; width:32px; height:2px; background:#cbd5e1; transform:translateY(-1px)"></div>
+                            ${busLine}
+                            ${renderOrgNodo(child)}
+                        </div>
+                    `;
+                }).join('');
+                children = `<div style="display:flex; flex-direction:column; justify-content:center; position:relative">${items}</div>`;
+            }
+
+            const exitLine = hasChildren && expanded
+                ? `<div style="position:absolute; right:0; top:50%; width:32px; height:2px; background:#cbd5e1; transform:translateY(-1px)"></div>`
+                : '';
+
+            return `
+                <div style="display:flex; align-items:stretch">
+                    <div style="display:flex; flex-direction:column; justify-content:center; position:relative; padding-right:${hasChildren && expanded ? 32 : 16}px">
+                        <div style="position:relative; display:flex; align-items:center; z-index:2">${card}</div>
+                        ${exitLine}
+                    </div>
+                    ${children}
                 </div>
             `;
         }
@@ -1716,7 +1750,49 @@
                 body.innerHTML = '<div class="text-center py-12 text-gray-500">No hay nodos en el organigrama.</div>';
                 return;
             }
-            body.innerHTML = orgTreeCache.map(n => renderOrgNodo(n, 0)).join('');
+            // Wrapper con min-width para que el arbol horizontal pueda ser mas ancho que el viewport
+            body.innerHTML = `<div style="display:inline-block; padding:12px 32px 12px 8px">${orgTreeCache.map(n => renderOrgNodo(n)).join('')}</div>`;
+            setupOrgDragPan();
+        }
+
+        // Drag-pan: permite arrastrar el arbol con el mouse (igual a la web-app)
+        function setupOrgDragPan() {
+            const body = document.getElementById('organigrama-body');
+            if (!body || body._dragSetup) return;
+            body._dragSetup = true;
+            let active = false, sx = 0, sy = 0, sl = 0, st = 0, moved = false, pid = null;
+            body.addEventListener('pointerdown', e => {
+                if (e.button !== 0) return;
+                // No iniciar drag si se clickea sobre foto o boton
+                if (e.target.tagName === 'IMG' || e.target.tagName === 'BUTTON' || e.target.closest('button')) return;
+                try { body.setPointerCapture(e.pointerId); } catch(_) {}
+                active = true; moved = false; pid = e.pointerId;
+                sx = e.clientX; sy = e.clientY; sl = body.scrollLeft; st = body.scrollTop;
+                body.style.cursor = 'grabbing';
+            });
+            body.addEventListener('pointermove', e => {
+                if (!active) return;
+                const dx = e.clientX - sx, dy = e.clientY - sy;
+                if (!moved && (Math.abs(dx) > 5 || Math.abs(dy) > 5)) moved = true;
+                if (moved) {
+                    body.scrollLeft = sl - dx;
+                    body.scrollTop  = st - dy;
+                }
+            });
+            const end = () => {
+                if (!active) return;
+                active = false;
+                try { body.releasePointerCapture(pid); } catch(_) {}
+                body.style.cursor = 'grab';
+                // Bloquear el siguiente click si hubo drag real
+                if (moved) {
+                    const blocker = (ev) => { ev.stopPropagation(); ev.preventDefault(); body.removeEventListener('click', blocker, true); };
+                    body.addEventListener('click', blocker, true);
+                }
+            };
+            body.addEventListener('pointerup', end);
+            body.addEventListener('pointercancel', end);
+            body.addEventListener('pointerleave', end);
         }
 
         // ===================================================================
