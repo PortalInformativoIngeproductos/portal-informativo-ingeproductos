@@ -859,7 +859,7 @@
                 <div class="inline-flex items-center bg-white rounded-full shadow-sm hover:scale-105 transition-transform cursor-default border border-gray-100 p-0.5" title="Número de visitas al portal">
                     <img src="https://api.visitorbadge.io/api/visitors?path=inge_interno.portal&label=Visitas&labelColor=%231a1a1a&countColor=%2300b4d8" alt="Contador de visitas" class="rounded-full" />
                 </div>
-                <p class="text-[11px] text-gray-400 font-medium">Última actualización: 24/04/2026 3:21 PM</p>
+                <p class="text-[11px] text-gray-400 font-medium">Última actualización: 24/04/2026 3:35 PM</p>
             </div>
 
         </div>
@@ -1666,15 +1666,14 @@
             const iniciales = (nodo.persona_nombre || nodo.nombre || '?').trim().split(/\s+/).slice(0, 2).map(p => p[0]).join('').toUpperCase();
 
             // Avatar: 1 foto -> 42px circular con borde color area; varias -> 3 mini circulares + contador
-            let avatarHtml;
+            // Sin foto -> NO mostrar avatar (solo texto del cargo, sin circulo de iniciales/color)
+            let avatarHtml = '';
             if (fotos.length === 1) {
-                avatarHtml = `<img src="${fotos[0]}" alt="${escapeHtml(nodo.nombre)}" onclick="event.stopPropagation(); openImageModal('${fotos[0]}', '${escapeHtml(nodo.persona_nombre || nodo.nombre)}')" style="width:42px; height:42px; border-radius:50%; object-fit:cover; flex-shrink:0; border:2px solid ${c.chipText}; box-shadow:0 2px 6px rgba(15,23,42,0.18); cursor:zoom-in" onerror="this.outerHTML='<div style=\\'width:42px;height:42px;border-radius:50%;flex-shrink:0;background:${c.grad};color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;border:2px solid ${c.chipText}\\'>${iniciales}</div>'">`;
+                avatarHtml = `<img src="${fotos[0]}" alt="${escapeHtml(nodo.nombre)}" referrerpolicy="no-referrer" loading="lazy" onclick="event.stopPropagation(); openImageModal('${fotos[0]}', '${escapeHtml(nodo.persona_nombre || nodo.nombre)}')" style="width:42px; height:42px; border-radius:50%; object-fit:cover; flex-shrink:0; border:2px solid ${c.chipText}; box-shadow:0 2px 6px rgba(15,23,42,0.18); cursor:zoom-in" onerror="this.style.display='none'">`;
             } else if (fotos.length > 1) {
-                const visibles = fotos.slice(0, 3).map(f => `<img src="${f}" onclick="event.stopPropagation(); openImageModal('${f}', '${escapeHtml(nodo.persona_nombre || nodo.nombre)}')" style="width:30px; height:30px; border-radius:50%; object-fit:cover; border:2px solid ${c.chipText}; box-shadow:0 1px 3px rgba(15,23,42,0.2); cursor:zoom-in">`).join('');
+                const visibles = fotos.slice(0, 3).map(f => `<img src="${f}" referrerpolicy="no-referrer" loading="lazy" onclick="event.stopPropagation(); openImageModal('${f}', '${escapeHtml(nodo.persona_nombre || nodo.nombre)}')" style="width:30px; height:30px; border-radius:50%; object-fit:cover; border:2px solid ${c.chipText}; box-shadow:0 1px 3px rgba(15,23,42,0.2); cursor:zoom-in" onerror="this.style.display='none'">`).join('');
                 const extra = fotos.length > 3 ? `<div style="width:30px; height:30px; border-radius:50%; background:${c.grad}; color:#fff; font-size:10px; font-weight:800; display:flex; align-items:center; justify-content:center; border:2px solid ${c.chipText}; box-shadow:0 1px 3px rgba(15,23,42,0.2)">+${fotos.length - 3}</div>` : '';
                 avatarHtml = `<div style="display:flex; align-items:center; gap:3px; flex-shrink:0">${visibles}${extra}</div>`;
-            } else {
-                avatarHtml = `<div style="width:42px; height:42px; border-radius:50%; flex-shrink:0; background:${c.grad}; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px; box-shadow:0 2px 6px rgba(15,23,42,0.18); border:2px solid rgba(255,255,255,0.6)">${iniciales}</div>`;
             }
 
             const padLeft = nivel === 0 ? 0 : Math.min(nivel, 6) * 16;
