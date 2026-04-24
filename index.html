@@ -486,19 +486,21 @@
                     </div>
 
                     <!-- FLIP CARD 6: Beneficios -->
-                    <div class="flip-card slide-up" style="animation-delay: 0.6s;" onclick="alert('Área de beneficios en desarrollo.')">
+                    <div class="flip-card slide-up" style="animation-delay: 0.6s;" onclick="openBeneficiosModal()">
                         <div class="flip-card-inner">
-                            <div class="flip-card-front">
+                            <div class="flip-card-front" style="border: 2px solid #d1fae5;">
+                                <div class="absolute -top-3 -right-3 bg-inge-green text-white text-[10px] font-bold px-3 py-1 rounded-full shadow-md z-10 animate-bounce">ACTIVO</div>
                                 <div class="w-16 h-16 bg-emerald-50 text-emerald-500 rounded-full flex items-center justify-center text-3xl mb-4">
                                     <i class="ph-fill ph-gift"></i>
                                 </div>
                                 <h3 class="text-lg font-bold text-gray-900 mb-2">Beneficios</h3>
-                                <p class="text-gray-500 text-xs">Para nuestros colaboradores</p>
+                                <p class="text-gray-500 text-xs">Solicitudes y permisos</p>
                             </div>
                             <div class="flip-card-back" style="background: linear-gradient(135deg, #10b981, #047857);">
                                 <i class="ph-fill ph-hand-heart text-4xl mb-3 opacity-80"></i>
                                 <h3 class="text-base font-bold mb-2">Beneficios</h3>
-                                <p class="text-xs text-emerald-50">Conoce lo que Ingeproductos tiene para ti.</p>
+                                <p class="text-xs text-emerald-50 mb-3">Solicita matrimonio, grados y licencias.</p>
+                                <span class="bg-white text-emerald-700 px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">Solicitar <i class="ph-bold ph-arrow-right"></i></span>
                             </div>
                         </div>
                     </div>
@@ -857,7 +859,7 @@
                 <div class="inline-flex items-center bg-white rounded-full shadow-sm hover:scale-105 transition-transform cursor-default border border-gray-100 p-0.5" title="Número de visitas al portal">
                     <img src="https://api.visitorbadge.io/api/visitors?path=inge_interno.portal&label=Visitas&labelColor=%231a1a1a&countColor=%2300b4d8" alt="Contador de visitas" class="rounded-full" />
                 </div>
-                <p class="text-[11px] text-gray-400 font-medium">Última actualización: 24/04/2026 2:56 PM</p>
+                <p class="text-[11px] text-gray-400 font-medium">Última actualización: 24/04/2026 3:21 PM</p>
             </div>
 
         </div>
@@ -938,6 +940,96 @@
                     <i class="ph-duotone ph-spinner-gap text-5xl animate-spin block mb-3"></i>
                     Cargando organigrama…
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= MODAL BENEFICIOS (solicitudes de permisos / licencia) ================= -->
+    <div id="beneficios-modal" class="fixed inset-0 z-[100] bg-gray-900/95 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300 flex items-center justify-center p-2 md:p-6">
+        <button onclick="closeBeneficiosModal()" class="absolute top-4 right-4 md:top-6 md:right-6 text-white hover:text-red-400 transition p-2 bg-white/10 rounded-full hover:bg-white/20 z-50 shadow-lg">
+            <i class="ph-bold ph-x text-3xl"></i>
+        </button>
+        <div class="w-full max-w-2xl max-h-[92vh] rounded-2xl overflow-hidden shadow-2xl slide-up bg-white flex flex-col">
+            <div class="px-5 py-4 flex items-center gap-3 flex-shrink-0" style="background: linear-gradient(135deg,#10b981 0%,#047857 100%); color:#fff;">
+                <i class="ph-fill ph-hand-heart text-2xl"></i>
+                <div class="flex-1">
+                    <h3 class="text-lg font-bold">Solicitudes de Beneficios</h3>
+                    <p class="text-xs opacity-90" id="beneficios-subtitle">Tu solicitud llega directamente a Recursos Humanos.</p>
+                </div>
+            </div>
+
+            <!-- Paso 1: elegir tipo -->
+            <div id="beneficios-step-pick" class="flex-1 overflow-y-auto p-5 md:p-6 bg-gray-50">
+                <p class="text-sm text-gray-600 mb-4">Selecciona el tipo de solicitud que deseas enviar:</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                    <button onclick="elegirBeneficio('matrimonio')" class="bg-white hover:bg-pink-50 border-2 border-pink-100 hover:border-pink-300 rounded-xl p-4 text-left transition shadow-sm hover:shadow-md group">
+                        <div class="w-12 h-12 bg-pink-50 group-hover:bg-pink-100 text-pink-500 rounded-full flex items-center justify-center text-2xl mb-2 transition"><i class="ph-fill ph-heart"></i></div>
+                        <h4 class="font-bold text-gray-900 text-sm">Permiso de Matrimonio</h4>
+                        <p class="text-xs text-gray-500 mt-1">Por contraer matrimonio</p>
+                    </button>
+                    <button onclick="elegirBeneficio('grados')" class="bg-white hover:bg-indigo-50 border-2 border-indigo-100 hover:border-indigo-300 rounded-xl p-4 text-left transition shadow-sm hover:shadow-md group">
+                        <div class="w-12 h-12 bg-indigo-50 group-hover:bg-indigo-100 text-indigo-500 rounded-full flex items-center justify-center text-2xl mb-2 transition"><i class="ph-fill ph-graduation-cap"></i></div>
+                        <h4 class="font-bold text-gray-900 text-sm">Permiso de Grados</h4>
+                        <p class="text-xs text-gray-500 mt-1">Propios, hijos o hijastros</p>
+                    </button>
+                    <button onclick="elegirBeneficio('licencia_no_remunerada')" class="bg-white hover:bg-amber-50 border-2 border-amber-100 hover:border-amber-300 rounded-xl p-4 text-left transition shadow-sm hover:shadow-md group">
+                        <div class="w-12 h-12 bg-amber-50 group-hover:bg-amber-100 text-amber-600 rounded-full flex items-center justify-center text-2xl mb-2 transition"><i class="ph-fill ph-file-doc"></i></div>
+                        <h4 class="font-bold text-gray-900 text-sm">Licencia No Remunerada</h4>
+                        <p class="text-xs text-gray-500 mt-1">Adjunta carta de solicitud</p>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Paso 2: formulario -->
+            <div id="beneficios-step-form" class="hidden flex-1 overflow-y-auto p-5 md:p-6 bg-gray-50">
+                <button onclick="beneficiosVolver()" class="text-xs text-gray-600 hover:text-gray-900 mb-4 flex items-center gap-1 font-bold"><i class="ph-bold ph-arrow-left"></i> Cambiar tipo</button>
+                <div id="beneficios-form-titulo" class="mb-4"></div>
+                <form id="beneficios-form" onsubmit="enviarBeneficio(event)" class="space-y-3">
+                    <div>
+                        <label class="text-xs font-bold text-gray-700 block mb-1">Cédula *</label>
+                        <input type="text" name="cedula" required pattern="[0-9]{6,15}" inputmode="numeric" placeholder="Solo números"
+                               class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none">
+                    </div>
+                    <div>
+                        <label class="text-xs font-bold text-gray-700 block mb-1">Nombre completo *</label>
+                        <input type="text" name="nombre" required minlength="3" placeholder="Nombres y apellidos"
+                               class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none">
+                    </div>
+                    <div>
+                        <label class="text-xs font-bold text-gray-700 block mb-1">Área *</label>
+                        <input type="text" name="area" required placeholder="Ej: Producción, Administrativa, Comercial..."
+                               class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none">
+                    </div>
+                    <div>
+                        <label class="text-xs font-bold text-gray-700 block mb-1">Observaciones</label>
+                        <textarea name="observaciones" rows="4" placeholder="Cuéntanos los detalles: fecha, motivo, días solicitados..."
+                                  class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none resize-none"></textarea>
+                    </div>
+                    <div id="beneficios-adjunto-wrap" class="hidden">
+                        <label class="text-xs font-bold text-gray-700 block mb-1">Carta de solicitud (PDF o imagen) *</label>
+                        <input type="file" name="archivo" accept=".pdf,image/*" id="beneficios-archivo"
+                               class="w-full text-xs text-gray-600 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-amber-100 file:text-amber-700 hover:file:bg-amber-200 cursor-pointer">
+                        <p class="text-[10px] text-gray-500 mt-1">Máximo 10 MB</p>
+                    </div>
+                    <div class="pt-2 flex flex-col md:flex-row gap-2">
+                        <button type="submit" id="beneficios-submit"
+                                class="flex-1 bg-gradient-to-r from-emerald-500 to-emerald-700 hover:from-emerald-600 hover:to-emerald-800 text-white font-bold py-2.5 rounded-lg transition shadow-md flex items-center justify-center gap-2">
+                            <i class="ph-bold ph-paper-plane-right"></i>
+                            Enviar solicitud
+                        </button>
+                    </div>
+                    <p id="beneficios-status" class="text-xs text-center text-gray-600 hidden"></p>
+                </form>
+            </div>
+
+            <!-- Paso 3: OK -->
+            <div id="beneficios-step-ok" class="hidden flex-1 overflow-y-auto p-8 text-center bg-gray-50">
+                <div class="w-20 h-20 bg-emerald-50 text-emerald-500 rounded-full flex items-center justify-center text-5xl mb-4 mx-auto animate-bounce">
+                    <i class="ph-fill ph-check-circle"></i>
+                </div>
+                <h4 class="text-xl font-bold text-gray-900 mb-2">¡Solicitud enviada!</h4>
+                <p class="text-sm text-gray-600 mb-6">Recibirás respuesta por correo cuando Recursos Humanos revise tu solicitud.</p>
+                <button onclick="closeBeneficiosModal()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-6 rounded-lg transition">Cerrar</button>
             </div>
         </div>
     </div>
@@ -1542,65 +1634,74 @@
             renderOrganigrama();
         }
 
-        // Paleta de colores por area (consistente con los cards del portal)
-        const ORG_AREA_COLORS = {
-            'Gerencia':    { bg: '#fef3c7', border: '#fcd34d', text: '#92400e' },
-            'Produccion':  { bg: '#dbeafe', border: '#93c5fd', text: '#1e40af' },
-            'Producción':  { bg: '#dbeafe', border: '#93c5fd', text: '#1e40af' },
-            'Calidad':     { bg: '#dcfce7', border: '#86efac', text: '#166534' },
-            'Comercial':   { bg: '#fce7f3', border: '#f9a8d4', text: '#9d174d' },
-            'Ventas':      { bg: '#fce7f3', border: '#f9a8d4', text: '#9d174d' },
-            'Administrativa': { bg: '#e0e7ff', border: '#a5b4fc', text: '#3730a3' },
-            'Administracion': { bg: '#e0e7ff', border: '#a5b4fc', text: '#3730a3' },
-            'Contabilidad':   { bg: '#e0e7ff', border: '#a5b4fc', text: '#3730a3' },
-            'Mantenimiento':  { bg: '#fef3c7', border: '#fcd34d', text: '#92400e' },
-            'Logistica':   { bg: '#cffafe', border: '#67e8f9', text: '#155e75' },
-            'Logística':   { bg: '#cffafe', border: '#67e8f9', text: '#155e75' },
-            'General':     { bg: '#f3f4f6', border: '#d1d5db', text: '#374151' },
+        // Paleta identica a la web-app Organigrama.jsx (AREAS con grad, chipBg, chipText)
+        const ORG_AREAS = {
+            'Gerencia':         { grad: 'linear-gradient(135deg,#475569,#0f172a)', chipBg: '#f1f5f9', chipText: '#0f172a' },
+            'Logística':        { grad: 'linear-gradient(135deg,#f97316,#dc2626)', chipBg: '#ffedd5', chipText: '#c2410c' },
+            'Logistica':        { grad: 'linear-gradient(135deg,#f97316,#dc2626)', chipBg: '#ffedd5', chipText: '#c2410c' },
+            'Comercial':        { grad: 'linear-gradient(135deg,#3b82f6,#4f46e5)', chipBg: '#dbeafe', chipText: '#1d4ed8' },
+            'Administrativa':   { grad: 'linear-gradient(135deg,#fbbf24,#ea580c)', chipBg: '#fef3c7', chipText: '#92400e' },
+            'Cadena de Valor':  { grad: 'linear-gradient(135deg,#a855f7,#d946ef)', chipBg: '#f3e8ff', chipText: '#7e22ce' },
+            'Tecnología':       { grad: 'linear-gradient(135deg,#06b6d4,#3b82f6)', chipBg: '#cffafe', chipText: '#155e75' },
+            'Tecnologia':       { grad: 'linear-gradient(135deg,#06b6d4,#3b82f6)', chipBg: '#cffafe', chipText: '#155e75' },
+            'Diseño':           { grad: 'linear-gradient(135deg,#8b5cf6,#a855f7)', chipBg: '#ede9fe', chipText: '#6d28d9' },
+            'Diseno':           { grad: 'linear-gradient(135deg,#8b5cf6,#a855f7)', chipBg: '#ede9fe', chipText: '#6d28d9' },
+            'Recursos Humanos': { grad: 'linear-gradient(135deg,#ec4899,#e11d48)', chipBg: '#fce7f3', chipText: '#be185d' },
+            'Producción':       { grad: 'linear-gradient(135deg,#10b981,#0d9488)', chipBg: '#d1fae5', chipText: '#047857' },
+            'Produccion':       { grad: 'linear-gradient(135deg,#10b981,#0d9488)', chipBg: '#d1fae5', chipText: '#047857' },
+            'General':          { grad: 'linear-gradient(135deg,#6b7280,#374151)', chipBg: '#f3f4f6', chipText: '#374151' },
         };
-        const ORG_DEFAULT_COLOR = { bg: '#f3f4f6', border: '#d1d5db', text: '#374151' };
+        const ORG_DEFAULT_AREA = ORG_AREAS.General;
+
+        function orgFotoUrl(f) {
+            if (!f) return null;
+            return f.startsWith('http') ? f : ORG_STATIC_BASE + f;
+        }
 
         function renderOrgNodo(nodo, nivel) {
             const hasChildren = (nodo.children || []).length > 0;
             const expanded = orgExpandedSet.has(nodo.id);
-            const col = ORG_AREA_COLORS[nodo.area] || ORG_DEFAULT_COLOR;
-            const fotos = nodo.fotos || [];
-            const fotoUrl = fotos.length > 0
-                ? (fotos[0].startsWith('http') ? fotos[0] : ORG_STATIC_BASE + fotos[0])
-                : null;
+            const c = ORG_AREAS[nodo.area] || ORG_DEFAULT_AREA;
+            const fotos = (nodo.fotos || []).map(orgFotoUrl).filter(Boolean);
             const iniciales = (nodo.persona_nombre || nodo.nombre || '?').trim().split(/\s+/).slice(0, 2).map(p => p[0]).join('').toUpperCase();
 
-            const padLeft = nivel === 0 ? 0 : Math.min(nivel, 5) * 18;
-            const line = nivel > 0
-                ? `<span class="absolute -left-3 top-1/2 w-3 h-px bg-gray-300"></span><span class="absolute -left-3 top-0 w-px bg-gray-300" style="height:50%"></span>`
+            // Avatar: 1 foto -> 42px circular con borde color area; varias -> 3 mini circulares + contador
+            let avatarHtml;
+            if (fotos.length === 1) {
+                avatarHtml = `<img src="${fotos[0]}" alt="${escapeHtml(nodo.nombre)}" onclick="event.stopPropagation(); openImageModal('${fotos[0]}', '${escapeHtml(nodo.persona_nombre || nodo.nombre)}')" style="width:42px; height:42px; border-radius:50%; object-fit:cover; flex-shrink:0; border:2px solid ${c.chipText}; box-shadow:0 2px 6px rgba(15,23,42,0.18); cursor:zoom-in" onerror="this.outerHTML='<div style=\\'width:42px;height:42px;border-radius:50%;flex-shrink:0;background:${c.grad};color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;border:2px solid ${c.chipText}\\'>${iniciales}</div>'">`;
+            } else if (fotos.length > 1) {
+                const visibles = fotos.slice(0, 3).map(f => `<img src="${f}" onclick="event.stopPropagation(); openImageModal('${f}', '${escapeHtml(nodo.persona_nombre || nodo.nombre)}')" style="width:30px; height:30px; border-radius:50%; object-fit:cover; border:2px solid ${c.chipText}; box-shadow:0 1px 3px rgba(15,23,42,0.2); cursor:zoom-in">`).join('');
+                const extra = fotos.length > 3 ? `<div style="width:30px; height:30px; border-radius:50%; background:${c.grad}; color:#fff; font-size:10px; font-weight:800; display:flex; align-items:center; justify-content:center; border:2px solid ${c.chipText}; box-shadow:0 1px 3px rgba(15,23,42,0.2)">+${fotos.length - 3}</div>` : '';
+                avatarHtml = `<div style="display:flex; align-items:center; gap:3px; flex-shrink:0">${visibles}${extra}</div>`;
+            } else {
+                avatarHtml = `<div style="width:42px; height:42px; border-radius:50%; flex-shrink:0; background:${c.grad}; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px; box-shadow:0 2px 6px rgba(15,23,42,0.18); border:2px solid rgba(255,255,255,0.6)">${iniciales}</div>`;
+            }
+
+            const padLeft = nivel === 0 ? 0 : Math.min(nivel, 6) * 16;
+            const cantidadChip = nodo.cantidad
+                ? `<span style="font-size:9px; font-weight:600; padding:2px 7px; border-radius:4px; background:#f1f5f9; color:#64748b; white-space:nowrap">${escapeHtml(nodo.cantidad)}</span>`
                 : '';
 
             return `
-                <div class="relative mb-2" style="margin-left:${padLeft}px">
-                    <div class="relative flex items-center gap-3 p-3 rounded-xl shadow-sm hover:shadow-md transition cursor-pointer bg-white border-l-4"
-                         style="border-left-color:${col.border}"
-                         onclick="${hasChildren ? `toggleOrgNode(${nodo.id})` : ''}">
-                        ${line}
-                        <div class="flex-shrink-0 w-11 h-11 rounded-full flex items-center justify-center overflow-hidden ring-2 ring-white shadow"
-                             style="background:${col.bg}; color:${col.text}">
-                            ${fotoUrl
-                                ? `<img src="${fotoUrl}" alt="${nodo.persona_nombre || nodo.nombre}" class="w-full h-full object-cover" onerror="this.style.display='none'; this.parentNode.textContent='${iniciales}'">`
-                                : `<span class="text-sm font-bold">${iniciales}</span>`}
-                        </div>
-                        <div class="flex-1 min-w-0">
-                            <div class="font-bold text-sm text-gray-900 truncate">${escapeHtml(nodo.nombre)}</div>
-                            ${nodo.persona_nombre ? `<div class="text-xs text-gray-600 truncate">${escapeHtml(nodo.persona_nombre)}</div>` : ''}
-                            <div class="flex items-center gap-2 mt-0.5">
-                                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full" style="background:${col.bg}; color:${col.text}">${escapeHtml(nodo.area || 'General')}</span>
-                                ${nodo.cantidad ? `<span class="text-[10px] text-gray-500"><i class="ph-bold ph-users"></i> ${escapeHtml(nodo.cantidad)}</span>` : ''}
+                <div class="mb-2" style="margin-left:${padLeft}px">
+                    <div class="flex items-center gap-3 rounded-xl bg-white shadow-sm hover:shadow-md transition-all"
+                         style="border:1px solid rgba(226,232,240,0.8); padding:10px; ${hasChildren ? 'cursor:pointer' : ''}; position:relative"
+                         ${hasChildren ? `onclick="toggleOrgNode(${nodo.id})"` : ''}>
+                        ${avatarHtml}
+                        <div style="display:flex; flex-direction:column; overflow:hidden; flex:1; min-width:0">
+                            <h3 style="font-size:13px; font-weight:700; color:#1e293b; line-height:1.25; margin:0; word-break:break-word" title="${escapeHtml(nodo.nombre)}">${escapeHtml(nodo.nombre)}</h3>
+                            ${nodo.persona_nombre ? `<span style="font-size:11px; color:#64748b; font-weight:500; margin-top:2px">${escapeHtml(nodo.persona_nombre)}</span>` : ''}
+                            <div style="display:flex; align-items:center; gap:4px; margin-top:5px; flex-wrap:wrap">
+                                <span style="font-size:9px; font-weight:700; padding:2px 7px; border-radius:4px; background:${c.chipBg}; color:${c.chipText}; text-transform:uppercase; letter-spacing:0.06em">${escapeHtml(nodo.area || 'General')}</span>
+                                ${cantidadChip}
                             </div>
                         </div>
                         ${hasChildren
-                            ? `<div class="flex-shrink-0 w-7 h-7 flex items-center justify-center text-gray-500 bg-gray-100 rounded-full transition-transform ${expanded ? 'rotate-90' : ''}"><i class="ph-bold ph-caret-right text-sm"></i></div>`
+                            ? `<button onclick="event.stopPropagation(); toggleOrgNode(${nodo.id})" style="width:26px; height:26px; border-radius:50%; background:#fff; border:1px solid #cbd5e1; box-shadow:0 2px 6px rgba(15,23,42,0.15); color:#64748b; font-size:14px; font-weight:700; cursor:pointer; flex-shrink:0; display:flex; align-items:center; justify-content:center; padding:0">${expanded ? '−' : '+'}</button>`
                             : ''}
                     </div>
                     ${hasChildren && expanded
-                        ? `<div class="mt-2 ml-5 pl-3 border-l-2 border-dashed border-gray-200">${nodo.children.map(c => renderOrgNodo(c, nivel + 1)).join('')}</div>`
+                        ? `<div style="margin-top:8px; margin-left:12px; padding-left:10px; border-left:2px dashed #e2e8f0">${nodo.children.map(ch => renderOrgNodo(ch, nivel + 1)).join('')}</div>`
                         : ''}
                 </div>
             `;
@@ -1617,6 +1718,127 @@
                 return;
             }
             body.innerHTML = orgTreeCache.map(n => renderOrgNodo(n, 0)).join('');
+        }
+
+        // ===================================================================
+        // BENEFICIOS — Solicitudes de permisos / licencia (envian correo a RRHH)
+        // ===================================================================
+        const BENEFICIOS_API = 'https://ingeproductos.app/api/v1/portal-solicitudes/enviar';
+        const BENEFICIOS_TIPOS = {
+            matrimonio: {
+                titulo: 'Solicitud de permiso de matrimonio',
+                desc: 'Permiso por contraer matrimonio.',
+                color: '#ec4899',
+                requiereAdjunto: false,
+                icon: 'ph-heart',
+            },
+            grados: {
+                titulo: 'Solicitud de permiso de grados',
+                desc: 'Permiso para asistir a ceremonia de grados (propios, hijos o hijastros).',
+                color: '#6366f1',
+                requiereAdjunto: false,
+                icon: 'ph-graduation-cap',
+            },
+            licencia_no_remunerada: {
+                titulo: 'Solicitud de licencia no remunerada',
+                desc: 'Adjunta la carta de solicitud firmada.',
+                color: '#d97706',
+                requiereAdjunto: true,
+                icon: 'ph-file-doc',
+            },
+        };
+        let beneficioActual = null;
+
+        function openBeneficiosModal() {
+            const modal = document.getElementById('beneficios-modal');
+            modal.classList.remove('hidden');
+            setTimeout(() => modal.classList.remove('opacity-0'), 10);
+            document.body.style.overflow = 'hidden';
+            // Reset al paso inicial
+            document.getElementById('beneficios-step-pick').classList.remove('hidden');
+            document.getElementById('beneficios-step-form').classList.add('hidden');
+            document.getElementById('beneficios-step-ok').classList.add('hidden');
+            document.getElementById('beneficios-form').reset();
+            document.getElementById('beneficios-status').classList.add('hidden');
+            beneficioActual = null;
+        }
+
+        function closeBeneficiosModal() {
+            const modal = document.getElementById('beneficios-modal');
+            modal.classList.add('opacity-0');
+            setTimeout(() => { modal.classList.add('hidden'); document.body.style.overflow = 'auto'; }, 300);
+        }
+
+        function elegirBeneficio(tipo) {
+            beneficioActual = tipo;
+            const t = BENEFICIOS_TIPOS[tipo];
+            document.getElementById('beneficios-subtitle').textContent = t.desc;
+            document.getElementById('beneficios-form-titulo').innerHTML = `
+                <div class="flex items-center gap-3 p-3 rounded-lg" style="background: ${t.color}15; border-left: 4px solid ${t.color}">
+                    <i class="ph-fill ${t.icon} text-2xl" style="color: ${t.color}"></i>
+                    <div>
+                        <h4 class="font-bold text-gray-900 text-sm">${t.titulo}</h4>
+                        <p class="text-xs text-gray-600">${t.desc}</p>
+                    </div>
+                </div>`;
+            const wrap = document.getElementById('beneficios-adjunto-wrap');
+            const file = document.getElementById('beneficios-archivo');
+            if (t.requiereAdjunto) { wrap.classList.remove('hidden'); file.required = true; }
+            else { wrap.classList.add('hidden'); file.required = false; file.value = ''; }
+            document.getElementById('beneficios-step-pick').classList.add('hidden');
+            document.getElementById('beneficios-step-form').classList.remove('hidden');
+        }
+
+        function beneficiosVolver() {
+            document.getElementById('beneficios-step-form').classList.add('hidden');
+            document.getElementById('beneficios-step-pick').classList.remove('hidden');
+            document.getElementById('beneficios-status').classList.add('hidden');
+        }
+
+        async function enviarBeneficio(ev) {
+            ev.preventDefault();
+            const form = ev.target;
+            const btn = document.getElementById('beneficios-submit');
+            const status = document.getElementById('beneficios-status');
+            const t = BENEFICIOS_TIPOS[beneficioActual];
+
+            if (t.requiereAdjunto) {
+                const f = form.archivo.files[0];
+                if (!f) { alert('Adjunta la carta de solicitud.'); return; }
+                if (f.size > 10 * 1024 * 1024) { alert('El archivo supera 10 MB.'); return; }
+            }
+
+            btn.disabled = true;
+            btn.innerHTML = '<i class="ph-duotone ph-spinner-gap animate-spin"></i> Enviando...';
+            status.classList.remove('hidden');
+            status.textContent = '';
+            status.className = 'text-xs text-center text-gray-600';
+
+            try {
+                const fd = new FormData();
+                fd.append('tipo', beneficioActual);
+                fd.append('cedula', form.cedula.value.trim());
+                fd.append('nombre', form.nombre.value.trim());
+                fd.append('area', form.area.value.trim());
+                fd.append('observaciones', form.observaciones.value.trim());
+                if (t.requiereAdjunto && form.archivo.files[0]) {
+                    fd.append('archivo', form.archivo.files[0]);
+                }
+                const r = await fetch(BENEFICIOS_API, { method: 'POST', body: fd });
+                if (!r.ok) {
+                    const txt = await r.text();
+                    throw new Error(txt || ('HTTP ' + r.status));
+                }
+                // Exito
+                document.getElementById('beneficios-step-form').classList.add('hidden');
+                document.getElementById('beneficios-step-ok').classList.remove('hidden');
+            } catch (err) {
+                status.textContent = 'No se pudo enviar: ' + err.message;
+                status.className = 'text-xs text-center text-red-600 font-bold';
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = '<i class="ph-bold ph-paper-plane-right"></i> Enviar solicitud';
+            }
         }
 
         // --- CARRUSEL DESTACADOS ---
@@ -1714,6 +1936,9 @@
             document.getElementById('organigrama-modal').addEventListener('click', function(e) {
                 if(e.target === this) closeOrganigrama();
             });
+            document.getElementById('beneficios-modal').addEventListener('click', function(e) {
+                if(e.target === this) closeBeneficiosModal();
+            });
 
             // Cerrar modales con tecla Escape
             document.addEventListener('keydown', function(e) {
@@ -1721,9 +1946,11 @@
                     const videoModal = document.getElementById('video-modal');
                     const imageModal = document.getElementById('image-modal');
                     const orgModal   = document.getElementById('organigrama-modal');
+                    const benModal   = document.getElementById('beneficios-modal');
                     if(!videoModal.classList.contains('hidden')) closeVideoModal();
                     if(!imageModal.classList.contains('hidden')) closeImageModal();
                     if(!orgModal.classList.contains('hidden')) closeOrganigrama();
+                    if(!benModal.classList.contains('hidden')) closeBeneficiosModal();
                 }
             });
 
