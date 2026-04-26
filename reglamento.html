@@ -131,12 +131,12 @@
           </p>
         </div>
         <div class="flex gap-2 flex-wrap">
-          <a id="btn-descargar" href="#" download="reglamento-interno-ingeproductos-v2026.pdf"
-             target="_blank" rel="noopener noreferrer"
-             class="inline-flex items-center gap-2 bg-white text-indigo-700 px-4 py-2 rounded-lg text-sm font-semibold border border-white/30 hover:bg-indigo-50 transition"
-             title="Guarda el PDF en tu dispositivo (se abre en otra pestaña)">
-            <i class="ph-bold ph-download-simple"></i> Descargar PDF
-          </a>
+          <button id="btn-descargar"
+             class="inline-flex items-center gap-2 bg-white text-indigo-700 px-4 py-2 rounded-lg text-sm font-semibold border border-white/30 hover:bg-indigo-50 transition disabled:opacity-60"
+             title="Descarga el PDF a tu dispositivo">
+            <i class="ph-bold ph-download-simple"></i>
+            <span id="btn-descargar-label">Descargar PDF</span>
+          </button>
           <a id="btn-pantalla-completa" href="#" target="_blank" rel="noopener noreferrer"
              class="inline-flex items-center gap-2 bg-white/20 text-white px-4 py-2 rounded-lg text-sm font-medium border border-white/30 hover:bg-white/30 transition"
              title="Abrir el PDF en otra pestaña a pantalla completa">
@@ -433,7 +433,8 @@
 
         // PDF
         $('pdf-frame').src = data.pdf_url + '#view=FitH';
-        $('btn-descargar').href = data.pdf_url;
+        // El boton "Descargar" usa fetch+Blob (el atributo download no funciona cross-origin).
+        $('btn-descargar').dataset.pdfUrl = data.pdf_url;
         $('btn-pantalla-completa').href = data.pdf_url;
 
         // Metadata
@@ -454,6 +455,38 @@
     // ─── Eventos ────────────────────────────────────────────────────────────
     $('btn-enviar').addEventListener('click', enviarPregunta);
     $('btn-limpiar').addEventListener('click', limpiarChat);
+
+    // Descargar PDF: fetch + Blob para forzar descarga real (el atributo download
+    // de <a> no funciona cuando el archivo esta en otro origen — ahi navegamos
+    // y Chrome lo abre en visor en vez de descargarlo).
+    $('btn-descargar').addEventListener('click', async () => {
+      const btn = $('btn-descargar');
+      const label = $('btn-descargar-label');
+      const url = btn.dataset.pdfUrl;
+      if (!url) return;
+      const labelOriginal = label.textContent;
+      btn.disabled = true;
+      label.textContent = 'Descargando…';
+      try {
+        const res = await fetch(url, { credentials: 'omit' });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const blob = await res.blob();
+        const blobUrl = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = blobUrl;
+        a.download = 'reglamento-interno-ingeproductos-v2026.pdf';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        setTimeout(() => URL.revokeObjectURL(blobUrl), 2000);
+      } catch (e) {
+        alert('No se pudo descargar el PDF. Probá "Ver a pantalla completa" y desde ahí guardalo.');
+      } finally {
+        btn.disabled = false;
+        label.textContent = labelOriginal;
+      }
+    });
+
     // Enter agrega salto de linea (comportamiento natural del textarea), el envio es solo
     // por boton: mucho mas comodo en moviles/tablets donde Enter no debe disparar acciones.
 
