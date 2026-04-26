@@ -504,6 +504,26 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- FLIP CARD 7: Solicitudes -->
+                    <div class="flip-card slide-up" style="animation-delay: 0.7s;" onclick="openSolicitudesModal()">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front" style="border: 2px solid #dbeafe;">
+                                <div class="absolute -top-3 -right-3 bg-blue-600 text-white text-[10px] font-bold px-3 py-1 rounded-full shadow-md z-10 animate-bounce">NUEVO</div>
+                                <div class="w-16 h-16 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center text-3xl mb-4">
+                                    <i class="ph-fill ph-file-text"></i>
+                                </div>
+                                <h3 class="text-lg font-bold text-gray-900 mb-2">Solicitudes</h3>
+                                <p class="text-gray-500 text-xs">Carta de trabajo y más</p>
+                            </div>
+                            <div class="flip-card-back" style="background: linear-gradient(135deg, #2563eb, #1e3a8a);">
+                                <i class="ph-fill ph-envelope-simple-open text-4xl mb-3 opacity-80"></i>
+                                <h3 class="text-base font-bold mb-2">Solicitudes</h3>
+                                <p class="text-xs text-blue-50 mb-3">Pide tu carta de trabajo en línea.</p>
+                                <span class="bg-white text-blue-700 px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">Solicitar <i class="ph-bold ph-arrow-right"></i></span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1030,6 +1050,94 @@
                 <h4 class="text-xl font-bold text-gray-900 mb-2">¡Solicitud enviada!</h4>
                 <p class="text-sm text-gray-600 mb-6">Recibirás respuesta por correo cuando Recursos Humanos revise tu solicitud.</p>
                 <button onclick="closeBeneficiosModal()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-6 rounded-lg transition">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= MODAL SOLICITUDES (carta de trabajo y otras) ================= -->
+    <div id="solicitudes-modal" class="fixed inset-0 z-[100] bg-gray-900/95 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300 flex items-center justify-center p-2 md:p-6">
+        <button onclick="closeSolicitudesModal()" class="absolute top-4 right-4 md:top-6 md:right-6 text-white hover:text-red-400 transition p-2 bg-white/10 rounded-full hover:bg-white/20 z-50 shadow-lg">
+            <i class="ph-bold ph-x text-3xl"></i>
+        </button>
+        <div class="w-full max-w-2xl max-h-[92vh] rounded-2xl overflow-hidden shadow-2xl slide-up bg-white flex flex-col">
+            <div class="px-5 py-4 flex items-center gap-3 flex-shrink-0" style="background: linear-gradient(135deg,#2563eb 0%,#1e3a8a 100%); color:#fff;">
+                <i class="ph-fill ph-envelope-simple-open text-2xl"></i>
+                <div class="flex-1">
+                    <h3 class="text-lg font-bold">Solicitudes</h3>
+                    <p class="text-xs opacity-90">Tu solicitud llega directamente a Recursos Humanos.</p>
+                </div>
+            </div>
+
+            <!-- Paso 1: elegir tipo -->
+            <div id="solicitudes-step-pick" class="flex-1 overflow-y-auto p-5 md:p-6 bg-gray-50">
+                <p class="text-sm text-gray-600 mb-4">Selecciona el tipo de solicitud que deseas enviar:</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <button onclick="elegirSolicitud('carta_trabajo')" class="bg-white hover:bg-blue-50 border-2 border-blue-100 hover:border-blue-300 rounded-xl p-4 text-left transition shadow-sm hover:shadow-md group">
+                        <div class="w-12 h-12 bg-blue-50 group-hover:bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-2xl mb-2 transition"><i class="ph-fill ph-file-text"></i></div>
+                        <h4 class="font-bold text-gray-900 text-sm">Carta de trabajo</h4>
+                        <p class="text-xs text-gray-500 mt-1">La recibes por correo</p>
+                    </button>
+                </div>
+                <p class="text-[11px] text-gray-400 mt-4 text-center">Próximamente más solicitudes.</p>
+            </div>
+
+            <!-- Paso 2: formulario carta de trabajo -->
+            <div id="solicitudes-step-form" class="hidden flex-1 overflow-y-auto p-5 md:p-6 bg-gray-50">
+                <button onclick="solicitudesVolver()" class="text-xs text-gray-600 hover:text-gray-900 mb-4 flex items-center gap-1 font-bold"><i class="ph-bold ph-arrow-left"></i> Volver</button>
+                <div class="mb-4">
+                    <div class="flex items-center gap-3 p-3 rounded-lg" style="background: #2563eb15; border-left: 4px solid #2563eb">
+                        <i class="ph-fill ph-file-text text-2xl" style="color: #2563eb"></i>
+                        <div>
+                            <h4 class="font-bold text-gray-900 text-sm">Solicitud de carta de trabajo</h4>
+                            <p class="text-xs text-gray-600">Te llegará al correo que indiques.</p>
+                        </div>
+                    </div>
+                </div>
+                <form id="solicitudes-form" onsubmit="enviarSolicitud(event)" class="space-y-3">
+                    <div>
+                        <label class="text-xs font-bold text-gray-700 block mb-1">Nombre completo *</label>
+                        <input type="text" name="nombre" required minlength="3" placeholder="Nombres y apellidos"
+                               class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none">
+                    </div>
+                    <div>
+                        <label class="text-xs font-bold text-gray-700 block mb-1">Cédula *</label>
+                        <input type="text" name="cedula" required pattern="[0-9]{6,15}" inputmode="numeric" placeholder="Solo números"
+                               class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none">
+                    </div>
+                    <div>
+                        <label class="text-xs font-bold text-gray-700 block mb-1">Correo donde quieres recibir la carta *</label>
+                        <input type="email" name="correo_destino" required placeholder="tu-correo@ejemplo.com"
+                               class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none">
+                    </div>
+                    <div>
+                        <label class="text-xs font-bold text-gray-700 block mb-1">Teléfono (WhatsApp) *</label>
+                        <input type="tel" name="telefono" required pattern="[0-9+ ()\-]{7,20}" inputmode="tel" placeholder="Ej: 3001234567"
+                               class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none">
+                    </div>
+                    <div>
+                        <label class="text-xs font-bold text-gray-700 block mb-1">Observaciones</label>
+                        <textarea name="observaciones" rows="3" placeholder="Indica si la carta es para banco, embajada, arrendamiento, etc."
+                                  class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none resize-none"></textarea>
+                    </div>
+                    <div class="pt-2 flex flex-col md:flex-row gap-2">
+                        <button type="submit" id="solicitudes-submit"
+                                class="flex-1 bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900 text-white font-bold py-2.5 rounded-lg transition shadow-md flex items-center justify-center gap-2">
+                            <i class="ph-bold ph-paper-plane-right"></i>
+                            Enviar solicitud
+                        </button>
+                    </div>
+                    <p id="solicitudes-status" class="text-xs text-center text-gray-600 hidden"></p>
+                </form>
+            </div>
+
+            <!-- Paso 3: OK -->
+            <div id="solicitudes-step-ok" class="hidden flex-1 overflow-y-auto p-8 text-center bg-gray-50">
+                <div class="w-20 h-20 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center text-5xl mb-4 mx-auto animate-bounce">
+                    <i class="ph-fill ph-check-circle"></i>
+                </div>
+                <h4 class="text-xl font-bold text-gray-900 mb-2">¡Solicitud enviada!</h4>
+                <p class="text-sm text-gray-600 mb-6">Recursos Humanos te enviará la carta al correo que indicaste.</p>
+                <button onclick="closeSolicitudesModal()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg transition">Cerrar</button>
             </div>
         </div>
     </div>
@@ -1887,6 +1995,75 @@
             document.getElementById('beneficios-status').classList.add('hidden');
         }
 
+        // ===================================================================
+        // SOLICITUDES — Carta de trabajo (correo a RRHH + Aux. Humana)
+        // ===================================================================
+        function openSolicitudesModal() {
+            const modal = document.getElementById('solicitudes-modal');
+            modal.classList.remove('hidden');
+            setTimeout(() => modal.classList.remove('opacity-0'), 10);
+            document.body.style.overflow = 'hidden';
+            document.getElementById('solicitudes-step-pick').classList.remove('hidden');
+            document.getElementById('solicitudes-step-form').classList.add('hidden');
+            document.getElementById('solicitudes-step-ok').classList.add('hidden');
+            document.getElementById('solicitudes-form').reset();
+            document.getElementById('solicitudes-status').classList.add('hidden');
+        }
+
+        function closeSolicitudesModal() {
+            const modal = document.getElementById('solicitudes-modal');
+            modal.classList.add('opacity-0');
+            setTimeout(() => { modal.classList.add('hidden'); document.body.style.overflow = 'auto'; }, 300);
+        }
+
+        function elegirSolicitud(tipo) {
+            // Por ahora solo carta_trabajo; el form ya está fijo a ese tipo.
+            document.getElementById('solicitudes-step-pick').classList.add('hidden');
+            document.getElementById('solicitudes-step-form').classList.remove('hidden');
+        }
+
+        function solicitudesVolver() {
+            document.getElementById('solicitudes-step-form').classList.add('hidden');
+            document.getElementById('solicitudes-step-pick').classList.remove('hidden');
+            document.getElementById('solicitudes-status').classList.add('hidden');
+        }
+
+        async function enviarSolicitud(ev) {
+            ev.preventDefault();
+            const form = ev.target;
+            const btn = document.getElementById('solicitudes-submit');
+            const status = document.getElementById('solicitudes-status');
+
+            btn.disabled = true;
+            btn.innerHTML = '<i class="ph-duotone ph-spinner-gap animate-spin"></i> Enviando...';
+            status.classList.remove('hidden');
+            status.textContent = '';
+            status.className = 'text-xs text-center text-gray-600';
+
+            try {
+                const fd = new FormData();
+                fd.append('tipo', 'carta_trabajo');
+                fd.append('cedula', form.cedula.value.trim());
+                fd.append('nombre', form.nombre.value.trim());
+                fd.append('correo_destino', form.correo_destino.value.trim());
+                fd.append('telefono', form.telefono.value.trim());
+                fd.append('observaciones', form.observaciones.value.trim());
+                const r = await fetch(BENEFICIOS_API, { method: 'POST', body: fd });
+                if (!r.ok) {
+                    const txt = await r.text();
+                    throw new Error(txt || ('HTTP ' + r.status));
+                }
+                document.getElementById('solicitudes-step-form').classList.add('hidden');
+                document.getElementById('solicitudes-step-ok').classList.remove('hidden');
+            } catch (err) {
+                status.textContent = 'No se pudo enviar: ' + err.message;
+                status.className = 'text-xs text-center text-red-600 font-bold';
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = '<i class="ph-bold ph-paper-plane-right"></i> Enviar solicitud';
+            }
+        }
+
         async function enviarBeneficio(ev) {
             ev.preventDefault();
             const form = ev.target;
@@ -2028,6 +2205,9 @@
             document.getElementById('organigrama-modal').addEventListener('click', function(e) {
                 if(e.target === this) closeOrganigrama();
             });
+            document.getElementById('solicitudes-modal').addEventListener('click', function(e) {
+                if(e.target === this) closeSolicitudesModal();
+            });
             document.getElementById('beneficios-modal').addEventListener('click', function(e) {
                 if(e.target === this) closeBeneficiosModal();
             });
@@ -2039,10 +2219,12 @@
                     const imageModal = document.getElementById('image-modal');
                     const orgModal   = document.getElementById('organigrama-modal');
                     const benModal   = document.getElementById('beneficios-modal');
+                    const solModal   = document.getElementById('solicitudes-modal');
                     if(!videoModal.classList.contains('hidden')) closeVideoModal();
                     if(!imageModal.classList.contains('hidden')) closeImageModal();
                     if(!orgModal.classList.contains('hidden')) closeOrganigrama();
                     if(!benModal.classList.contains('hidden')) closeBeneficiosModal();
+                    if(!solModal.classList.contains('hidden')) closeSolicitudesModal();
                 }
             });
 
