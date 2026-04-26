@@ -132,8 +132,9 @@
         </div>
         <div class="flex gap-2 flex-wrap">
           <a id="btn-descargar" href="#" download="reglamento-interno-ingeproductos-v2026.pdf"
+             target="_blank" rel="noopener noreferrer"
              class="inline-flex items-center gap-2 bg-white text-indigo-700 px-4 py-2 rounded-lg text-sm font-semibold border border-white/30 hover:bg-indigo-50 transition"
-             title="Guarda el PDF en tu dispositivo">
+             title="Guarda el PDF en tu dispositivo (se abre en otra pestaña)">
             <i class="ph-bold ph-download-simple"></i> Descargar PDF
           </a>
           <a id="btn-pantalla-completa" href="#" target="_blank" rel="noopener noreferrer"
@@ -299,19 +300,13 @@
       scrollToEnd();
     }
 
-    function addRespuestaAsistente({ texto, fuente, precargada, error }) {
+    function addRespuestaAsistente({ texto, error }) {
       const bg = error ? 'bg-red-50 border border-red-200 text-red-800'
                        : 'bg-gray-50 border border-gray-200 text-gray-800';
-      const fuenteHtml = fuente
-        ? `<div class="mt-1.5 text-[10.5px] ${precargada ? 'text-emerald-600' : 'text-gray-500 italic'}">
-              ${precargada ? '⚡ ' : '🤖 '}${esc(fuente)}
-           </div>`
-        : '';
       $('chat-msgs').insertAdjacentHTML('beforeend', `
         <div class="flex justify-start mb-2.5">
           <div class="max-w-[92%] rounded-xl px-3 py-2 text-sm leading-relaxed shadow-sm ${bg}">
             <div class="md-content">${error ? esc(texto) : renderMarkdown(texto)}</div>
-            ${fuenteHtml}
           </div>
         </div>
       `);
@@ -349,11 +344,7 @@
     function usarPreguntaFrecuente(pf) {
       ocultarWelcome();
       addMensajeUsuario(pf.pregunta);
-      addRespuestaAsistente({
-        texto: pf.respuesta,
-        fuente: 'Respuesta predefinida (cita literal del reglamento)',
-        precargada: true,
-      });
+      addRespuestaAsistente({ texto: pf.respuesta });
     }
 
     // ─── Pregunta libre → backend → Groq/Gemini ─────────────────────────────
@@ -391,10 +382,7 @@
           addRespuestaAsistente({ texto: '⚠️ ' + msg, error: true });
         } else {
           const data = await res.json();
-          addRespuestaAsistente({
-            texto: data.respuesta,
-            fuente: `${data.proveedor} · ${data.modelo}`,
-          });
+          addRespuestaAsistente({ texto: data.respuesta });
         }
       } catch (e) {
         removeThinking();
