@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>Reglamento Interno · Ingeproductos</title>
+
+  <meta name="description" content="Reglamento Interno de Trabajo de Ingeproductos S.A.S. v2026 con asistente IA gratuito para resolver dudas al instante.">
+  <meta property="og:title" content="Reglamento Interno · Ingeproductos">
+  <meta property="og:description" content="Lee el reglamento y pregúntale a la IA tus dudas sobre faltas, permisos, vacaciones y más.">
+  <meta property="og:image" content="./assets/img/logo-ingeproductos.jpeg">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#4338ca">
+
+  <link rel="icon" type="image/jpeg" href="./assets/img/logo-ingeproductos.jpeg">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            inge: { dark:'#1a1a1a', cyan:'#00b4d8', green:'#74c336', magenta:'#d90429', lightBg:'#f8fafc' }
+          },
+          fontFamily: { sans: ['Montserrat','sans-serif'] }
+        }
+      }
+    }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+  <style>
+    body { font-family: 'Montserrat', sans-serif; background-color: #f8fafc; }
+
+    .gradient-hero {
+      background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #a855f7 100%);
+    }
+
+    .pdf-frame {
+      width: 100%;
+      height: calc(100vh - 220px);
+      min-height: 480px;
+      border: 0;
+      background: #525659;
+    }
+
+    .chat-body {
+      height: calc(100vh - 280px);
+      min-height: 460px;
+    }
+
+    .pf-card {
+      transition: all 0.15s ease;
+    }
+    .pf-card:hover {
+      border-color: #7c3aed !important;
+      background: #faf5ff !important;
+      transform: translateY(-1px);
+    }
+
+    @keyframes dotPulse {
+      0%, 60%, 100% { opacity: 0.3; transform: translateY(0); }
+      30% { opacity: 1; transform: translateY(-3px); }
+    }
+    .dot-pulse {
+      animation: dotPulse 1.2s infinite ease-in-out;
+      display: inline-block;
+      font-size: 11px;
+    }
+
+    /* Scroll del chat */
+    .chat-scroll::-webkit-scrollbar { width: 6px; }
+    .chat-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+
+    /* Markdown render: bullets y tablas */
+    .md-content ul { list-style: disc; padding-left: 22px; margin: 6px 0 10px 0; }
+    .md-content ol { list-style: decimal; padding-left: 22px; margin: 6px 0 10px 0; }
+    .md-content li { margin-bottom: 4px; line-height: 1.55; }
+    .md-content p { margin: 4px 0; line-height: 1.55; }
+    .md-content strong { font-weight: 600; color: #111; }
+
+    /* Responsive: tablet/movil → 1 columna */
+    @media (max-width: 1024px) {
+      .reglamento-grid { grid-template-columns: 1fr !important; }
+      .pdf-frame { height: 65vh; min-height: 420px; }
+      .chat-body { height: 70vh; min-height: 460px; }
+    }
+    @media (max-width: 640px) {
+      .pdf-frame { height: 55vh; min-height: 360px; }
+      .chat-body { height: 75vh; min-height: 420px; }
+    }
+  </style>
+</head>
+
+<body class="bg-inge-lightBg">
+
+  <!-- Header con back -->
+  <header class="bg-white shadow-sm sticky top-0 z-30">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-3">
+      <a href="index.html" class="flex items-center gap-2 text-gray-600 hover:text-inge-cyan transition">
+        <i class="ph-bold ph-arrow-left text-xl"></i>
+        <span class="text-sm font-semibold hidden sm:inline">Volver al portal</span>
+      </a>
+      <div class="flex items-center gap-2">
+        <img src="./assets/img/logo-ingeproductos.jpeg" alt="Ingeproductos" class="h-8 w-8 rounded-full">
+        <span class="font-bold text-gray-800 text-sm hidden sm:inline">Ingeproductos</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 pt-4 pb-8">
+
+    <!-- Hero -->
+    <div class="gradient-hero text-white rounded-2xl p-5 sm:p-6 mb-4 shadow-lg">
+      <div class="flex items-center gap-4 flex-wrap">
+        <div class="w-14 h-14 rounded-xl bg-white/20 flex items-center justify-center flex-shrink-0">
+          <i class="ph-fill ph-scales text-3xl"></i>
+        </div>
+        <div class="flex-1 min-w-[220px]">
+          <h1 class="text-xl sm:text-2xl font-bold leading-tight">Reglamento Interno de Trabajo</h1>
+          <p class="text-sm text-indigo-100 mt-1">
+            Ingeproductos S.A.S · Versión 2026 ·
+            <span id="pdf-pages-info">Cargando…</span> · Asistente IA gratuito
+          </p>
+        </div>
+        <div class="flex gap-2 flex-wrap">
+          <a id="btn-descargar" href="#" download="reglamento-interno-ingeproductos-v2026.pdf"
+             class="inline-flex items-center gap-2 bg-white text-indigo-700 px-4 py-2 rounded-lg text-sm font-semibold border border-white/30 hover:bg-indigo-50 transition"
+             title="Guarda el PDF en tu dispositivo">
+            <i class="ph-bold ph-download-simple"></i> Descargar PDF
+          </a>
+          <a id="btn-pantalla-completa" href="#" target="_blank" rel="noopener noreferrer"
+             class="inline-flex items-center gap-2 bg-white/20 text-white px-4 py-2 rounded-lg text-sm font-medium border border-white/30 hover:bg-white/30 transition"
+             title="Abrir el PDF en otra pestaña a pantalla completa">
+            <i class="ph-bold ph-arrow-square-out"></i> Ver a pantalla completa
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Layout split: PDF + Asistente -->
+    <div class="reglamento-grid grid grid-cols-2 gap-4 items-start">
+
+      <!-- Panel PDF -->
+      <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+        <div class="px-4 py-2.5 border-b border-gray-200 bg-gray-50 flex items-center justify-between">
+          <div class="flex items-center gap-2 text-sm font-semibold text-gray-800">
+            <i class="ph-fill ph-file-pdf text-red-500 text-base"></i> Reglamento (PDF)
+          </div>
+          <span class="text-xs text-gray-500 hidden sm:inline">Pellizca o usa la rueda para hacer zoom</span>
+        </div>
+        <iframe id="pdf-frame" class="pdf-frame" title="Reglamento Interno"></iframe>
+      </div>
+
+      <!-- Panel Asistente -->
+      <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+        <div class="px-4 py-2.5 border-b border-gray-200 bg-gradient-to-r from-purple-50 to-indigo-50 flex items-center justify-between">
+          <div class="flex items-center gap-2 text-sm font-semibold text-gray-800">
+            <i class="ph-fill ph-sparkle text-purple-600 text-base"></i> Asistente del reglamento
+          </div>
+          <button id="btn-limpiar" class="text-xs text-gray-500 hover:text-gray-800 px-2 py-1 rounded border border-gray-200 hidden">
+            Limpiar
+          </button>
+        </div>
+
+        <div class="chat-body flex flex-col">
+          <!-- Mensajes / preguntas frecuentes iniciales -->
+          <div id="chat-scroll" class="chat-scroll flex-1 overflow-y-auto p-4">
+            <div id="welcome">
+              <p class="text-xs text-gray-500 mb-3">
+                Toca una pregunta frecuente para una respuesta inmediata, o escribe la tuya abajo:
+              </p>
+              <div id="preguntas-grid" class="grid gap-2">
+                <!-- Cards de preguntas se renderizan dinámicamente -->
+                <div class="text-center text-gray-400 text-sm py-8">
+                  <i class="ph-bold ph-spinner-gap text-2xl animate-spin"></i>
+                  <p class="mt-2">Cargando preguntas frecuentes…</p>
+                </div>
+              </div>
+              <div class="mt-3 p-3 rounded-lg bg-blue-50 border border-blue-200 text-xs text-blue-800">
+                <i class="ph-bold ph-info mr-1"></i>
+                Las respuestas frecuentes son pre-escritas con citas literales del reglamento. Si tu pregunta no está en la lista, escríbela abajo y la responderá la IA gratuita.
+              </div>
+            </div>
+
+            <div id="chat-msgs"></div>
+          </div>
+
+          <!-- Input -->
+          <div class="border-t border-gray-200 p-3 bg-white">
+            <div class="flex gap-2">
+              <textarea id="input-pregunta" rows="2"
+                placeholder="Escribe tu pregunta sobre el reglamento…"
+                class="flex-1 resize-none bg-white text-gray-900 border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-100"></textarea>
+              <button id="btn-enviar"
+                class="bg-gradient-to-br from-emerald-500 to-emerald-600 text-white px-4 rounded-lg flex items-center justify-center hover:opacity-90 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                title="Enviar (Enter)">
+                <i class="ph-bold ph-paper-plane-tilt text-lg"></i>
+              </button>
+            </div>
+            <p class="mt-2 text-center text-[11px] text-gray-500">
+              Enter envía · Shift+Enter agrega línea · IA gratuita (Groq Llama 3.3 → Gemini)
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="mt-4 text-center text-xs text-gray-400">
+      © Ingeproductos S.A.S — Reglamento Interno de Trabajo v2026 ·
+      <a href="index.html" class="hover:text-inge-cyan">Volver al portal</a>
+    </p>
+  </main>
+
+  <script>
+    // ─── Configuración ──────────────────────────────────────────────────────
+    const API_BASE = 'https://ingeproductos.app/api/v1/reglamento-publico';
+
+    // ─── Estado ─────────────────────────────────────────────────────────────
+    let preguntasFrecuentes = [];
+    let cargando = false;
+
+    // ─── Iconos por id de pregunta (Phosphor) ───────────────────────────────
+    const ICONS = {
+      info:        'ph-fill ph-info',
+      warning:     'ph-fill ph-warning',
+      shield:      'ph-fill ph-shield-warning',
+      'shield-check': 'ph-fill ph-shield-check',
+      heart:       'ph-fill ph-heart-straight',
+      flower:      'ph-fill ph-flower',
+      palmtree:    'ph-fill ph-tree-palm',
+      clock:       'ph-fill ph-clock',
+      baby:        'ph-fill ph-baby',
+      calendar:    'ph-fill ph-calendar-blank',
+    };
+
+    // ─── Helpers DOM ────────────────────────────────────────────────────────
+    const $ = (id) => document.getElementById(id);
+
+    // Escapa HTML para evitar XSS al renderizar texto del usuario / API
+    function esc(t) {
+      return String(t)
+        .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+        .replace(/"/g,'&quot;').replace(/'/g,'&#039;');
+    }
+
+    // Markdown muy básico: **negrita**, listas con - y 1., párrafos.
+    // Evita inyectar HTML externo: primero escapa, luego solo añade <strong>, <ul>, <ol>, <p>.
+    function renderMarkdown(text) {
+      const lines = String(text).split('\n');
+      let html = '';
+      let listType = null; // 'ul' | 'ol' | null
+      let listBuf = [];
+      const flushList = () => {
+        if (!listType) return;
+        html += `<${listType}>${listBuf.map(l => `<li>${l}</li>`).join('')}</${listType}>`;
+        listType = null; listBuf = [];
+      };
+      const inline = (s) => esc(s).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+
+      for (const raw of lines) {
+        const line = raw.replace(/\s+$/, '');
+        const mUl = /^\s*[-•]\s+(.*)$/.exec(line);
+        const mOl = /^\s*\d+\.\s+(.*)$/.exec(line);
+        if (mUl) {
+          if (listType !== 'ul') { flushList(); listType = 'ul'; }
+          listBuf.push(inline(mUl[1]));
+        } else if (mOl) {
+          if (listType !== 'ol') { flushList(); listType = 'ol'; }
+          listBuf.push(inline(mOl[1]));
+        } else {
+          flushList();
+          if (line.trim() === '') {
+            html += '<div style="height:6px"></div>';
+          } else {
+            html += `<p>${inline(line)}</p>`;
+          }
+        }
+      }
+      flushList();
+      return html;
+    }
+
+    // ─── Renderizado de mensajes en el chat ─────────────────────────────────
+    function addMensajeUsuario(texto) {
+      $('chat-msgs').insertAdjacentHTML('beforeend', `
+        <div class="flex justify-end mb-2.5">
+          <div class="max-w-[92%] rounded-xl px-3 py-2 text-sm text-white whitespace-pre-wrap leading-relaxed shadow-sm"
+               style="background: linear-gradient(135deg,#6366f1,#7c3aed)">
+            ${esc(texto)}
+          </div>
+        </div>
+      `);
+      scrollToEnd();
+    }
+
+    function addRespuestaAsistente({ texto, fuente, precargada, error }) {
+      const bg = error ? 'bg-red-50 border border-red-200 text-red-800'
+                       : 'bg-gray-50 border border-gray-200 text-gray-800';
+      const fuenteHtml = fuente
+        ? `<div class="mt-1.5 text-[10.5px] ${precargada ? 'text-emerald-600' : 'text-gray-500 italic'}">
+              ${precargada ? '⚡ ' : '🤖 '}${esc(fuente)}
+           </div>`
+        : '';
+      $('chat-msgs').insertAdjacentHTML('beforeend', `
+        <div class="flex justify-start mb-2.5">
+          <div class="max-w-[92%] rounded-xl px-3 py-2 text-sm leading-relaxed shadow-sm ${bg}">
+            <div class="md-content">${error ? esc(texto) : renderMarkdown(texto)}</div>
+            ${fuenteHtml}
+          </div>
+        </div>
+      `);
+      scrollToEnd();
+    }
+
+    function addThinking() {
+      $('chat-msgs').insertAdjacentHTML('beforeend', `
+        <div id="thinking" class="flex justify-start mb-2.5">
+          <div class="bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-sm text-gray-500 inline-flex gap-1.5">
+            <span class="dot-pulse">●</span>
+            <span class="dot-pulse" style="animation-delay:0.2s">●</span>
+            <span class="dot-pulse" style="animation-delay:0.4s">●</span>
+          </div>
+        </div>
+      `);
+      scrollToEnd();
+    }
+    function removeThinking() {
+      const el = $('thinking');
+      if (el) el.remove();
+    }
+
+    function ocultarWelcome() {
+      $('welcome').classList.add('hidden');
+      $('btn-limpiar').classList.remove('hidden');
+    }
+
+    function scrollToEnd() {
+      const c = $('chat-scroll');
+      c.scrollTop = c.scrollHeight;
+    }
+
+    // ─── Click en pregunta frecuente: respuesta INSTANTANEA precargada ──────
+    function usarPreguntaFrecuente(pf) {
+      ocultarWelcome();
+      addMensajeUsuario(pf.pregunta);
+      addRespuestaAsistente({
+        texto: pf.respuesta,
+        fuente: 'Respuesta predefinida (cita literal del reglamento)',
+        precargada: true,
+      });
+    }
+
+    // ─── Pregunta libre → backend → Groq/Gemini ─────────────────────────────
+    async function enviarPregunta() {
+      if (cargando) return;
+      const ta = $('input-pregunta');
+      const pregunta = ta.value.trim();
+      if (!pregunta) return;
+      if (pregunta.length > 500) {
+        alert('La pregunta es demasiado larga (máximo 500 caracteres).');
+        return;
+      }
+
+      ocultarWelcome();
+      addMensajeUsuario(pregunta);
+      ta.value = '';
+      cargando = true;
+      $('btn-enviar').disabled = true;
+      addThinking();
+
+      try {
+        const res = await fetch(`${API_BASE}/chat`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ pregunta }),
+        });
+        removeThinking();
+        if (!res.ok) {
+          let msg = 'Error consultando al asistente.';
+          if (res.status === 429) msg = 'Demasiadas preguntas en poco tiempo. Esperá un minuto e intentá de nuevo.';
+          else if (res.status === 503) msg = 'La IA no está disponible ahora. Intentá en unos minutos.';
+          else {
+            try { const j = await res.json(); if (j.detail) msg = j.detail; } catch {}
+          }
+          addRespuestaAsistente({ texto: '⚠️ ' + msg, error: true });
+        } else {
+          const data = await res.json();
+          addRespuestaAsistente({
+            texto: data.respuesta,
+            fuente: `${data.proveedor} · ${data.modelo}`,
+          });
+        }
+      } catch (e) {
+        removeThinking();
+        addRespuestaAsistente({
+          texto: '⚠️ No pude contactar al asistente. Verificá tu conexión.',
+          error: true,
+        });
+      } finally {
+        cargando = false;
+        $('btn-enviar').disabled = false;
+        ta.focus();
+      }
+    }
+
+    // ─── Limpiar conversación ───────────────────────────────────────────────
+    function limpiarChat() {
+      $('chat-msgs').innerHTML = '';
+      $('welcome').classList.remove('hidden');
+      $('btn-limpiar').classList.add('hidden');
+    }
+
+    // ─── Pintar las 10 preguntas frecuentes ─────────────────────────────────
+    function pintarPreguntasFrecuentes() {
+      const grid = $('preguntas-grid');
+      grid.innerHTML = '';
+      preguntasFrecuentes.forEach((pf, i) => {
+        const ico = ICONS[pf.icon] || 'ph-fill ph-question';
+        const btn = document.createElement('button');
+        btn.className = 'pf-card flex items-center gap-3 bg-white border border-gray-200 rounded-xl px-3 py-2.5 cursor-pointer text-left text-sm text-gray-800';
+        btn.innerHTML = `
+          <span class="w-8 h-8 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center flex-shrink-0">
+            <i class="${ico} text-base"></i>
+          </span>
+          <span class="leading-snug">${esc(pf.pregunta)}</span>
+        `;
+        btn.addEventListener('click', () => usarPreguntaFrecuente(pf));
+        grid.appendChild(btn);
+      });
+    }
+
+    // ─── Carga inicial ──────────────────────────────────────────────────────
+    async function init() {
+      try {
+        const res = await fetch(`${API_BASE}/info`);
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const data = await res.json();
+        preguntasFrecuentes = data.preguntas_frecuentes || [];
+
+        // PDF
+        $('pdf-frame').src = data.pdf_url + '#view=FitH';
+        $('btn-descargar').href = data.pdf_url;
+        $('btn-pantalla-completa').href = data.pdf_url;
+
+        // Metadata
+        $('pdf-pages-info').textContent = `${data.pdf_pages} páginas`;
+
+        // Preguntas
+        pintarPreguntasFrecuentes();
+      } catch (e) {
+        $('preguntas-grid').innerHTML = `
+          <div class="text-center text-red-600 text-sm py-6">
+            <i class="ph-bold ph-warning-circle text-2xl"></i>
+            <p class="mt-2">No se pudo cargar la información del reglamento.<br>Refrescá la página.</p>
+          </div>
+        `;
+      }
+    }
+
+    // ─── Eventos ────────────────────────────────────────────────────────────
+    $('btn-enviar').addEventListener('click', enviarPregunta);
+    $('btn-limpiar').addEventListener('click', limpiarChat);
+    $('input-pregunta').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        enviarPregunta();
+      }
+    });
+
+    init();
+  </script>
+
+</body>
+</html>
