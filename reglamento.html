@@ -86,15 +86,35 @@
     .md-content p { margin: 4px 0; line-height: 1.55; }
     .md-content strong { font-weight: 600; color: #111; }
 
-    /* Responsive: tablet/movil → 1 columna */
+    /* Responsive: tablet/movil → 1 columna y asistente PRIMERO */
     @media (max-width: 1024px) {
       .reglamento-grid { grid-template-columns: 1fr !important; }
-      .pdf-frame { height: 65vh; min-height: 420px; }
+      .panel-pdf { order: 2; }
+      .panel-asistente { order: 1; }
+      .pdf-frame { height: 60vh; min-height: 380px; }
       .chat-body { height: 70vh; min-height: 460px; }
     }
     @media (max-width: 640px) {
-      .pdf-frame { height: 55vh; min-height: 360px; }
-      .chat-body { height: 75vh; min-height: 420px; }
+      .pdf-frame { height: 50vh; min-height: 320px; }
+      .chat-body { height: 72vh; min-height: 420px; }
+      .hero-titulo { font-size: 1.05rem !important; }
+    }
+
+    /* Boton flotante: visible solo en movil/tablet (cuando el chat NO esta a la vista) */
+    .fab-preguntar {
+      position: fixed; right: 14px; bottom: 14px; z-index: 40;
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: white; border-radius: 999px; padding: 12px 18px;
+      box-shadow: 0 8px 24px rgba(16,185,129,0.4);
+      display: none; align-items: center; gap: 8px;
+      font-weight: 700; font-size: 14px;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .fab-preguntar:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(16,185,129,0.5); }
+    .fab-preguntar:active { transform: translateY(0); }
+
+    @media (max-width: 1024px) {
+      .fab-preguntar { display: inline-flex; }
     }
   </style>
 </head>
@@ -124,7 +144,7 @@
           <i class="ph-fill ph-scales text-3xl"></i>
         </div>
         <div class="flex-1 min-w-[220px]">
-          <h1 class="text-xl sm:text-2xl font-bold leading-tight">Reglamento Interno de Trabajo</h1>
+          <h1 class="hero-titulo text-xl sm:text-2xl font-bold leading-tight">Reglamento Interno de Trabajo</h1>
           <p class="text-sm text-indigo-100 mt-1">
             Ingeproductos S.A.S · Versión 2026 ·
             <span id="pdf-pages-info">Cargando…</span> · Asistente IA gratuito
@@ -146,25 +166,25 @@
       </div>
     </div>
 
-    <!-- Layout split: PDF + Asistente -->
+    <!-- Layout split: PDF + Asistente (en mobile/tablet el asistente va PRIMERO) -->
     <div class="reglamento-grid grid grid-cols-2 gap-4 items-start">
 
       <!-- Panel PDF -->
-      <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
-        <div class="px-4 py-2.5 border-b border-gray-200 bg-gray-50 flex items-center justify-between">
+      <div class="panel-pdf bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+        <div class="px-4 py-2.5 border-b border-gray-200 bg-gray-50 hidden lg:flex items-center justify-between">
           <div class="flex items-center gap-2 text-sm font-semibold text-gray-800">
             <i class="ph-fill ph-file-pdf text-red-500 text-base"></i> Reglamento (PDF)
           </div>
-          <span class="text-xs text-gray-500 hidden sm:inline">Pellizca o usa la rueda para hacer zoom</span>
+          <span class="text-xs text-gray-500 hidden sm:inline">Usa la rueda o pellizca para hacer zoom</span>
         </div>
         <iframe id="pdf-frame" class="pdf-frame" title="Reglamento Interno"></iframe>
       </div>
 
-      <!-- Panel Asistente -->
-      <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+      <!-- Panel Asistente (en mobile/tablet aparece primero) -->
+      <div class="panel-asistente bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
         <div class="px-4 py-2.5 border-b border-gray-200 bg-gradient-to-r from-purple-50 to-indigo-50 flex items-center justify-between">
           <div class="flex items-center gap-2 text-sm font-semibold text-gray-800">
-            <i class="ph-fill ph-sparkle text-purple-600 text-base"></i> Asistente del reglamento
+            <i class="ph-fill ph-sparkle text-purple-600 text-base"></i> Pregúntale al asistente
           </div>
           <button id="btn-limpiar" class="text-xs text-gray-500 hover:text-gray-800 px-2 py-1 rounded border border-gray-200 hidden">
             Limpiar
@@ -217,6 +237,12 @@
       <a href="index.html" class="hover:text-inge-cyan">Volver al portal</a>
     </p>
   </main>
+
+  <!-- Boton flotante: solo visible en movil/tablet (≤1024px) -->
+  <button id="fab-preguntar" class="fab-preguntar" type="button" title="Pregúntale al asistente">
+    <i class="ph-fill ph-sparkle text-base"></i>
+    <span>Preguntar</span>
+  </button>
 
   <script>
     // ─── Configuración ──────────────────────────────────────────────────────
@@ -456,10 +482,18 @@
     $('btn-enviar').addEventListener('click', enviarPregunta);
     $('btn-limpiar').addEventListener('click', limpiarChat);
 
-    // Descargar PDF: fetch + Blob para forzar descarga real (el atributo download
-    // de <a> no funciona cuando el archivo esta en otro origen — ahi navegamos
-    // y Chrome lo abre en visor en vez de descargarlo).
-    $('btn-descargar').addEventListener('click', async () => {
+    // FAB: scroll al input + foco. Visible solo en movil/tablet via CSS.
+    $('fab-preguntar').addEventListener('click', () => {
+      const ta = $('input-pregunta');
+      ta.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      setTimeout(() => ta.focus({ preventScroll: true }), 350);
+    });
+
+    // Descargar PDF: forzar descarga real con fetch + Blob (download de <a> NO
+    // funciona cross-origin — Chrome ignora el atributo y abre el PDF en visor).
+    // Tipamos el blob como application/pdf por si el server lo entrega como octet-stream.
+    $('btn-descargar').addEventListener('click', async (ev) => {
+      ev.preventDefault();
       const btn = $('btn-descargar');
       const label = $('btn-descargar-label');
       const url = btn.dataset.pdfUrl;
@@ -468,19 +502,22 @@
       btn.disabled = true;
       label.textContent = 'Descargando…';
       try {
-        const res = await fetch(url, { credentials: 'omit' });
+        const res = await fetch(url, { credentials: 'omit', cache: 'no-store' });
         if (!res.ok) throw new Error('HTTP ' + res.status);
-        const blob = await res.blob();
+        const raw = await res.blob();
+        // Re-empaquetar como application/pdf para que el navegador respete download.
+        const blob = new Blob([raw], { type: 'application/pdf' });
         const blobUrl = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = blobUrl;
         a.download = 'reglamento-interno-ingeproductos-v2026.pdf';
+        a.style.display = 'none';
         document.body.appendChild(a);
         a.click();
         a.remove();
-        setTimeout(() => URL.revokeObjectURL(blobUrl), 2000);
+        setTimeout(() => URL.revokeObjectURL(blobUrl), 4000);
       } catch (e) {
-        alert('No se pudo descargar el PDF. Probá "Ver a pantalla completa" y desde ahí guardalo.');
+        alert('No se pudo descargar el PDF. Probá "Ver a pantalla completa" y desde ahí guardalo con clic derecho → Guardar como.');
       } finally {
         btn.disabled = false;
         label.textContent = labelOriginal;
