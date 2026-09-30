@@ -574,7 +574,7 @@
                         <span class="p-2 bg-pink-100 rounded-lg text-pink-600 inline-flex"><i class="ph-fill ph-shield-check"></i></span>
                         Políticas de la Compañía
                     </h2>
-                    <p class="text-gray-500 mt-2 md:ml-14">Lineamientos oficiales de Ingeproductos. Ábrelos en línea o descárgalos en PDF.</p>
+                    <p class="text-gray-500 mt-2 md:ml-14">Lineamientos oficiales de Ingeproductos. Ábrelos para leerlos aquí mismo, en línea.</p>
                 </div>
 
                 <div class="space-y-10" id="politicas-container">
@@ -905,7 +905,7 @@
                 <div class="inline-flex items-center bg-white rounded-full shadow-sm hover:scale-105 transition-transform cursor-default border border-gray-100 p-0.5" title="Número de visitas al portal">
                     <img src="https://api.visitorbadge.io/api/visitors?path=inge_interno.portal&label=Visitas&labelColor=%231a1a1a&countColor=%2300b4d8" alt="Contador de visitas" class="rounded-full" />
                 </div>
-                <p class="text-[11px] text-gray-400 font-medium">Última actualización: 30/09/2026 3:00 PM</p>
+                <p class="text-[11px] text-gray-400 font-medium">Última actualización: 30/09/2026 4:52 PM</p>
             </div>
 
         </div>
@@ -932,6 +932,31 @@
         <div class="w-full max-w-5xl bg-black rounded-2xl overflow-hidden shadow-2xl relative slide-up flex items-center justify-center ring-1 ring-white/10 mx-4" style="aspect-ratio: 16/9; max-height: 80vh;">
             <iframe id="main-video-player" width="100%" height="100%" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="Reproductor de video" style="border:none; position: absolute; top: 0; left: 0;"></iframe>
             <video id="sharepoint-video-player" class="hidden absolute inset-0 w-full h-full bg-black" controls autoplay playsinline></video>
+        </div>
+    </div>
+
+    <!-- ================= VISOR DE POLÍTICAS (SOLO LECTURA) =================
+         Las páginas se dibujan con PDF.js en <canvas>: sin la barra del visor del navegador
+         (Descargar / Imprimir) y sin que Android descargue el archivo al abrirlo. -->
+    <div id="politica-modal" role="dialog" aria-modal="true" aria-labelledby="politica-modal-title"
+         class="fixed inset-0 z-[100] bg-gray-900/95 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300 flex items-center justify-center p-2 md:p-8"
+         onclick="if (event.target === this) closePoliticaModal()">
+        <div class="w-full max-w-4xl h-[94vh] md:h-[90vh] rounded-2xl shadow-2xl relative slide-up bg-white flex flex-col overflow-hidden">
+            <div class="flex items-center gap-3 px-4 py-3 border-b border-gray-100">
+                <span class="p-2 bg-pink-100 rounded-lg text-pink-600 inline-flex shrink-0"><i class="ph-fill ph-shield-check text-xl"></i></span>
+                <h3 id="politica-modal-title" class="flex-1 min-w-0 text-base md:text-lg font-bold text-gray-900 leading-snug">Documento</h3>
+                <button type="button" onclick="closePoliticaModal()" aria-label="Cerrar"
+                        class="shrink-0 w-11 h-11 rounded-full bg-gray-100 text-gray-700 hover:bg-red-50 hover:text-red-500 transition-colors flex items-center justify-center">
+                    <i class="ph-bold ph-x text-xl"></i>
+                </button>
+            </div>
+            <div id="politica-modal-body" class="flex-1 overflow-y-auto bg-gray-100 p-2 md:p-4 select-none" oncontextmenu="return false">
+                <div id="politica-modal-estado" class="text-sm text-gray-500 font-medium flex items-center justify-center gap-2 py-16"></div>
+                <div id="politica-modal-paginas" class="flex flex-col items-center gap-3"></div>
+            </div>
+            <div class="px-4 py-2 border-t border-gray-100 text-[11px] text-gray-500 text-center">
+                Documento de solo lectura<span id="politica-modal-npag"></span>
+            </div>
         </div>
     </div>
 
@@ -1546,7 +1571,9 @@
         }
 
         function createPoliticaCardHTML(doc) {
-            const url = RUTA_POLITICAS + doc.file;
+            // Solo lectura (30-sep-2026): sin enlace al PDF ni botón de descarga; "Ver" abre el
+            // visor de la página (openPoliticaModal) por la posición del documento en el arreglo.
+            const idx = documentosCompania.indexOf(doc);
             // La fecha solo se muestra si el PDF la trae
             const fecha = doc.date
                 ? `<p class="mt-1.5 text-xs font-semibold text-gray-500 flex items-center gap-1"><i class="ph-bold ph-calendar-check text-sm"></i> ${doc.date}</p>`
@@ -1563,13 +1590,10 @@
                         </div>
                     </div>
                     <p class="text-sm text-gray-500 leading-relaxed mt-4 flex-grow">${doc.desc}</p>
-                    <div class="flex flex-wrap gap-2 mt-5">
-                        <a href="${url}" target="_blank" rel="noopener" aria-label="Ver ${doc.title} (PDF)" class="flex-1 min-w-[8.5rem] min-h-[44px] px-3 bg-pink-600 text-white hover:bg-pink-700 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-colors shadow-sm">
-                            <i class="ph-bold ph-eye text-lg"></i> Ver
-                        </a>
-                        <a href="${url}" download aria-label="Descargar ${doc.title} (PDF)" class="flex-1 min-w-[8.5rem] min-h-[44px] px-3 bg-white text-pink-700 border border-pink-200 hover:bg-pink-50 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-colors">
-                            <i class="ph-bold ph-download-simple text-lg"></i> Descargar
-                        </a>
+                    <div class="mt-5">
+                        <button type="button" onclick="openPoliticaModal(${idx})" aria-label="Ver ${doc.title}" class="w-full min-h-[44px] px-3 bg-pink-600 text-white hover:bg-pink-700 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-colors shadow-sm">
+                            <i class="ph-bold ph-eye text-lg"></i> Ver documento
+                        </button>
                     </div>
                 </article>
             `;
@@ -1743,6 +1767,107 @@
             modal.classList.add('opacity-0');
             setTimeout(() => { modal.classList.add('hidden'); iframe.src = ''; video.pause(); video.src = ''; document.body.style.overflow = 'auto'; }, 300);
         }
+
+        // --- VISOR DE POLÍTICAS: SOLO LECTURA (30-sep-2026) ---
+        // Pedido de Xavier: "que solo se pueda ver pero no descargar". Abrir el PDF tal cual deja
+        // la barra del visor del navegador con Descargar/Imprimir, y en Android el archivo se
+        // descarga. Aquí PDF.js dibuja cada página en un <canvas> dentro de la página.
+        // Límite honesto: el archivo igual llega al navegador para poder mostrarse; esto quita la
+        // opción de descargar, no blinda contra un usuario técnico.
+        const PDFJS_URL = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
+        const PDFJS_WORKER_URL = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+        let pdfjsPromesa = null;   // la librería se baja solo al abrir el primer documento
+        let politicaRenderId = 0;  // cambia al cerrar o abrir otro: corta el dibujo en curso
+
+        function cargarPdfJs() {
+            if (window.pdfjsLib) return Promise.resolve(window.pdfjsLib);
+            if (!pdfjsPromesa) {
+                pdfjsPromesa = new Promise((resolve, reject) => {
+                    const s = document.createElement('script');
+                    s.src = PDFJS_URL;
+                    s.async = true;
+                    s.onload = () => {
+                        window.pdfjsLib.GlobalWorkerOptions.workerSrc = PDFJS_WORKER_URL;
+                        resolve(window.pdfjsLib);
+                    };
+                    s.onerror = () => { pdfjsPromesa = null; reject(new Error('No cargó PDF.js')); };
+                    document.head.appendChild(s);
+                });
+            }
+            return pdfjsPromesa;
+        }
+
+        async function openPoliticaModal(idx) {
+            const doc = documentosCompania[idx];
+            if (!doc) return;
+            const modal = document.getElementById('politica-modal');
+            const cuerpo = document.getElementById('politica-modal-body');
+            const paginas = document.getElementById('politica-modal-paginas');
+            const estado = document.getElementById('politica-modal-estado');
+            const npag = document.getElementById('politica-modal-npag');
+            document.getElementById('politica-modal-title').innerText = doc.title;
+            paginas.innerHTML = '';
+            npag.innerText = '';
+            estado.innerHTML = '<i class="ph-duotone ph-spinner-gap animate-spin text-2xl"></i> Cargando documento…';
+            estado.classList.remove('hidden');
+            modal.classList.remove('hidden');
+            setTimeout(() => { modal.classList.remove('opacity-0'); }, 10);
+            document.body.style.overflow = 'hidden';
+            cuerpo.scrollTop = 0;
+
+            const miRender = ++politicaRenderId;
+            let pdf = null;
+            try {
+                const pdfjsLib = await cargarPdfJs();
+                pdf = await pdfjsLib.getDocument({ url: RUTA_POLITICAS + doc.file }).promise;
+                if (miRender !== politicaRenderId) return;
+                npag.innerText = ' · ' + pdf.numPages + (pdf.numPages === 1 ? ' página' : ' páginas');
+                // Ancho de la página = el del contenedor (máx. 860 px) y densidad de píxeles hasta 2,
+                // para que el texto se lea nítido en celular sin inflar la memoria.
+                const ancho = Math.max(260, Math.min(cuerpo.clientWidth - 16, 860));
+                const dpr = Math.min(window.devicePixelRatio || 1, 2);
+                for (let n = 1; n <= pdf.numPages; n++) {
+                    const pagina = await pdf.getPage(n);
+                    if (miRender !== politicaRenderId) return;
+                    const escala = ancho / pagina.getViewport({ scale: 1 }).width;
+                    const vista = pagina.getViewport({ scale: escala * dpr });
+                    const canvas = document.createElement('canvas');
+                    canvas.width = Math.floor(vista.width);
+                    canvas.height = Math.floor(vista.height);
+                    canvas.style.width = Math.floor(vista.width / dpr) + 'px';
+                    canvas.style.maxWidth = '100%';
+                    canvas.style.height = 'auto';
+                    canvas.className = 'bg-white shadow-sm rounded-md';
+                    canvas.setAttribute('aria-label', `Página ${n} de ${pdf.numPages}`);
+                    paginas.appendChild(canvas);
+                    await pagina.render({ canvasContext: canvas.getContext('2d'), viewport: vista }).promise;
+                    if (n === 1 && miRender === politicaRenderId) estado.classList.add('hidden');
+                }
+            } catch (e) {
+                if (miRender !== politicaRenderId) return;
+                estado.innerHTML = '<i class="ph-bold ph-warning-circle text-2xl text-red-500"></i> No se pudo abrir el documento. Revisa tu conexión e inténtalo de nuevo.';
+                estado.classList.remove('hidden');
+            } finally {
+                if (pdf) pdf.destroy();   // las páginas ya quedaron dibujadas en los canvas
+            }
+        }
+
+        function closePoliticaModal() {
+            politicaRenderId++;
+            const modal = document.getElementById('politica-modal');
+            modal.classList.add('opacity-0');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                document.getElementById('politica-modal-paginas').innerHTML = '';
+                document.body.style.overflow = 'auto';
+            }, 300);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !document.getElementById('politica-modal').classList.contains('hidden')) {
+                closePoliticaModal();
+            }
+        });
 
         // --- MODAL IMAGEN (ORGANIGRAMAS, POLITICAS Y CUMPLEAÑOS) ---
         function openImageModal(imgUrl, title, downloadUrl = null, extraUrl = null, extraText = null) {
