@@ -447,10 +447,11 @@
                         </div>
                     </div>
 
-                    <!-- FLIP CARD 4: Políticas de la Compañía -->
-                    <div class="flip-card slide-up" style="animation-delay: 0.4s;" onclick="alert('Políticas de la Compañía en desarrollo.')">
+                    <!-- FLIP CARD 4: Políticas de la Compañía (ACTIVA) -->
+                    <div class="flip-card slide-up" style="animation-delay: 0.4s;" onclick="switchView('colaborador-politicas')">
                         <div class="flip-card-inner">
-                            <div class="flip-card-front">
+                            <div class="flip-card-front" style="border: 2px solid #fce7f3;">
+                                <div class="absolute -top-3 -right-3 bg-inge-green text-white text-[10px] font-bold px-3 py-1 rounded-full shadow-md z-10 animate-bounce">NUEVO</div>
                                 <div class="w-16 h-16 bg-pink-50 text-pink-500 rounded-full flex items-center justify-center text-3xl mb-4">
                                     <i class="ph-fill ph-shield-check"></i>
                                 </div>
@@ -460,7 +461,8 @@
                             <div class="flip-card-back" style="background: linear-gradient(135deg, #ec4899, #be185d);">
                                 <i class="ph-fill ph-shield-check text-4xl mb-3 opacity-80"></i>
                                 <h3 class="text-base font-bold mb-2">Políticas</h3>
-                                <p class="text-xs text-pink-50">Conoce las políticas corporativas.</p>
+                                <p class="text-xs text-pink-50 mb-3">Conoce las políticas corporativas.</p>
+                                <span class="bg-white text-pink-700 px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">Entrar <i class="ph-bold ph-arrow-right"></i></span>
                             </div>
                         </div>
                     </div>
@@ -553,6 +555,30 @@
 
                 <div class="space-y-16" id="capacitaciones-container">
                     <!-- Se llena con JavaScript separando por Categorías -->
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ================= VISTA: COLABORADOR - POLÍTICAS DE LA COMPAÑÍA ================= -->
+        <section id="view-colaborador-politicas" class="hidden-view fade-in py-12 bg-white flex-grow">
+            <div class="max-w-7xl mx-auto px-4">
+
+                <button onclick="switchView('personal-hub')" class="bg-gray-100 border border-gray-200 text-gray-800 px-4 py-2 min-h-[44px] rounded-xl font-bold mb-8 flex items-center gap-2 hover:bg-pink-600 hover:text-white hover:border-pink-600 hover:-translate-y-0.5 transition-all shadow-sm w-max group">
+                    <i class="ph-bold ph-arrow-left text-lg group-hover:-translate-x-1 transition-transform"></i>
+                    <span class="text-sm">Volver al Portal</span>
+                </button>
+
+                <div class="mb-10">
+                    <h2 class="text-2xl md:text-3xl font-extrabold text-gray-900 tracking-tight flex items-center gap-3">
+                        <span class="p-2 bg-pink-100 rounded-lg text-pink-600 inline-flex"><i class="ph-fill ph-shield-check"></i></span>
+                        Políticas de la Compañía
+                    </h2>
+                    <p class="text-gray-500 mt-2 md:ml-14">Lineamientos oficiales de Ingeproductos. Ábrelos en línea o descárgalos en PDF.</p>
+                </div>
+
+                <div class="space-y-10" id="politicas-container">
+                    <!-- Se llena con JavaScript separando Políticas y Reglamentos -->
                 </div>
 
             </div>
@@ -879,7 +905,7 @@
                 <div class="inline-flex items-center bg-white rounded-full shadow-sm hover:scale-105 transition-transform cursor-default border border-gray-100 p-0.5" title="Número de visitas al portal">
                     <img src="https://api.visitorbadge.io/api/visitors?path=inge_interno.portal&label=Visitas&labelColor=%231a1a1a&countColor=%2300b4d8" alt="Contador de visitas" class="rounded-full" />
                 </div>
-                <p class="text-[11px] text-gray-400 font-medium">Última actualización: 24/04/2026 3:54 PM</p>
+                <p class="text-[11px] text-gray-400 font-medium">Última actualización: 30/09/2026 3:00 PM</p>
             </div>
 
         </div>
@@ -1310,9 +1336,47 @@
             }
         ];
 
+        // --- POLÍTICAS Y REGLAMENTOS DE LA COMPAÑÍA ---
+        // Los PDF viven en assets/docs/politicas/. Para agregar uno nuevo: copiar el PDF a esa carpeta y sumar un objeto a este arreglo.
+        // kind: 'politica' o 'reglamento' (define en qué grupo se muestra). icon: nombre del icono Phosphor sin el prefijo "ph-".
+        // date: texto tal como consta en el propio PDF (firma o inicio de vigencia); dejar '' si el PDF no trae fecha.
+        const RUTA_POLITICAS = './assets/docs/politicas/';
+        const documentosCompania = [
+            { kind: 'politica', icon: 'first-aid-kit', iconClass: 'bg-red-50 text-red-500', file: 'politica-de-seguridad-y-salud-en-el-trabajo.pdf',
+              title: 'Política de Seguridad y Salud en el Trabajo', date: 'Firmada el 11 de agosto de 2026',
+              desc: 'Declara el compromiso de la empresa con proteger la seguridad y salud de todos sus trabajadores y contratistas.' },
+            { kind: 'politica', icon: 'siren', iconClass: 'bg-orange-50 text-orange-500', file: 'politica-en-prevencion-de-emergencias-y-gestion-del-riesgo.pdf',
+              title: 'Política en Prevención de Emergencias y Gestión del Riesgo', date: 'Firmada el 11 de agosto de 2026',
+              desc: 'Establece el compromiso de la empresa con la prevención, preparación y respuesta ante emergencias, para proteger vidas y bienes.' },
+            { kind: 'politica', icon: 'device-mobile', iconClass: 'bg-blue-50 text-blue-500', file: 'politica-de-uso-adecuado-de-dispositivos-electronicos.pdf',
+              title: 'Política de Uso Adecuado de Dispositivos Electrónicos', date: 'Firmada el 11 de agosto de 2026',
+              desc: 'Regula el uso de celulares, audífonos y relojes inteligentes en las instalaciones para evitar accidentes por distracción.' },
+            { kind: 'politica', icon: 't-shirt', iconClass: 'bg-indigo-50 text-indigo-500', file: 'politica-de-uso-de-uniformes.pdf',
+              title: 'Política de Uso de Uniformes', date: 'Firmada el 11 de agosto de 2026',
+              desc: 'Define el uso, cuidado, entrega y devolución de la dotación, el uniforme y los elementos de protección personal.' },
+            { kind: 'politica', icon: 'identification-badge', iconClass: 'bg-cyan-50 text-inge-cyan', file: 'politica-de-contratistas-y-visitantes.pdf',
+              title: 'Política de Contratistas y Visitantes', date: 'Firmada el 11 de agosto de 2026',
+              desc: 'Fija las reglas de seguridad y salud para visitantes, contratistas y demás personas externas que ingresan a las instalaciones.' },
+            { kind: 'politica', icon: 'leaf', iconClass: 'bg-emerald-50 text-emerald-500', file: 'politica-de-gestion-ambiental.pdf',
+              title: 'Política de Gestión Ambiental', date: 'Firmada el 11 de agosto de 2026',
+              desc: 'Compromete a la empresa a prevenir la contaminación, usar eficientemente los recursos y reducir, reusar y reciclar los residuos.' },
+            { kind: 'politica', icon: 'person-arms-spread', iconClass: 'bg-purple-50 text-purple-600', file: 'politica-de-inclusion-laboral.pdf',
+              title: 'Política de Inclusión Laboral', date: 'Firmada el 11 de agosto de 2026',
+              desc: 'Promueve un entorno laboral inclusivo y sin discriminación, con igualdad de oportunidades y ajustes razonables para personas con discapacidad.' },
+            { kind: 'politica', icon: 'hand-palm', iconClass: 'bg-pink-50 text-pink-500', file: 'politica-de-prevencion-del-acoso-y-la-violencia-sexual-en-el-contexto-laboral.pdf',
+              title: 'Política de Prevención del Acoso y la Violencia Sexual en el Contexto Laboral', date: 'Vigente desde el 11 de agosto de 2026',
+              desc: 'Establece cómo prevenir, denunciar, investigar y sancionar el acoso y la violencia sexual en el trabajo, con tolerancia cero.' },
+            { kind: 'reglamento', icon: 'hard-hat', iconClass: 'bg-amber-50 text-amber-600', file: 'reglamento-de-higiene-y-seguridad-industrial.pdf',
+              title: 'Reglamento de Higiene y Seguridad Industrial', date: 'Firmado el 11 de agosto de 2026',
+              desc: 'Fija normas para prevenir accidentes y enfermedades laborales y las obligaciones de la empresa y de los trabajadores.' },
+            { kind: 'reglamento', icon: 'handshake', iconClass: 'bg-teal-50 text-teal-600', file: 'reglamento-de-convivencia-y-comite-de-convivencia-laboral.pdf',
+              title: 'Reglamento de Convivencia y Comité de Convivencia Laboral', date: 'Vigente desde el 20 de abril de 2026',
+              desc: 'Promueve la convivencia laboral armónica, previene el acoso laboral y define cómo funciona el Comité de Convivencia.' }
+        ];
+
         // --- NAVEGACIÓN Y VISTAS ---
         function switchView(viewName) {
-            const views = ['inicio', 'personal-hub', 'capacitaciones', 'directivos-login', 'directivos-dashboard', 'ruta-inge', 'ia-hub', 'visitante-hub', 'visitante-politicas', 'visitante-videos'];
+            const views = ['inicio', 'personal-hub', 'capacitaciones', 'colaborador-politicas', 'directivos-login', 'directivos-dashboard', 'ruta-inge', 'ia-hub', 'visitante-hub', 'visitante-politicas', 'visitante-videos'];
             
             if ((viewName === 'directivos-dashboard' || viewName === 'ruta-inge') && !isAuthenticated) {
                 viewName = 'directivos-login';
@@ -1347,6 +1411,7 @@
 
             // Renders dinámicos
             if(viewName === 'capacitaciones') renderCapacitaciones();
+            if(viewName === 'colaborador-politicas') renderPoliticas();
             if(viewName === 'ruta-inge') renderVideosRutaInge();
             if(viewName === 'visitante-videos') renderVideosVisitantes();
             if(viewName === 'ia-hub') renderVideosIA();
@@ -1363,7 +1428,7 @@
 
             let activeId = '';
             if (viewName === 'inicio') activeId = 'inicio';
-            if (viewName === 'personal-hub' || viewName === 'capacitaciones' || viewName === 'ia-hub') activeId = 'personal';
+            if (viewName === 'personal-hub' || viewName === 'capacitaciones' || viewName === 'colaborador-politicas' || viewName === 'ia-hub') activeId = 'personal';
             if (viewName === 'visitante-hub' || viewName === 'visitante-politicas' || viewName === 'visitante-videos') activeId = 'visitante';
             if (viewName === 'directivos-dashboard' || viewName === 'ruta-inge') activeId = 'panel-directivos';
 
@@ -1454,6 +1519,60 @@
                 `;
             }
             container.innerHTML = html;
+        }
+
+        // --- RENDERIZADO: POLÍTICAS Y REGLAMENTOS (COLABORADORES) ---
+        function renderPoliticas() {
+            const container = document.getElementById('politicas-container');
+            // Grupos en el orden en que se muestran
+            const grupos = [
+                { kind: 'politica', label: 'Políticas', icon: 'bookmark-simple' },
+                { kind: 'reglamento', label: 'Reglamentos', icon: 'scales' }
+            ];
+            container.innerHTML = grupos.map(g => {
+                const docs = documentosCompania.filter(d => d.kind === g.kind);
+                if (docs.length === 0) return '';
+                return `
+                    <div class="bg-gray-50/50 rounded-3xl p-4 md:p-8 border border-gray-200 shadow-sm relative">
+                        <h3 class="text-xl md:text-2xl font-extrabold text-gray-800 mb-6 flex items-center gap-3 border-b border-gray-300 pb-4">
+                            <i class="ph-fill ph-${g.icon} text-pink-500 text-3xl"></i> ${g.label}
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+                            ${docs.map(createPoliticaCardHTML).join('')}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function createPoliticaCardHTML(doc) {
+            const url = RUTA_POLITICAS + doc.file;
+            // La fecha solo se muestra si el PDF la trae
+            const fecha = doc.date
+                ? `<p class="mt-1.5 text-xs font-semibold text-gray-500 flex items-center gap-1"><i class="ph-bold ph-calendar-check text-sm"></i> ${doc.date}</p>`
+                : '';
+            return `
+                <article class="bg-white rounded-2xl border border-gray-200 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_15px_40px_rgb(0,0,0,0.12)] hover:-translate-y-1 transition-all flex flex-col h-full p-5">
+                    <div class="flex items-start gap-4">
+                        <div class="w-14 h-14 shrink-0 ${doc.iconClass} rounded-2xl flex items-center justify-center text-3xl">
+                            <i class="ph-fill ph-${doc.icon}"></i>
+                        </div>
+                        <div class="min-w-0">
+                            <h4 class="font-bold text-gray-900 text-base leading-snug">${doc.title}</h4>
+                            ${fecha}
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-500 leading-relaxed mt-4 flex-grow">${doc.desc}</p>
+                    <div class="flex flex-wrap gap-2 mt-5">
+                        <a href="${url}" target="_blank" rel="noopener" aria-label="Ver ${doc.title} (PDF)" class="flex-1 min-w-[8.5rem] min-h-[44px] px-3 bg-pink-600 text-white hover:bg-pink-700 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-colors shadow-sm">
+                            <i class="ph-bold ph-eye text-lg"></i> Ver
+                        </a>
+                        <a href="${url}" download aria-label="Descargar ${doc.title} (PDF)" class="flex-1 min-w-[8.5rem] min-h-[44px] px-3 bg-white text-pink-700 border border-pink-200 hover:bg-pink-50 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-colors">
+                            <i class="ph-bold ph-download-simple text-lg"></i> Descargar
+                        </a>
+                    </div>
+                </article>
+            `;
         }
 
         function renderVideosVisitantes() {
