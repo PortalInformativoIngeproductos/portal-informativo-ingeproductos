@@ -61,7 +61,14 @@
       min-height: 480px;
       border: 0;
       background: #525659;
+      overflow-y: auto;
+      padding: 8px;
     }
+    .pdf-pagina { background: #fff; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.3); max-width: 100%; }
+    .pdf-pagina canvas { display: block; width: 100%; height: auto; border-radius: 6px; }
+
+    /* Solo lectura: al imprimir la página no sale el reglamento */
+    @media print { .panel-pdf { display: none !important; } }
 
     .chat-body {
       height: calc(100vh - 280px);
@@ -162,19 +169,6 @@
             <span id="pdf-pages-info">Cargando…</span> · Asistente IA gratuito
           </p>
         </div>
-        <div class="flex gap-2 flex-wrap">
-          <button id="btn-descargar"
-             class="inline-flex items-center gap-2 bg-white text-indigo-700 px-4 py-2 rounded-lg text-sm font-semibold border border-white/30 hover:bg-indigo-50 transition disabled:opacity-60"
-             title="Descarga el PDF a tu dispositivo">
-            <i class="ph-bold ph-download-simple"></i>
-            <span id="btn-descargar-label">Descargar PDF</span>
-          </button>
-          <a id="btn-pantalla-completa" href="#" target="_blank" rel="noopener noreferrer"
-             class="inline-flex items-center gap-2 bg-white/20 text-white px-4 py-2 rounded-lg text-sm font-medium border border-white/30 hover:bg-white/30 transition"
-             title="Abrir el PDF en otra pestaña a pantalla completa">
-            <i class="ph-bold ph-arrow-square-out"></i> Ver a pantalla completa
-          </a>
-        </div>
       </div>
     </div>
 
@@ -187,9 +181,16 @@
           <div class="flex items-center gap-2 text-sm font-semibold text-gray-800">
             <i class="ph-fill ph-file-pdf text-red-500 text-base"></i> Reglamento (PDF)
           </div>
-          <span class="text-xs text-gray-500 hidden sm:inline">Usa la rueda o pellizca para hacer zoom</span>
+          <span class="text-xs text-gray-500 hidden sm:inline">Documento de solo lectura</span>
         </div>
-        <iframe id="pdf-frame" class="pdf-frame" title="Reglamento Interno"></iframe>
+        <!-- Visor de solo lectura (10-nov-2026): PDF.js dibuja cada página en un <canvas>,
+             sin la barra del navegador que trae Descargar/Imprimir -->
+        <div id="pdf-frame" class="pdf-frame select-none" role="document" aria-label="Reglamento Interno" oncontextmenu="return false">
+          <div id="pdf-estado" class="text-sm text-gray-200 font-medium flex items-center justify-center gap-2 py-16">
+            <i class="ph-bold ph-spinner-gap animate-spin text-2xl"></i> Cargando reglamento…
+          </div>
+          <div id="pdf-paginas" class="flex flex-col items-center gap-3"></div>
+        </div>
       </div>
 
       <!-- Panel Asistente (en mobile/tablet aparece primero) -->
@@ -521,11 +522,8 @@
         turnstileSiteKey = data.turnstile_site_key || '';
         maybeRenderTurnstile();
 
-        // PDF
-        $('pdf-frame').src = data.pdf_url + '#view=FitH';
-        // El boton "Descargar" usa fetch+Blob (el atributo download no funciona cross-origin).
-        $('btn-descargar').dataset.pdfUrl = data.pdf_url;
-        $('btn-pantalla-completa').href = data.pdf_url;
+        // PDF en el visor de solo lectura
+        abrirVisorPdf(data.pdf_url);
 
         // Metadata
         $('pdf-pages-info').textContent = `${data.pdf_pages} páginas`;
@@ -553,40 +551,83 @@
       setTimeout(() => ta.focus({ preventScroll: true }), 350);
     });
 
-    // Descargar PDF: forzar descarga real con fetch + Blob (download de <a> NO
-    // funciona cross-origin — Chrome ignora el atributo y abre el PDF en visor).
-    // Tipamos el blob como application/pdf por si el server lo entrega como octet-stream.
-    $('btn-descargar').addEventListener('click', async (ev) => {
-      ev.preventDefault();
-      const btn = $('btn-descargar');
-      const label = $('btn-descargar-label');
-      const url = btn.dataset.pdfUrl;
-      if (!url) return;
-      const labelOriginal = label.textContent;
-      btn.disabled = true;
-      label.textContent = 'Descargando…';
+    // ─── Visor del reglamento: SOLO LECTURA (10-nov-2026) ───────────────────
+    // Pedido de Xavier: que el reglamento no se pueda descargar. Antes iba en un <iframe> con el
+    // visor del navegador (botones Descargar/Imprimir) + botón "Descargar PDF". Ahora PDF.js
+    // dibuja cada página en un <canvas>, igual que las políticas del index.
+    // Son ~60 páginas: se dibujan a medida que se acercan a la vista (no todas de una) para no
+    // reventar la memoria del celular.
+    // Límite honesto: el archivo igual llega al navegador para poder mostrarse; esto quita la
+    // opción de descargar, no blinda contra un usuario técnico.
+    const PDFJS_URL = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
+    const PDFJS_WORKER_URL = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+    function cargarPdfJs() {
+      if (window.pdfjsLib) return Promise.resolve(window.pdfjsLib);
+      return new Promise((resolve, reject) => {
+        const s = document.createElement('script');
+        s.src = PDFJS_URL;
+        s.async = true;
+        s.onload = () => {
+          window.pdfjsLib.GlobalWorkerOptions.workerSrc = PDFJS_WORKER_URL;
+          resolve(window.pdfjsLib);
+        };
+        s.onerror = () => reject(new Error('No cargó PDF.js'));
+        document.head.appendChild(s);
+      });
+    }
+
+    async function abrirVisorPdf(url) {
+      const visor = $('pdf-frame');
+      const paginas = $('pdf-paginas');
+      const estado = $('pdf-estado');
       try {
-        const res = await fetch(url, { credentials: 'omit', cache: 'no-store' });
-        if (!res.ok) throw new Error('HTTP ' + res.status);
-        const raw = await res.blob();
-        // Re-empaquetar como application/pdf para que el navegador respete download.
-        const blob = new Blob([raw], { type: 'application/pdf' });
-        const blobUrl = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = blobUrl;
-        a.download = 'reglamento-interno-ingeproductos-v2026.pdf';
-        a.style.display = 'none';
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-        setTimeout(() => URL.revokeObjectURL(blobUrl), 4000);
+        const pdfjsLib = await cargarPdfJs();
+        const pdf = await pdfjsLib.getDocument({ url }).promise;
+        // Ancho de página = el del visor (máx. 860 px); densidad hasta 2 para leer nítido en celular
+        const ancho = Math.max(260, Math.min(visor.clientWidth - 16, 860));
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        const base = (await pdf.getPage(1)).getViewport({ scale: 1 });
+
+        // Un marco vacío por página con la proporción de la primera, para que el scroll tenga su alto real
+        const marcos = [];
+        for (let n = 1; n <= pdf.numPages; n++) {
+          const marco = document.createElement('div');
+          marco.className = 'pdf-pagina';
+          marco.style.width = ancho + 'px';
+          marco.style.aspectRatio = `${base.width} / ${base.height}`;
+          marco.dataset.pagina = n;
+          marco.setAttribute('aria-label', `Página ${n} de ${pdf.numPages}`);
+          paginas.appendChild(marco);
+          marcos.push(marco);
+        }
+        estado.classList.add('hidden');
+
+        // Dibuja la página cuando su marco está a menos de ~1 pantalla de la vista
+        const dibujar = async (marco) => {
+          const pagina = await pdf.getPage(Number(marco.dataset.pagina));
+          const original = pagina.getViewport({ scale: 1 });
+          const vista = pagina.getViewport({ scale: (ancho / original.width) * dpr });
+          const canvas = document.createElement('canvas');
+          canvas.width = Math.floor(vista.width);
+          canvas.height = Math.floor(vista.height);
+          marco.style.aspectRatio = `${original.width} / ${original.height}`;
+          marco.appendChild(canvas);
+          await pagina.render({ canvasContext: canvas.getContext('2d'), viewport: vista }).promise;
+        };
+        const observador = new IntersectionObserver((entradas) => {
+          entradas.forEach((e) => {
+            if (!e.isIntersecting) return;
+            observador.unobserve(e.target);
+            dibujar(e.target).catch(() => {});
+          });
+        }, { root: visor, rootMargin: '800px 0px' });
+        marcos.forEach((m) => observador.observe(m));
       } catch (e) {
-        alert('No se pudo descargar el PDF. Probá "Ver a pantalla completa" y desde ahí guardalo con clic derecho → Guardar como.');
-      } finally {
-        btn.disabled = false;
-        label.textContent = labelOriginal;
+        estado.innerHTML = '<i class="ph-bold ph-warning-circle text-2xl text-red-300"></i> No se pudo abrir el reglamento. Revisa tu conexión y refresca la página.';
+        estado.classList.remove('hidden');
       }
-    });
+    }
 
     // Enter agrega salto de linea (comportamiento natural del textarea), el envio es solo
     // por boton: mucho mas comodo en moviles/tablets donde Enter no debe disparar acciones.
